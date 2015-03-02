@@ -1,17 +1,16 @@
 # origin
-The Origin framework is a WPF shell application for hosting line-of-business modules in a document style layout. Origin uses Prism, Unity, the AvalonDock docking system, a custom navigation bar and supports MVVM.
 
 ![Alt text](/Images/Origin-screenshot.png?raw=true "Origin screenshot")
 
 
 
 # Motivation
-I first started developing Origin in 2012 as an exercise in WPF shell development using Prism and Unity. Origin is a simple WPF shell that implements the AvalonDock docking system along with a custom navigation bar for hosting modules in a document style layout that supports MVVM. It is an ideal platform for developers who need to start writing line-of-business functionality without having to worry about writing a shell from scratch. So, in 2015 I finally decided to dust of the cover and publish it.
+I first started developing Origin in 2012 as an exercise in WPF shell development using Prism and Unity. Origin is a simple WPF shell that implements the AvalonDock docking system along with a custom navigation bar for hosting modules in a document style layout that supports MVVM. It is an ideal platform for developers who need to start writing line-of-business functionality without having to worry about writing a shell from scratch. I finally decided to dust of the cover and publish it in 2015.
 
 
 
 # Getting Started
-## Download the source code and run the solution
+### Download the source code and run the solution
 1. Download the source code from GitHub.
 
 2. In the **Solution** folder, open the solution file **DevelopmentInProgress.Origin.sln** using Visual Studio.
@@ -26,14 +25,14 @@ I first started developing Origin in 2012 as an exercise in WPF shell developmen
 
 
 
-## What you get with the solution
+### What you get with the solution
 The solution contains the following three projects:
 
-1. **DevelopmentInProgress.Origin** - this is the Origin framework containing the shell. You will create line-of-business modules as dll's that will plug into the framework.
+1. **DevelopmentInProgress.Origin** - this is the Origin framework containing the shell. You will create line-of-business modules as dll's that will plug into the framework. You will find out how to create a module below.
 
-2. **DevelopmentInProgress.ExampleModule** - this module contains examples of some basic functionality offered by the Origin framework and is a great place to start learning about how it works by stepping through the code. Once you are familiar with the Origin framework you can remove it from the solution. When you do, don’t forget to remove it from the *ModuleCatalog.xaml* file in the *DevelopmentInProgress.Origin* project too.
+2. **DevelopmentInProgress.ExampleModule** - this module contains examples of some basic functionality offered by the Origin framework. It's not pretty but is a great place to start learning about how it works by stepping through the code. Once you are familiar with the Origin framework you can remove it from the solution. When you do, don’t forget to remove it from the *ModuleCatalog.xaml* file in the *DevelopmentInProgress.Origin* project too.
 
-3.  **DevelopmentInProgress.ModuleTemplate** - the quickest way to get started writing a module is to use this template. It comes with a document view and view model and is preconfigured in the navigation panel. Just rename the project and objects as appropriate. You’ll probably want a new image too.
+3. **DevelopmentInProgress.ModuleTemplate** - the quickest way to get started writing a module is to use this template. It comes with a document view and view model and is preconfigured in the navigation panel. Just rename the project and objects as appropriate. You’ll probably want a new image too!
 
 
 
@@ -43,32 +42,34 @@ The following three steps describe how to create your own module using the **Dev
 ![Alt text](/Images/moduletemplate-project.png?raw=true "DevelopmentInProgress.ModuleTemplate project")
 
 
-1. Create a Class Library for the module
-    1.  Open the solution **DevelopmentInProgress.Origin.sln** in Visual Studio and add a new Class Library project.
+### Step 1 - Create a Class Library for the module
+1.  Open the solution **DevelopmentInProgress.Origin.sln** in Visual Studio and add a new Class Library project.
 
-    2.  In the new project add a reference to the **DevelopmentInProgress.Origin** project.
+2.  In the new project add a reference to the **DevelopmentInProgress.Origin** project.
 
-    3.  Add a reference to **System.Xaml.dll**
+3.  Add a reference to **System.Xaml.dll**.
   
-    4.  Add references to the following Prism libraries in the ThirdParty folder:
-          * **Microsoft.Practices.Prism.dll**
-          * **Microsoft.Practices.Prism.UnityExtensions.dll**
-          * **Microsoft.Practices.Unity.dll**
+4.  Add references to the following Prism libraries in the ThirdParty folder:
+      * **Microsoft.Practices.Prism.dll**
+      * **Microsoft.Practices.Prism.UnityExtensions.dll**
+      * **Microsoft.Practices.Unity.dll**
     
-    5.  In the projects properties Build page change the build output path to `..\..\Binaries\`
+5.  In the projects properties Build page change the build output path to `..\..\Binaries\`.
 
-    6.  Create the following three folders in the project
-          * **View**
-          * **ViewModel**
-          * **Images**
+6.  Create the following three folders in the project:
+      * **View**
+      * **ViewModel**
+      * **Images**
     
-    7. Add two **.png** images in the **Images** folder. One will be for the module and one will be for the document. Set their **BuildAction** property to **Resource**. These images will appear on the navigation panel.
+7. Add two **.png** images in the **Images** folder. One will be for the module and one will be for the document. These images will appear on the navigation panel. Don't forget to set their **BuildAction** property to **Resource**.
 
-2. Create your **View**, **ViewModel** and **Module** classes
-    1. In the **ViewModel** folder:
-        1. Create a new class called **NewDocumentViewModel.cs** and make it inherit the `DocumentViewModel` abstract class.
-        2. Modify the constructor to accept `ViewModelContext`.
-        3. Override the `OnPublishedAsync(object data)` and `SaveDocumentAsync()` methods.
+### Step 2 - Create your **View**, **ViewModel** and **Module** classes
+1. In the **ViewModel** folder:
+    1. Create a new class called **NewDocumentViewModel.cs** and make it inherit the `DocumentViewModel` abstract class.
+    
+    2. Modify the constructor to accept `ViewModelContext`, passing it into the base constructor.
+    
+    3. Override the `OnPublishedAsync(object data)` and `SaveDocumentAsync()` methods.
 
 
         ```C#
@@ -92,18 +93,18 @@ The following three steps describe how to create your own module using the **Dev
         ```
 
 
-   2. In the **View** folder:
-      1. Create a new WPF UserControl class called **NewDocumentView.xaml**. 
+2. In the **View** folder:
+    1. Create a new WPF UserControl class called **NewDocumentView.xaml**. 
 
-      2. In the code behind file inherit from `DocumentViewBase` instead of `UserControl`.
+    2. In the code behind file inherit from `DocumentViewBase` instead of `UserControl`.
 
-      3. Modify the constructor to accept `IViewContext` and `NewDocumentViewModel`, passing them into the base constructor along with `Module.ModuleName`
+    3. Modify the constructor to accept `IViewContext` and `NewDocumentViewModel`, passing them into the base constructor along with `Module.ModuleName`.
 
-      4. Set the data context to the 'NewDocumentViewModel'
+    4. Set the data context to the `newDocumentViewModel`.
 
-      5. In the xaml file rename the 'UserControl' root element to 'view:DocumentViewBase'
+    5. In the xaml file rename the `UserControl` root element to `view:DocumentViewBase`.
 
-      6. Remove the 'DesignHeight' and 'DesignWidth' properties
+    6. Remove the `DesignHeight` and `DesignWidth` properties.
 
       ```C#
           public partial class NewDocumentView : DocumentViewBase
@@ -131,17 +132,18 @@ The following three steps describe how to create your own module using the **Dev
       </view:DocumentViewBase>
       ```
 
-  3. Create a class called **Module.cs**.
-      1. **Module** must Inherit from `ModuleBase`
+3. Create a class called **Module.cs**.
+    1. **Module** must Inherit from `ModuleBase`.
 
-      2. Add a constant string property called `ModuleName` and give your module a name.
+    2. Add a constant string property called `ModuleName` and give your module a name.
 
-      3. Modify the constructor to accept `IUnityContainer, ModuleNavigator and ILoggerFacade` passing them into the base constructor.
+    3. Modify the constructor to accept `IUnityContainer, ModuleNavigator` and `ILoggerFacade`, passing them into the base constructor.
 
-      4. Override the `Initialize()` Method and:
-          * Register the **ViewModel** and **View** with the `Unity` container
-          * Create and configure your navigation objects including **ModuleSettings**, **ModuleGroup** and **ModuleGroupItem** classes as shown in the code listing below.
+    4. Override the `Initialize()` Method and do the following:
+      * Register the **ViewModel** and **View** with the `Unity` container.
+      * Create and configure your navigation objects including **ModuleSettings**, **ModuleGroup** and **ModuleGroupItem** classes as shown in the code listing below.
  
+
       ```C#
           public class Module : ModuleBase
           {
@@ -179,7 +181,8 @@ The following three steps describe how to create your own module using the **Dev
           }
       ```
 
-4. Finally, add an entry for your module in the module catalog which can be found in the **Configuration** folder of the **DevelopmentInProgress.Origin** project.
+### Step 3 - Finally, add an entry for your module in the module catalog.
+The `ModuleCatalog.xaml` file can be found in the **Configuration** folder of the **DevelopmentInProgress.Origin** project.
 
   ```xaml
       <prism:ModuleInfo Ref="Module Template" 
