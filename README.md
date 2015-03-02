@@ -1,6 +1,6 @@
 # origin
 
-![Alt text](/Images/Origin-screenshot.png?raw=true "Origin screenshot")
+![Alt text](/README-images/origin-screenshot.png?raw=true "Origin screenshot")
 
 
 
@@ -17,7 +17,7 @@ I first started developing Origin in 2012 as an exercise in WPF shell developmen
 
 3. You will see three projects in the solution and each will be discussed below. For the time being note the start-up project is **DevelopmentInProgress.Origin** and the build output will go to a folder called **Binaries**.
 
-   ![Alt text](/Images/solution.PNG?raw=true "Solution")
+   ![Alt text](/README-images/solution.PNG?raw=true "Solution")
 
 4. Build the solution.
 
@@ -39,7 +39,7 @@ The solution contains the following three projects:
 # Creating a Module
 The following three steps describe how to create your own module using the **DevelopmentInProgress.ModuleTemplate** project as an example.
 
-![Alt text](/Images/moduletemplate-project.png?raw=true "DevelopmentInProgress.ModuleTemplate project")
+![Alt text](/README-images/moduletemplate-project.png?raw=true "DevelopmentInProgress.ModuleTemplate project")
 
 
 ### Step 1 - Create a Class Library for the module
@@ -194,4 +194,4 @@ The `ModuleCatalog.xaml` file can be found in the **Configuration** folder of th
 
 Rebuild the solution and run it.
 
-![Alt text](/Images/moduletemplate-screenshot.png?raw=true "DevelopmentInProgress.ModuleTemplate screenshot")
+![Alt text](/README-mages/moduletemplate-screenshot.png?raw=true "DevelopmentInProgress.ModuleTemplate screenshot")
