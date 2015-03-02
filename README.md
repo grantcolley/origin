@@ -194,4 +194,4 @@ The `ModuleCatalog.xaml` file can be found in the **Configuration** folder of th
 
 Rebuild the solution and run it.
 
-![Alt text](/README-mages/moduletemplate-screenshot.png?raw=true "DevelopmentInProgress.ModuleTemplate screenshot")
+![Alt text](/README-images/moduletemplate-screenshot.png?raw=true "DevelopmentInProgress.ModuleTemplate screenshot")
