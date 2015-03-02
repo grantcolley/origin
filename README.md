@@ -40,7 +40,7 @@ The solution contains the following three projects:
 # Creating a Module
 The following three steps describe how to create your own module using the **DevelopmentInProgress.ModuleTemplate** project as an example.
 
-![Alt text](/Images/moduletemplate-project.png?raw=true "DevelopmentInProgress.ModuleTemplate")
+![Alt text](/Images/moduletemplate-project.png?raw=true "DevelopmentInProgress.ModuleTemplate project")
 
 
 1. Create a Class Library for the module
@@ -187,3 +187,8 @@ The following three steps describe how to create your own module using the **Dev
                         ModuleType="DevelopmentInProgress.ModuleTemplate.Module,DevelopmentInProgress.ModuleTemplate"
                         InitializationMode="WhenAvailable"/>
   ```
+
+
+Rebuild the solution and run it.
+
+![Alt text](/Images/moduletemplate-screenshot.png?raw=true "DevelopmentInProgress.ModuleTemplate screenshot")
