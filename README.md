@@ -197,4 +197,178 @@ Rebuild the solution and run it.
 ![Alt text](/README-images/moduletemplate-screenshot.png?raw=true "DevelopmentInProgress.ModuleTemplate screenshot")
 
 
-[Why not take a look at the Origin wiki for more...](https://github.com/grantcolley/origin/wiki)
+#Time To Get Coding
+
+As already mentioned the best way to see how the Origin framework works and how you can write code to leverage its functionality is to look at the **DevelopmentInProgress.ExampleModule** project and step through the code using the debugger.
+
+
+In the meanwhile lets take a look at some of the functionality the Origin framework gives you.
+
+
+### Open a new document and pass parameters to it
+Document view models inherit the `DocumentViewModel` class. You can open a new document from a view model by calling the inherited method `PublishDocument(NavigationSettings navigationSettings)`, passing a `NavigationSettings` object containing information about the target view, document title and parameter.
+
+```C#
+            var navigationSettings = new NavigationSettings()
+            {
+                View = "ExampleDocumentNavigationView",
+                Title = "Example Document",
+                Data = parameter
+            };
+
+            PublishDocument(navigationSettings);
+```
+
+
+
+### Document navigation history
+Documents show a breadcrumb style navigation history. Click a link in the navigation history and jump back to the document you came from.
+
+![](https://github.com/grantcolley/origin/raw/master/README-images/navigation-history.png)
+
+
+
+### Open a modal window and pass parameters to it
+Document view models and modal view models ultimately inherit the `ViewModelBase` class. To open a modal window call `ShowModal(ModalSettings modalSettings)` on the `ViewModelBase` class, passing a `ModalSettings` object containing information about the target view and view model, the window title, height and width, and the parameter.
+
+```C#
+            var modalSettings = new ModalSettings()
+            {
+                Title = "Window Title",
+                View = "DevelopmentInProgress.ExampleModule.View.ExampleModalView,DevelopmentInProgress.ExampleModule",
+                ViewModel = "DevelopmentInProgress.ExampleModule.ViewModel.ExampleModalViewModel,DevelopmentInProgress.ExampleModule",
+                Height = 700,
+                Width = 700
+            };
+
+            modalSettings.Parameters.Add("parameter", parameter);
+            ShowModal(modalSettings);
+```
+
+
+
+### Asynchronously process the arguments passed to a view model
+
+To process parameters passed to a view model inheriting from `DocumentViewModel`:
+```C#
+        protected override ProcessAsyncResult OnPublishedAsync(object data)
+        {
+            // process the data passed into the view model here...
+
+            return new ProcessAsyncResult();
+        }
+```
+
+To process parameters passed to a view model inheriting from `ModalViewModel`:
+```C#
+        protected override ProcessAsyncResult OnPublishedAsync(Dictionary<string, object> parameters)
+        {
+            // process the data passed into the view model here...
+
+            return new ProcessAsyncResult();
+        }
+```
+
+
+
+### Save a document asynchronously
+When saving a document by clicking the Save button in the toolbar, the shell executes the `Save` command of the documents `ViewModelBase` class. You can handle the save asynchronously by overriding the `ViewModelBase` class's `SaveDocumentAsync()` method.
+
+```C#
+        protected override ProcessAsyncResult SaveDocumentAsync()
+        {
+            // do save stuff here...
+
+            return new ProcessAsyncResult();
+        }
+```
+
+
+### Indicate when a document has been modified
+The `ViewModelBase` class supports property change notification via `OnPropertyChanged(string propertyName, bool isDirty = false)`. Passing true to the isDirty parameter will show a “dirty” indicator as a red asterisk on the document or modal window. Calling `ResetStatus()` will clear the indicator. 
+
+![](https://github.com/grantcolley/origin/raw/master/README-images/document-dirty.png)
+
+
+
+### Show messages in the document pane
+To show messages in the document footer call `ShowMessage(Message message, bool appendMessage = false)` or `ShowMessages(List<Message> messagesToShow, bool appendMessage = false)` on the `ViewModelBase` class.
+
+```C#
+            var message = new Message()
+            {
+                Text = "Message text",
+                MessageType = MessageTypeEnum.Error
+            };
+
+            ShowMessage(message, true);
+```
+
+![](https://github.com/grantcolley/origin/raw/master/README-images/document-messages.png)
+
+
+
+### Show a message box
+To show a message box call `ShowMessageBox(MessageBoxSettings messageBoxSettings)` on the `ViewModelBase` class.
+
+```C#
+            var message = new Message()
+            {
+                Title = "Show Info"
+                Text = "Example message...",
+                MessageType = MessageTypeEnum.Info
+            };
+
+            var messageBoxSettings = new MessageBoxSettings() 
+            {
+                Message = message,
+                MessageBoxButtons = MessageBoxButtonsEnum.YesNoCancel
+            };
+
+            var result = ShowMessageBox(messageBoxSettings);
+```
+
+![](https://github.com/grantcolley/origin/raw/master/README-images/message-box.png)
+
+
+
+### Unhandled exceptions
+Unhandled exceptions are ugly. When you get one the error message is displayed in a error message box along with the stack trace. The user can copy the content to the clipboard and send it to somebody to look at. Or you can get it from the log file.
+
+![](https://github.com/grantcolley/origin/raw/master/README-images/unhandled-exceptions.png)
+
+
+
+### Obtain a handle on open view models
+This is probably best explained with an example, the following code illustrates how to populate a list of open document view models. Note the `FindDocumentViewModel` class allows you to specify a _NavigationId_ for returning a specific document view model, or the _ModuleName_ for returning all open document view models for the module. If you do not specify _NavigationId_ or _ModuleName_ then all open document view models will be returned.
+
+```C#
+        public ObservableCollection<ViewModelBase> OpenDocuments { get; private set; }
+
+        private void GetDocuments(object param)
+        {
+            var documentViewModels = new FindDocumentViewModel();
+            OnGetViewModels(documentViewModels);
+
+            ViewModelContext.UiDispatcher.Invoke(
+                () =>
+                {
+                    OpenDocuments.Clear();
+                    documentViewModels.ViewModels.ForEach(vm =>
+                    {
+                        if (vm != this)
+                        {
+                            OpenDocuments.Add(vm);
+                        }
+                    });
+                });
+        }
+```
+
+
+### The application toolbar
+The application toolbar gives you buttons to ``Save, Save All`` and ``Refresh`` documents. The ``Save`` button will save the currently active document. ``Save All`` will save all open documents. ``Refresh`` will refresh all open documents. 
+If you don't want to use the toolbar you can hide it. Toggle the visibility of the toolbar by setting the `IsShellToolBarVisible` attribute in the _App.config_ file in the **DevelopmentInProgress.Origin** project.
+
+![](https://github.com/grantcolley/origin/raw/master/README-images/toolbar.png)
+
