@@ -54,7 +54,7 @@ The following three steps describe how to create your own module using the **Dev
       * **Microsoft.Practices.Prism.UnityExtensions.dll**
       * **Microsoft.Practices.Unity.dll**
     
-5.  In the projects properties Build page change the build output path to `..\..\Binaries\`.
+5.  In the projects properties Build page change the build output path to `..\..\..\Binaries\`.
 
 6.  Create the following three folders in the project:
       * **View**
