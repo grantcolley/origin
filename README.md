@@ -13,7 +13,7 @@ I first started developing Origin in 2012 as an exercise in WPF shell developmen
 ### Download the source code and run the solution
 1. Download the source code from GitHub.
 
-2. In the **Solution** folder, open the solution file **DevelopmentInProgress.Origin.sln** using Visual Studio.
+2. Open the solution file **DevelopmentInProgress.Origin.sln** using Visual Studio.
 
 3. You will see three projects in the solution and each will be discussed below. For the time being note the start-up project is **DevelopmentInProgress.Origin** and the build output will go to a folder called **Binaries**.
 
