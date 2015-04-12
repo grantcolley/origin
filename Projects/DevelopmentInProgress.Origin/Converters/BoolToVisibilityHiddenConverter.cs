@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BoolToVisibilityConverter.cs" company="Development In Progress Ltd">
+// <copyright file="BoolToVisibilityHiddenConverter.cs" company="Development In Progress Ltd">
 //     Copyright © 2012. All rights reserved.
 // </copyright>
 // <author>Grant Colley</author>
@@ -15,7 +15,7 @@ namespace DevelopmentInProgress.Origin.Converters
     /// <summary>
     /// Converts a boolean to a <see cref="Visibility"/> value.
     /// </summary>
-    public class BoolToVisibilityConverter : IValueConverter
+    public class BoolToVisibilityHiddenConverter : IValueConverter
     {
         /// <summary>
         /// Converts the value to the converted type.
@@ -24,7 +24,7 @@ namespace DevelopmentInProgress.Origin.Converters
         /// <param name="targetType">The target type.</param>
         /// <param name="parameter">The parameter.</param>
         /// <param name="culture">The culture information.</param>
-        /// <returns>Visibility.Visible if true, else returns Visibility.Collapsed.</returns>
+        /// <returns>Visibility.Visible if true, else returns Visibility.Hidden.</returns>
         public object Convert(object value, Type targetType,
             object parameter, CultureInfo culture)
         {
@@ -34,7 +34,7 @@ namespace DevelopmentInProgress.Origin.Converters
                 return Visibility.Visible;
             }
 
-            return Visibility.Collapsed;
+            return Visibility.Hidden;
         }
 
         /// <summary>

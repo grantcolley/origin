@@ -103,6 +103,7 @@
       <DependentUpon>CircularProgress.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToStringConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityHiddenConverter.cs" />
     <Compile Include="Converters\UriStringToImageConverter.cs" />
     <Compile Include="Converters\InvertBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\TextToForegroundConverter.cs" />
