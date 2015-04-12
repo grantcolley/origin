@@ -49,6 +49,15 @@ namespace DevelopmentInProgress.Origin.ViewModel
         }
 
         /// <summary>
+        /// Executed on the UI thread on completion of <see cref="OnPublishedAsync(object)"/>.
+        /// </summary>
+        /// <param name="processAsyncResult">The results of processing the method asynchronously.</param>
+        protected virtual void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
+        {
+            return;
+        }
+
+        /// <summary>
         /// Raised when publishing a document. Handled in the <see cref="DocumentViewBase"/> class.
         /// </summary>
         public event EventHandler<NavigationSettings> Publish;
@@ -114,6 +123,15 @@ namespace DevelopmentInProgress.Origin.ViewModel
         protected override ProcessAsyncResult OnPublishedAsync()
         {
             return OnPublishedAsync(Data);
+        }
+
+        /// <summary>
+        /// Executed on the UI thread on completion of <see cref="OnPublishedAsync()"/>.
+        /// </summary>
+        /// <param name="processAsyncResult">The results of processing the method asynchronously.</param>
+        protected override void OnPublishedAsyncCompleted(ProcessAsyncResult processAsyncResult)
+        {
+            OnPublishedCompleted(processAsyncResult);
         }
 
         /// <summary>

@@ -38,6 +38,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             return new ProcessAsyncResult();
         }
 
+        protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
+        {
+            base.OnPublishedCompleted(processAsyncResult);
+        }
+
         protected override ProcessAsyncResult SaveDocumentAsync()
         {
             Thread.Sleep(1000);

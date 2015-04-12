@@ -15,6 +15,11 @@ namespace DevelopmentInProgress.ModuleTemplate.ViewModel
             return base.OnPublishedAsync(data);
         }
 
+        protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
+        {
+            base.OnPublishedCompleted(processAsyncResult);
+        }
+
         protected override ProcessAsyncResult SaveDocumentAsync()
         {
             return base.SaveDocumentAsync();

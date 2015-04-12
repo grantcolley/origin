@@ -96,13 +96,20 @@ namespace DevelopmentInProgress.Origin.ViewModel
         #endregion
 
         /// <summary>
-        /// Notification to the sub class that data has been published. This is also used for refreshing the subclass.
+        /// Notification to the sub class that data has been published. This is called on a task separate from the UI thread when 
+        /// the document is opened for the first time and when it is refreshed.
         /// This abstract method is implemented by <see cref="DocumentViewModel"/> and <see cref="ModalViewModel"/>
         /// which in turn implement a specialized virtual OnPublishAsync method of their own which can be overriden by a 
         /// document or modal view model. 
         /// </summary>
-        /// <returns>The results of processing the method asynchronously</returns>
+        /// <returns>The results of processing the method asynchronously.</returns>
         protected abstract ProcessAsyncResult OnPublishedAsync();
+
+        /// <summary>
+        /// Executed on the UI thread on completion of <see cref="OnPublishedAsync"/>.
+        /// </summary>
+        /// <param name="processAsyncResult">The results of processing the method asynchronously.</param>
+        protected abstract void OnPublishedAsyncCompleted(ProcessAsyncResult processAsyncResult);
 
         /// <summary>
         /// Perform an asynchronous save. This is a virtual method that is optionally overriden by the view model.
@@ -256,20 +263,6 @@ namespace DevelopmentInProgress.Origin.ViewModel
         }
 
         /// <summary>
-        /// Calls the method ResetStatus().
-        /// </summary>
-        /// <param name="processAsyncResult">This argument is ignored.</param>
-        protected void ResetStatusAsync(ProcessAsyncResult processAsyncResult)
-        {
-            if (processAsyncResult.IsFaulted)
-            {
-                ShowFlattenedAggregateException(processAsyncResult.FlattenedAggregateException);                
-            }
-
-            ResetStatus();
-        }
-
-        /// <summary>
         /// Raises the <see cref="ShowMessageWindow"/> event which is handled on the view.
         /// </summary>
         /// <param name="messageBoxSettings">Details of the message to display.</param>
@@ -381,7 +374,7 @@ namespace DevelopmentInProgress.Origin.ViewModel
         /// </summary>
         protected void DataPublished()
         {
-            ProcessAsync(OnPublishedAsync, ResetStatusAsync);
+            ProcessAsync(OnPublishedAsync, OnPublishedAsyncCompleted);
         }
 
         /// <summary>
@@ -399,7 +392,7 @@ namespace DevelopmentInProgress.Origin.ViewModel
         /// <param name="param">This argument is ignored.</param>
         private void OnSave(object param)
         {
-            ProcessAsync(SaveDocumentAsync, ResetStatusAsync);
+            ProcessAsync(SaveDocumentAsync, OnPublishedAsyncCompleted);
         }
         
         /// <summary>
@@ -418,8 +411,17 @@ namespace DevelopmentInProgress.Origin.ViewModel
                 .ContinueWith(antecendent =>
                 {
                     var asyncResult = GetProcessAsyncResult(antecendent);
-                    asyncResult.State = antecendent.AsyncState;
-                    completionAction(asyncResult);
+                    if (asyncResult.IsFaulted)
+                    {
+                        ShowFlattenedAggregateException(asyncResult.FlattenedAggregateException);
+                    }
+                    else
+                    {
+                        asyncResult.State = antecendent.AsyncState;
+                        completionAction(asyncResult);                        
+                    }
+
+                    ResetStatus();
                 }, TaskScheduler.FromCurrentSynchronizationContext())
                 .ContinueWith(antecendent =>
                 {
@@ -450,7 +452,16 @@ namespace DevelopmentInProgress.Origin.ViewModel
                 .ContinueWith(antecendent =>
                 {
                     var asyncResult = GetProcessAsyncResult(antecendent);
-                    completionAction(asyncResult);
+                    if (asyncResult.IsFaulted)
+                    {
+                        ShowFlattenedAggregateException(asyncResult.FlattenedAggregateException);
+                    }
+                    else
+                    {
+                        completionAction(asyncResult);
+                    }
+
+                    ResetStatus();
                 }, TaskScheduler.FromCurrentSynchronizationContext())
                 .ContinueWith(antecendent =>
                 {
