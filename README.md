@@ -69,7 +69,7 @@ The following three steps describe how to create your own module using the **Dev
     
     2. Modify the constructor to accept `ViewModelContext`, passing it into the base constructor.
     
-    3. Override the `OnPublishedAsync(object data)` and `SaveDocumentAsync()` methods.
+    3. Override the `OnPublishedAsync(object data)`, `OnPublishedCompleted(ProcessAsyncResult processAsyncResult)` and `SaveDocumentAsync()` methods.
 
 
         ```C#
@@ -84,7 +84,12 @@ The following three steps describe how to create your own module using the **Dev
                 {
                     return base.OnPublishedAsync(data);
                 }
-        
+                
+                protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
+                {
+                    base.OnPublishedCompleted(processAsyncResult);
+                }
+                
                 protected override ProcessAsyncResult SaveDocumentAsync()
                 {
                     return base.SaveDocumentAsync();
@@ -249,7 +254,13 @@ Document view models and modal view models ultimately inherit the `ViewModelBase
 
 ### Asynchronously process the arguments passed to a view model
 
-To process parameters passed to a view model inheriting from `DocumentViewModel`:
+The arguments passed to the view model are handled in the view model by overriding the methods `OnPublishedAsync` and `OnPublishedCompleted`.
+
+`OnPublishedAsync` runs on a different thread from the UI, giving the view model an opportunity to peform functions such as query query a database etc. in an asynchronous manner.
+
+`OnPublishedCompleted` returns the results of `OnPublishedAsync` back to the view model on the UI thread, allowing the view model to update properties such as collections etc, which need to be done on a UI thread.
+
+To asynchronously process parameters passed to a view model inheriting from `DocumentViewModel` as an object:
 ```C#
         protected override ProcessAsyncResult OnPublishedAsync(object data)
         {
@@ -259,7 +270,7 @@ To process parameters passed to a view model inheriting from `DocumentViewModel`
         }
 ```
 
-To process parameters passed to a view model inheriting from `ModalViewModel`:
+To asynchronously process parameters passed to a view model inheriting from `ModalViewModel` in the form of a dictionary of key value pairs:
 ```C#
         protected override ProcessAsyncResult OnPublishedAsync(Dictionary<string, object> parameters)
         {
@@ -269,7 +280,14 @@ To process parameters passed to a view model inheriting from `ModalViewModel`:
         }
 ```
 
-
+To process the results from `OnPublishedAsync` in the view model on the UI thread (applies to view models inheriting from `DocumentViewModel` or `ModalViewModel`).
+```C#
+        protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
+        {
+        // process the data passed into the view model here...
+            base.OnPublishedCompleted(processAsyncResult);
+        }
+```
 
 ### Save a document asynchronously
 When saving a document by clicking the Save button in the toolbar, the shell executes the `Save` command of the documents `ViewModelBase` class. You can handle the save asynchronously by overriding the `ViewModelBase` class's `SaveDocumentAsync()` method.
