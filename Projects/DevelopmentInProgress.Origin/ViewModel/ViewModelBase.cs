@@ -108,16 +108,25 @@ namespace DevelopmentInProgress.Origin.ViewModel
         /// <summary>
         /// Executed on the UI thread on completion of <see cref="OnPublishedAsync"/>.
         /// </summary>
-        /// <param name="processAsyncResult">The results of processing the method asynchronously.</param>
+        /// <param name="processAsyncResult">The results of the async method.</param>
         protected abstract void OnPublishedAsyncCompleted(ProcessAsyncResult processAsyncResult);
 
         /// <summary>
-        /// Perform an asynchronous save. This is a virtual method that is optionally overriden by the view model.
+        /// Perform an asynchronous save. This is called on a task separate from the UI thread. 
+        /// This virtual method that is optionally overriden by the view model.
         /// </summary>
         /// <returns>The results of an asynchronous save.</returns>
         protected virtual ProcessAsyncResult SaveDocumentAsync()
         {
             return new ProcessAsyncResult();
+        }
+
+        /// <summary>
+        /// Executed on the UI thread on completion of <see cref="SaveDocumentAsync"/>.
+        /// </summary>
+        /// <param name="processAsyncResult">The results of the async method.</param>
+        protected virtual void SaveDocumentCompleted(ProcessAsyncResult processAsyncResult)
+        {
         }
 
         /// <summary>
@@ -392,7 +401,7 @@ namespace DevelopmentInProgress.Origin.ViewModel
         /// <param name="param">This argument is ignored.</param>
         private void OnSave(object param)
         {
-            ProcessAsync(SaveDocumentAsync, OnPublishedAsyncCompleted);
+            ProcessAsync(SaveDocumentAsync, SaveDocumentCompleted);
         }
         
         /// <summary>
