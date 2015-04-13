@@ -24,10 +24,5 @@ namespace DevelopmentInProgress.ModuleTemplate.ViewModel
         {
             return base.SaveDocumentAsync();
         }
-
-        protected override void SaveDocumentCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            base.SaveDocumentCompleted(processAsyncResult);
-        }
     }
 }
