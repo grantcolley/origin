@@ -91,6 +91,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             return new ProcessAsyncResult();
         }
 
+        protected override void SaveDocumentCompleted(ProcessAsyncResult processAsyncResult)
+        {
+            base.SaveDocumentCompleted(processAsyncResult);
+        }
+
         private void ShowMessage(object parameter)
         {
             var message = new Message() { Text = MessageText };

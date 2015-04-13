@@ -3,7 +3,6 @@
                      xmlns:prism="clr-namespace:Microsoft.Practices.Prism.Modularity;assembly=Microsoft.Practices.Prism">
 
         <!-- Modules loaded by prism during application startup -->
-
     <prism:ModuleInfo Ref="Example Module" 
                       ModuleName="DevelopmentInProgress.ExampleModule" 
                       ModuleType="DevelopmentInProgress.ExampleModule.Module,DevelopmentInProgress.ExampleModule"
@@ -12,6 +11,11 @@
     <prism:ModuleInfo Ref="Module Template" 
                       ModuleName="DevelopmentInProgress.ModuleTemplate" 
                       ModuleType="DevelopmentInProgress.ModuleTemplate.Module,DevelopmentInProgress.ModuleTemplate"
+                      InitializationMode="WhenAvailable"/>
+                      
+    <prism:ModuleInfo Ref="DipDocs"
+                      ModuleName="DevelopmentInProgress.DipDocs"
+                      ModuleType="DevelopmentInProgress.DipDocs.Module,DevelopmentInProgress.DipDocs"
                       InitializationMode="WhenAvailable"/>
     
 </prism:ModuleCatalog>
