@@ -68,6 +68,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -82,10 +83,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Service\Data.cs" />
+    <Compile Include="Service\RemediationService.cs" />
     <Compile Include="ViewModel\ExampleDocumentMessagesViewModel.cs" />
     <Compile Include="ViewModel\ExampleDocumentNavigationViewModel.cs" />
     <Compile Include="ViewModel\ExampleModalViewModel.cs" />
     <Compile Include="ViewModel\ExampleDocumentViewModel.cs" />
+    <Compile Include="ViewModel\RemediationWorkflowViewModel.cs" />
     <Compile Include="View\ExampleDocumentMessagesView.xaml.cs">
       <DependentUpon>ExampleDocumentMessagesView.xaml</DependentUpon>
     </Compile>
@@ -97,6 +101,9 @@
     </Compile>
     <Compile Include="View\ExampleDocumentView.xaml.cs">
       <DependentUpon>ExampleDocumentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RemediationWorkflowView.xaml.cs">
+      <DependentUpon>RemediationWorkflowView.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -134,11 +141,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\RemediationWorkflowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\DocumentEdit.png" />
     <Resource Include="Images\DocumentMessages.png" />
     <Resource Include="Images\DocumentNavigation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Remediation.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

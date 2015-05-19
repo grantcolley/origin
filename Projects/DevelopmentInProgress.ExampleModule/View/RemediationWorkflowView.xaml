@@ -1,0 +1,88 @@
+﻿<view:DocumentViewBase x:Class="DevelopmentInProgress.ExampleModule.View.RemediationWorkflowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:view="clr-namespace:DevelopmentInProgress.Origin.View;assembly=DevelopmentInProgress.Origin"
+             xmlns:model="clr-namespace:DevelopmentInProgress.ExampleModule.Model"
+             mc:Ignorable="d">
+    <view:DocumentViewBase.Resources>
+        <ResourceDictionary>
+            <Style x:Key="groupBoxNoHeaderStyle" TargetType="{x:Type GroupBox}">
+                <Setter Property="BorderBrush" Value="#D5DFE5"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="6"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="6"/>
+                                </Grid.RowDefinitions>
+                                <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3"/>
+                                <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" Grid.Column="0" Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                        <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+                                    </Border>
+                                </Border>
+                                <Border x:Name="Header" Grid.Column="1" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2">
+                                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                                <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </view:DocumentViewBase.Resources>    
+    <DockPanel Margin="10,10,10,10" LastChildFill="True">
+        <StatusBar Height="36" DockPanel.Dock="Bottom"/>
+        <TabControl Height="300" DockPanel.Dock="Bottom">
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ListView ItemsSource="{Binding Customers}">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type model:Customer}">
+                        <GroupBox Style="{StaticResource groupBoxNoHeaderStyle}" 
+                            Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" 
+                            BorderBrush="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <Label Content="Name:" FontWeight="Bold"/>
+                                    <Label Content="{Binding Name}" Width="300"/>
+                                    <Label Content="Sort Code:" FontWeight="Bold"/>
+                                    <Label Content="{Binding SortCode}" Width="100"/>
+                                    <Label Content="Account Number:" FontWeight="Bold"/>
+                                    <Label Content="{Binding AccountNumber}" Width="150"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <Label Content="Address:" FontWeight="Bold"/>
+                                    <Label Content="{Binding Address}"/>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+    </DockPanel>
+</view:DocumentViewBase>
