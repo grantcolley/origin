@@ -45,15 +45,54 @@
         </ResourceDictionary>
     </view:DocumentViewBase.Resources>    
     <DockPanel Margin="10,10,10,10" LastChildFill="True">
-        <StatusBar Height="36" DockPanel.Dock="Bottom"/>
-        <TabControl Height="300" DockPanel.Dock="Bottom">
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
+        <GroupBox DockPanel.Dock="Bottom" Style="{StaticResource groupBoxNoHeaderStyle}"
+			Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
+            <StackPanel>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Name:" FontWeight="Bold"/>
+                    <Label Content="{Binding Name}" Width="300"/>
+                    <Label Content="Sort Code:" FontWeight="Bold"/>
+                    <Label Content="{Binding SortCode}" Width="100"/>
+                    <Label Content="Account Number:" FontWeight="Bold"/>
+                    <Label Content="{Binding AccountNumber}" Width="150"/>
+                    <ContentControl/>
+                </StackPanel>
+                <TabControl Height="300" >
+                    <TabItem Header="TabItem">
+                        <Grid Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>                                
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Hedging Product:" FontWeight="Bold" Margin="2"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" Width="150" SelectedItem="{Binding Product}" Margin="2">
+                                <ComboBoxItem>Cap</ComboBoxItem>
+                                <ComboBoxItem>Collar</ComboBoxItem>
+                                <ComboBoxItem>Structured Collar</ComboBoxItem>
+                            </ComboBox>
+                            <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Total Payment Amount:" FontWeight="Bold" Margin="2"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="150" Text="{Binding TotalPaymentAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                            <Label Grid.Row="2" Grid.Column="0" Width="150" Content="Consequential Loss:" FontWeight="Bold" Margin="2"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Width="150" Text="{Binding ConsequentialLoss}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                            <Label Grid.Row="3" Grid.Column="0" Width="150" Content="Interest:" FontWeight="Bold" Margin="2"/>
+                            <TextBox Grid.Row="3" Grid.Column="1" Width="100" Text="{Binding Interest}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
+                            <Label Grid.Row="4" Grid.Column="0" Width="150" Content="Start Date:" FontWeight="Bold" Margin="2"/>
+                            <DatePicker Grid.Row="4" Grid.Column="1" Width="150" SelectedDate="{Binding StartDate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem">
+                        <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}"/>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+        </GroupBox>
         <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <ListView ItemsSource="{Binding Customers}">
                 <ListView.ItemTemplate>

@@ -1,4 +1,5 @@
-﻿using DevelopmentInProgress.ExampleModule.ViewModel;
+﻿using System.Windows.Input;
+using DevelopmentInProgress.ExampleModule.ViewModel;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.View;
 
@@ -15,6 +16,11 @@ namespace DevelopmentInProgress.ExampleModule.View
             InitializeComponent();
 
             DataContext = remediationWorkflowViewModel;
+        }
+
+        private void OnPreviewTextIsDecimal(object sender, TextCompositionEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
