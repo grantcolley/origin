@@ -19,8 +19,6 @@ namespace DevelopmentInProgress.ExampleModule
 
         public override void Initialize()
         {
-            Container.RegisterType<Object, RemediationWorkflowView>(typeof(RemediationWorkflowView).Name);
-            Container.RegisterType<RemediationWorkflowViewModel>(typeof(RemediationWorkflowViewModel).Name);
             Container.RegisterType<Object, ExampleDocumentView>(typeof(ExampleDocumentView).Name);
             Container.RegisterType<ExampleDocumentViewModel>(typeof(ExampleDocumentViewModel).Name);
             Container.RegisterType<Object, ExampleDocumentMessagesView>(typeof(ExampleDocumentMessagesView).Name);
@@ -31,8 +29,6 @@ namespace DevelopmentInProgress.ExampleModule
             var moduleSettings = new ModuleSettings();
             moduleSettings.ModuleName = ModuleName;
             moduleSettings.ModuleImagePath = @"/DevelopmentInProgress.ExampleModule;component/Images/ExampleModule.png";
-
-            #region Example Module
 
             var moduleGroup = new ModuleGroup();
             moduleGroup.ModuleGroupName = "Example Module";
@@ -59,24 +55,6 @@ namespace DevelopmentInProgress.ExampleModule
             moduleGroup.ModuleGroupItems.Add(documentMessages);
             moduleGroup.ModuleGroupItems.Add(documentNavigation);
 
-            #endregion
-
-            #region Remediation Workflow
-
-            var remediationWorkflowGroup = new ModuleGroup();
-            remediationWorkflowGroup.ModuleGroupName = "Remediation Workflow";
-
-            var remediationWorkflow = new ModuleGroupItem();
-            remediationWorkflow.ModuleGroupItemName = "Remediation Workflow";
-            remediationWorkflow.TargetView = typeof(RemediationWorkflowView).Name;
-            remediationWorkflow.TargetViewTitle = "Remediation Workflow";
-            remediationWorkflow.ModuleGroupItemImagePath = @"/DevelopmentInProgress.ExampleModule;component/Images/Remediation.png";
-
-            remediationWorkflowGroup.ModuleGroupItems.Add(remediationWorkflow);
-
-            #endregion
-
-            moduleSettings.ModuleGroups.Add(remediationWorkflowGroup);
             moduleSettings.ModuleGroups.Add(moduleGroup);
 
             ModuleNavigator.AddModuleNavigation(moduleSettings);
