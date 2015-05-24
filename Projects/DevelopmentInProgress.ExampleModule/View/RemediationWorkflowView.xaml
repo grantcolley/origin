@@ -42,13 +42,154 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+
+
+
+
+
+            <!--<WrapPanel Orientation="Horizontal" Height="400">
+                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <Label Content="Communication" FontWeight="Bold"/>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Letter Sent:" Margin="2"/>
+                        <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding LetterSent}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                        <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Response Recieved:" Margin="2"/>
+                        <DatePicker Grid.Row="1" Grid.Column="1" Width="150" SelectedDate="{Binding ResponseReceived}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                        <Label Grid.Row="2" Grid.Column="0" Width="150" Content="Consequential Loss Claim:" Margin="2"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Width="150" Text="{Binding ConsequentialLossClaim}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <Label Content="Data Capture" FontWeight="Bold"/>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Hedging Product:" Margin="2"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Width="150" SelectedItem="{Binding Product}" Margin="2">
+                            <ComboBoxItem>Cap</ComboBoxItem>
+                            <ComboBoxItem>Collar</ComboBoxItem>
+                            <ComboBoxItem>Structured Collar</ComboBoxItem>
+                        </ComboBox>
+                        <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Nominal Amount:" Margin="2"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Width="150" Text="{Binding NominalAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                        <Label Grid.Row="2" Grid.Column="0" Width="150" Content="Interest:" Margin="2"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Width="100" Text="{Binding Interest}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="3" Grid.Column="0" Width="150" Content="Start Date:" Margin="2"/>
+                        <DatePicker Grid.Row="3" Grid.Column="1" Width="150" SelectedDate="{Binding StartDate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                        <Label Grid.Row="4" Grid.Column="0" Width="150" Content="Redress Rate:" Margin="2"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Width="100" Text="{Binding RedressRate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="5" Grid.Column="0" Width="150" Content="Redress Amount:" Margin="2"/>
+                        <Label Grid.Row="5" Grid.Column="1" Width="150" Content="{Binding RedressAmount}" Margin="2"/>
+                        <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <Label Content="Offset Applicable" FontWeight="Bold"/>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Offset Amount:" Margin="2"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="150" Text="{Binding OffsetAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <Label Content="Redress Review" FontWeight="Bold"/>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Final Redress Amount:" Margin="2"/>
+                        <Label Grid.Row="0" Grid.Column="1" Width="150" Content="{Binding FinalRedressAmount}" Margin="2"/>
+                        <Button Grid.Row="1" Grid.Column="0" Width="80" Margin="2" Content="Fail"/>
+                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Pass"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <Label Content="Payment" FontWeight="Bold"/>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Payment Executed:" Margin="2"/>
+                        <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding PaymentExecuted}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Execute"/>
+                    </Grid>
+                </GroupBox>
+            </WrapPanel>-->
+
+
+
+
+
+
+
         </ResourceDictionary>
     </view:DocumentViewBase.Resources>    
     <DockPanel Margin="10,10,10,10" LastChildFill="True">
         <GroupBox DockPanel.Dock="Bottom" Style="{StaticResource groupBoxNoHeaderStyle}"
 			Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
             <StackPanel>
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
                     <Label Content="Name:" FontWeight="Bold"/>
                     <Label Content="{Binding Name}" Width="300"/>
                     <Label Content="Sort Code:" FontWeight="Bold"/>
@@ -57,40 +198,11 @@
                     <Label Content="{Binding AccountNumber}" Width="150"/>
                     <ContentControl/>
                 </StackPanel>
-                <TabControl Height="300" >
-                    <TabItem Header="TabItem">
-                        <Grid Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>                                
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Hedging Product:" FontWeight="Bold" Margin="2"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" Width="150" SelectedItem="{Binding Product}" Margin="2">
-                                <ComboBoxItem>Cap</ComboBoxItem>
-                                <ComboBoxItem>Collar</ComboBoxItem>
-                                <ComboBoxItem>Structured Collar</ComboBoxItem>
-                            </ComboBox>
-                            <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Total Payment Amount:" FontWeight="Bold" Margin="2"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" Width="150" Text="{Binding TotalPaymentAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
-                            <Label Grid.Row="2" Grid.Column="0" Width="150" Content="Consequential Loss:" FontWeight="Bold" Margin="2"/>
-                            <TextBox Grid.Row="2" Grid.Column="1" Width="150" Text="{Binding ConsequentialLoss}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
-                            <Label Grid.Row="3" Grid.Column="0" Width="150" Content="Interest:" FontWeight="Bold" Margin="2"/>
-                            <TextBox Grid.Row="3" Grid.Column="1" Width="100" Text="{Binding Interest}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
-                            <Label Grid.Row="4" Grid.Column="0" Width="150" Content="Start Date:" FontWeight="Bold" Margin="2"/>
-                            <DatePicker Grid.Row="4" Grid.Column="1" Width="150" SelectedDate="{Binding StartDate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="TabItem">
-                        <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}"/>
-                    </TabItem>
-                </TabControl>
+                <ItemsControl>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl>
             </StackPanel>
         </GroupBox>
         <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
