@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevelopmentInProgress.Examp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevelopmentInProgress.ModuleTemplate", "Projects\DevelopmentInProgress.ModuleTemplate\DevelopmentInProgress.ModuleTemplate.csproj", "{D8B3EE0B-9896-499E-9865-1CB553F0EA4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevelopmentInProgress.RemediationProgramme", "Projects\DevelopmentInProgress.RemediationProgramme\DevelopmentInProgress.RemediationProgramme.csproj", "{2DB08974-5434-4C06-9B93-A15CDD8AB97D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D8B3EE0B-9896-499E-9865-1CB553F0EA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8B3EE0B-9896-499E-9865-1CB553F0EA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8B3EE0B-9896-499E-9865-1CB553F0EA4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB08974-5434-4C06-9B93-A15CDD8AB97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB08974-5434-4C06-9B93-A15CDD8AB97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB08974-5434-4C06-9B93-A15CDD8AB97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB08974-5434-4C06-9B93-A15CDD8AB97D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
