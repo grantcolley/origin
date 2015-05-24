@@ -47,8 +47,12 @@ The following three steps describe how to create your own module using the **Dev
 
 2.  In the new project add a reference to the **DevelopmentInProgress.Origin** project.
 
-3.  Add a reference to **System.Xaml.dll**.
-  
+3.  Add references to:
+      * **PresentationCore.dll**
+      * **PresentationFramework.dll**
+      * **WindowsBase.dll**
+      * **System.Xaml.dll**
+
 4.  Add references to the following Prism libraries in the ThirdParty folder:
       * **Microsoft.Practices.Prism.dll**
       * **Microsoft.Practices.Prism.UnityExtensions.dll**
