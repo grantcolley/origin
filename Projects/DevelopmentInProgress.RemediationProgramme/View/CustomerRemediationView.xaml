@@ -8,7 +8,8 @@
              mc:Ignorable="d">
     <view:DocumentViewBase.Resources>
         <ResourceDictionary>
-            <Style x:Key="groupBoxNoHeaderStyle" TargetType="{x:Type GroupBox}">
+            
+            <Style x:Key="GroupBoxNoHeaderStyle" TargetType="{x:Type GroupBox}">
                 <Setter Property="BorderBrush" Value="#D5DFE5"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Template">
@@ -43,12 +44,7 @@
                 </Setter>
             </Style>
 
-
-
-
-
-
-            <!--<WrapPanel Orientation="Horizontal" Height="400">
+            <DataTemplate DataType="{x:Type model:Communication}">
                 <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
@@ -72,13 +68,18 @@
                         <DatePicker Grid.Row="1" Grid.Column="1" Width="150" SelectedDate="{Binding ResponseReceived}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
                         <Label Grid.Row="2" Grid.Column="0" Width="150" Content="Consequential Loss Claim:" Margin="2"/>
                         <TextBox Grid.Row="2" Grid.Column="1" Width="150" Text="{Binding ConsequentialLossClaim}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
-                        <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"/>
+                        <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
+                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}"/>
                     </Grid>
                 </GroupBox>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type model:CollateData}">
                 <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <Label Content="Data Capture" FontWeight="Bold"/>
+                            <Label Content="Collate Data" FontWeight="Bold"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <Grid>
@@ -111,9 +112,14 @@
                         <TextBox Grid.Row="4" Grid.Column="1" Width="100" Text="{Binding RedressRate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
                         <Label Grid.Row="5" Grid.Column="0" Width="150" Content="Redress Amount:" Margin="2"/>
                         <Label Grid.Row="5" Grid.Column="1" Width="150" Content="{Binding RedressAmount}" Margin="2"/>
-                        <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"/>
+                        <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
+                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}"/>
                     </Grid>
                 </GroupBox>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type model:Adjustment}">
                 <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
@@ -129,11 +135,16 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Offset Amount:" Margin="2"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Width="150" Text="{Binding OffsetAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
-                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"/>
+                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Adjustment Amount:" Margin="2"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="150" Text="{Binding AdjustmentAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
+                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}"/>
                     </Grid>
                 </GroupBox>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type model:RedressReview}">
                 <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
@@ -152,9 +163,14 @@
                         <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Final Redress Amount:" Margin="2"/>
                         <Label Grid.Row="0" Grid.Column="1" Width="150" Content="{Binding FinalRedressAmount}" Margin="2"/>
                         <Button Grid.Row="1" Grid.Column="0" Width="80" Margin="2" Content="Fail"/>
-                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Pass"/>
+                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Pass"
+                                Command="{Binding DataContext.DipStateRunCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}"/>
                     </Grid>
                 </GroupBox>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type model:Payment}">
                 <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
@@ -170,24 +186,23 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Payment Executed:" Margin="2"/>
-                        <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding PaymentExecuted}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
-                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Execute"/>
+                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Payment Date:" Margin="2"/>
+                        <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding PaymentDate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal"/>
+                        <Button Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Execute"
+                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}"/>
                     </Grid>
-                </GroupBox>
-            </WrapPanel>-->
-
-
-
-
-
-
+                </GroupBox>                
+            </DataTemplate>
 
         </ResourceDictionary>
     </view:DocumentViewBase.Resources>    
+    
     <DockPanel Margin="10,10,10,10" LastChildFill="True">
-        <GroupBox DockPanel.Dock="Bottom" Style="{StaticResource groupBoxNoHeaderStyle}"
-			Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
+        
+        <GroupBox DockPanel.Dock="Bottom" Style="{StaticResource GroupBoxNoHeaderStyle}"
+			Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"
+                  DataContext="{Binding ElementName=CustomerList, Path=SelectedItem}">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Name:" FontWeight="Bold"/>
@@ -198,18 +213,21 @@
                     <Label Content="{Binding AccountNumber}" Width="150"/>
                     <ContentControl/>
                 </StackPanel>
-                <ItemsControl>
-                    <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
-                    </ItemsPanelTemplate>
+                <ItemsControl ItemsSource="{Binding RemediationWorkflow}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
         </GroupBox>
+        
         <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <ListView ItemsSource="{Binding Customers}">
+            <ListView x:Name="CustomerList" ItemsSource="{Binding Customers}">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type model:Customer}">
-                        <GroupBox Style="{StaticResource groupBoxNoHeaderStyle}" 
+                        <GroupBox Style="{StaticResource GroupBoxNoHeaderStyle}" 
                             Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" 
                             BorderBrush="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}">
                             <Grid>
@@ -235,5 +253,6 @@
                 </ListView.ItemTemplate>
             </ListView>
         </ScrollViewer>
+        
     </DockPanel>
 </view:DocumentViewBase>

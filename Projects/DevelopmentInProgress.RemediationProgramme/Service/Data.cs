@@ -5,7 +5,7 @@ namespace DevelopmentInProgress.RemediationProgramme.Service
 {
     public static class Data
     {
-        public static IEnumerable<Customer> GetCustomers()
+        public static List<Customer> GetCustomers()
         {
             var customers = new List<Customer>();
             
@@ -36,9 +36,9 @@ namespace DevelopmentInProgress.RemediationProgramme.Service
             customers.Add(new Customer()
             {
                 Name = "James Blagg",
-                SortCode = "12-98-32",
-                AccountNumber = "11997788",
-                Address = "456 Garden Path, Canary Wharf, London, CW1 1WP"
+                SortCode = "12-34-45",
+                AccountNumber = "11779988",
+                Address = "951 Cambridge Road, Hampstead, London, NW2 7HA"
             });
             
             return customers;
