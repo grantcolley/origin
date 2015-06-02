@@ -1,6 +1,6 @@
 ﻿namespace DevelopmentInProgress.RemediationProgramme.Model
 {
-    public class AdjustmentDecision : DipState.DipState
+    public class AdjustmentDecision : EntityBase
     {
         public bool? AdjustmentApplicable { get; set; }
     }

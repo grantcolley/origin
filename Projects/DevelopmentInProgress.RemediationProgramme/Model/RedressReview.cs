@@ -1,6 +1,6 @@
 ﻿namespace DevelopmentInProgress.RemediationProgramme.Model
 {
-    public class RedressReview : DipState.DipState
+    public class RedressReview : EntityBase
     {
         public decimal? FinalRedressAmount { get; set; }
     }

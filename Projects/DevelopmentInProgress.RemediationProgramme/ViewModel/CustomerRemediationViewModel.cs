@@ -18,11 +18,13 @@ namespace DevelopmentInProgress.RemediationProgramme.ViewModel
         {
             this.remediationService = remediationService;
             CompleteCommand = new ViewModelCommand(Complete);
+            FailCommand = new ViewModelCommand(Fail);
         }
 
         public ICommand CompleteCommand { get; set; }
-
+        public ICommand FailCommand { get; set; }
         public List<Customer> Customers { get; set; }
+        public Customer CurrentCustomer { get; set; }
 
         protected override ProcessAsyncResult OnPublishedAsync()
         {
@@ -34,7 +36,19 @@ namespace DevelopmentInProgress.RemediationProgramme.ViewModel
         {
             var state = param as DipState.DipState;
             remediationService.Run(state, DipStateStatus.Completed);
-            OnPropertyChanged(String.Empty);
+
+            var entityBase = param as EntityBase;
+            entityBase.OnPropertyChanged(String.Empty);
+
+            CurrentCustomer.OnPropertyChanged("RemediationWorkflow");
+        }
+
+        private void Fail(object param)
+        {
+            var state = param as DipState.DipState;
+            remediationService.Run(state, DipStateStatus.Failed);
+
+            CurrentCustomer.OnPropertyChanged("RemediationWorkflow");
         }
     }
 }

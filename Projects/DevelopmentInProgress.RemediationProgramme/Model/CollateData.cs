@@ -2,7 +2,7 @@
 
 namespace DevelopmentInProgress.RemediationProgramme.Model
 {
-    public class CollateData : DipState.DipState
+    public class CollateData : EntityBase
     {
         public string HedgingProduct { get; set; }
         public decimal? NominalAmount { get; set; }
