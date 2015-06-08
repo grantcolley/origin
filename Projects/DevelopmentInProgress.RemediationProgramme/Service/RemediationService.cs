@@ -50,6 +50,7 @@ namespace DevelopmentInProgress.RemediationProgramme.Service
             var collateData = new CollateData() { Id = 3, Name = "Collate Date", InitialiseWithParent = true };
             var adjustmentDecision = new AdjustmentDecision() { Id = 4, Name = "Adjustment Decision", Type = DipStateType.Auto };
             var adjustment = new Adjustment() {Id = 5, Name = "Adjustment"};
+            var autoTransitionRedressReview = new AutoTransitionRedressReview() { Id = 6, Name = "Auto Transition Redress Review", Type = DipStateType.Auto };
             var redressReview = new RedressReview() {Id = 6, Name = "Redress Review"};
             var payment = new Payment() { Id = 7, Name = "Payment", CanCompleteParent = true };
 
@@ -58,22 +59,26 @@ namespace DevelopmentInProgress.RemediationProgramme.Service
                 .AddSubState(collateData)
                 .AddSubState(adjustmentDecision)
                 .AddSubState(adjustment)
+                .AddSubState(autoTransitionRedressReview)
                 .AddSubState(redressReview)
                 .AddSubState(payment);
 
             communication.AddDependant(redressReview, true);
 
             collateData
-                .AddTransition(adjustmentDecision)
-                .AddDependant(redressReview);
+                .AddTransition(adjustmentDecision);
 
             adjustmentDecision
                 .AddTransition(adjustment)
-                .AddTransition(redressReview)
+                .AddTransition(autoTransitionRedressReview)
                 .AddAction(DipStateActionType.Entry, (s => { s.Transition = s.Transitions[new Random().Next(0, 2)]; }));
 
-            adjustment.AddTransition(redressReview);
+            adjustment.AddTransition(autoTransitionRedressReview);
 
+            autoTransitionRedressReview
+                .AddTransition(redressReview)
+                .AddDependant(redressReview);
+            
             redressReview
                 .AddTransition(payment)
                 .AddTransition(collateData)

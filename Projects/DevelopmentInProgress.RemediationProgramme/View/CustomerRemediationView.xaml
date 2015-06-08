@@ -129,11 +129,9 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Hedging Product:" Margin="2"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Width="150" SelectedItem="{Binding Product}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}">
-                            <ComboBoxItem>Cap</ComboBoxItem>
-                            <ComboBoxItem>Collar</ComboBoxItem>
-                            <ComboBoxItem>Structured Collar</ComboBoxItem>
-                        </ComboBox>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Width="150" 
+                                  ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                  SelectedItem="{Binding HedgingProduct}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
                         <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Nominal Amount:" Margin="2"/>
                         <TextBox Grid.Row="1" Grid.Column="1" Width="150" Text="{Binding NominalAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" IsReadOnly="{Binding IsReadOnly}"/>
                         <Label Grid.Row="2" Grid.Column="0" Width="150" Content="Interest:" Margin="2"/>
@@ -268,13 +266,15 @@
                     <Label Content="{Binding AccountNumber}" Width="150"/>
                     <ContentControl/>
                 </StackPanel>
-                <ItemsControl ItemsSource="{Binding RemediationWorkflow}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding RemediationWorkflow}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
             </StackPanel>
         </GroupBox>
         

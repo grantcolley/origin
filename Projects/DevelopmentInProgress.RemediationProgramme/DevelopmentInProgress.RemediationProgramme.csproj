@@ -58,6 +58,7 @@
     <Compile Include="Converters\DipStateStatusToVisibilityConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Model\AdjustmentDecision.cs" />
+    <Compile Include="Model\AutoTransitionRedressReview.cs" />
     <Compile Include="Model\CollateData.cs" />
     <Compile Include="Model\Communication.cs" />
     <Compile Include="Model\Adjustment.cs" />

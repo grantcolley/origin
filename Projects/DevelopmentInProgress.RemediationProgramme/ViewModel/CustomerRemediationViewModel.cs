@@ -19,12 +19,15 @@ namespace DevelopmentInProgress.RemediationProgramme.ViewModel
             this.remediationService = remediationService;
             CompleteCommand = new ViewModelCommand(Complete);
             FailCommand = new ViewModelCommand(Fail);
+
+            Products = new List<string>() {"Cap", "Collar", "Structured Collar"};
         }
 
         public ICommand CompleteCommand { get; set; }
         public ICommand FailCommand { get; set; }
         public List<Customer> Customers { get; set; }
         public Customer CurrentCustomer { get; set; }
+        public List<string> Products { get; set; }
 
         protected override ProcessAsyncResult OnPublishedAsync()
         {
