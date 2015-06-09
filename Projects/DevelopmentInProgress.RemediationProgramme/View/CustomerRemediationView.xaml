@@ -11,6 +11,7 @@
         <ResourceDictionary>
 
             <converters:DipStateStatusToVisibilityConverter x:Key="DipStateStatusToVisibilityConverter"/>
+            <converters:InvertedDipStateStatusToVisibilityConverter x:Key="InvertedDipStateStatusToVisibilityConverter"/>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
             
             <Style TargetType="TextBox">
@@ -108,112 +109,121 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type model:CollateData}">
-                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <Label Content="Collate Data" FontWeight="Bold"/>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Hedging Product:" Margin="2"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Width="150" 
-                                  ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                  SelectedItem="{Binding HedgingProduct}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
-                        <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Nominal Amount:" Margin="2"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Width="150" Text="{Binding NominalAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" IsReadOnly="{Binding IsReadOnly}"/>
-                        <Label Grid.Row="2" Grid.Column="0" Width="150" Content="Interest:" Margin="2"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Width="100" Text="{Binding Interest}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
-                        <Label Grid.Row="3" Grid.Column="0" Width="150" Content="Start Date:" Margin="2"/>
-                        <DatePicker Grid.Row="3" Grid.Column="1" Width="150" SelectedDate="{Binding StartDate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
-                        <Label Grid.Row="4" Grid.Column="0" Width="150" Content="Redress Rate:" Margin="2"/>
-                        <TextBox Grid.Row="4" Grid.Column="1" Width="100" Text="{Binding RedressRate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
-                        <Label Grid.Row="5" Grid.Column="0" Width="150" Content="Redress Amount:" Margin="2"/>
-                        <Label Grid.Row="5" Grid.Column="1" Width="150" Content="{Binding RedressAmount}" Margin="2"/>
-                        <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
-                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                CommandParameter="{Binding}"
-                                Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
-                    </Grid>
-                </GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <Label Content="Collate Data" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Hedging Product:" Margin="2"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" Width="150" 
+                                      ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                      SelectedItem="{Binding HedgingProduct}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
+                            <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Nominal Amount:" Margin="2"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="150" Text="{Binding NominalAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" IsReadOnly="{Binding IsReadOnly}"/>
+                            <Label Grid.Row="2" Grid.Column="0" Width="150" Content="Interest:" Margin="2"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Width="100" Text="{Binding Interest}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
+                            <Label Grid.Row="3" Grid.Column="0" Width="150" Content="Start Date:" Margin="2"/>
+                            <DatePicker Grid.Row="3" Grid.Column="1" Width="150" SelectedDate="{Binding StartDate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
+                            <Label Grid.Row="4" Grid.Column="0" Width="150" Content="Redress Rate:" Margin="2"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" Width="100" Text="{Binding RedressRate}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
+                            <Label Grid.Row="5" Grid.Column="0" Width="150" Content="Redress Amount:" Margin="2"/>
+                            <Label Grid.Row="5" Grid.Column="1" Width="150" Content="{Binding RedressAmount}" Margin="2"/>
+                            <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                        </Grid>
+                    </GroupBox>
+                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                </StackPanel>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type model:Adjustment}">
-                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <Label Content="Offset Applicable" FontWeight="Bold"/>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Adjustment Amount:" Margin="2"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Width="150" Text="{Binding AdjustmentAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
-                        <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
-                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                CommandParameter="{Binding}"
-                                Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
-                    </Grid>
-                </GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <Label Content="Offset Applicable" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Adjustment Amount:" Margin="2"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="150" Text="{Binding AdjustmentAmount}" Margin="2" PreviewTextInput="OnPreviewTextIsDecimal" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
+                            <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                        </Grid>
+                    </GroupBox>
+                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                </StackPanel>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type model:RedressReview}">
-                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <Label Content="Redress Review" FontWeight="Bold"/>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Final Redress Amount:" Margin="2"/>
-                        <Label Grid.Row="0" Grid.Column="1" Width="150" Content="{Binding FinalRedressAmount}" Margin="2"/>
-                        <Button Grid.Row="6" Grid.Column="0" Width="80" Margin="2" Content="Fail"
-                                Command="{Binding DataContext.FailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                CommandParameter="{Binding}"
-                                Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
-                        <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Pass"
-                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                CommandParameter="{Binding}"
-                                Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
-                    </Grid>
-                </GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <Label Content="Redress Review" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Final Redress Amount:" Margin="2"/>
+                            <Label Grid.Row="0" Grid.Column="1" Width="150" Content="{Binding FinalRedressAmount}" Margin="2"/>
+                            <Button Grid.Row="6" Grid.Column="0" Width="80" Margin="2" Content="Fail"
+                                    Command="{Binding DataContext.FailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                            <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Pass"
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                        </Grid>
+                    </GroupBox>
+                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                </StackPanel>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type model:Payment}">
