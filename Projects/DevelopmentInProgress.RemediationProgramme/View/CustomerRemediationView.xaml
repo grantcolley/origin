@@ -74,7 +74,7 @@
             </Style>
 
             <DataTemplate DataType="{x:Type model:Communication}">
-                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                <GroupBox Margin="5,0,0,5">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <Label Content="Communication" FontWeight="Bold"/>

@@ -55,7 +55,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\Class1.cs" />
+    <Compile Include="Converters\InvertedDipStateStatusToVisibilityConverter.cs" />
     <Compile Include="Converters\DipStateStatusToVisibilityConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Model\AdjustmentDecision.cs" />
