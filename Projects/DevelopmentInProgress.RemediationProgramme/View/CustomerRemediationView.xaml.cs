@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Windows.Input;
 using DevelopmentInProgress.RemediationProgramme.ViewModel;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.View;
@@ -16,11 +18,6 @@ namespace DevelopmentInProgress.RemediationProgramme.View
             InitializeComponent();
 
             DataContext = customerRemediationViewModel;
-        }
-
-        private void OnPreviewTextIsDecimal(object sender, TextCompositionEventArgs e)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
