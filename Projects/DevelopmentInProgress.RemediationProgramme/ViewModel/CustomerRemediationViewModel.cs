@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using DevelopmentInProgress.DipState;
+using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.RemediationProgramme.Model;
 using DevelopmentInProgress.RemediationProgramme.Service;
 using DevelopmentInProgress.Origin.Context;
@@ -38,7 +39,14 @@ namespace DevelopmentInProgress.RemediationProgramme.ViewModel
         private void Complete(object param)
         {
             var state = param as DipState.DipState;
-            remediationService.Run(state, DipStateStatus.Completed);
+            try
+            {
+                remediationService.Run(state, DipStateStatus.Completed);
+            }
+            catch (DipStateException e)
+            {
+                ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = e.Message});
+            }
 
             var entityBase = param as EntityBase;
             entityBase.OnPropertyChanged(String.Empty);

@@ -71,7 +71,23 @@ namespace DevelopmentInProgress.RemediationProgramme.Service
             adjustmentDecision
                 .AddTransition(adjustment)
                 .AddTransition(autoTransitionRedressReview)
-                .AddAction(DipStateActionType.Entry, (s => { s.Transition = s.Transitions[new Random().Next(0, 2)]; }));
+                .AddAction(DipStateActionType.Entry, (s =>
+                {
+                    var collData = s.Antecedent as CollateData;
+                    if (collData.RedressAmount == null
+                        || collateData.RedressAmount.Value < 100)
+                    {
+                        // If the calculated redress amount is less
+                        // than 100 transition to adjustment.
+                        s.Transition = s.Transitions[0];
+                    }
+                    else
+                    {
+                        // If the calculated redress amount is greater 
+                        // equal to 100 transition to redress review.
+                        s.Transition = s.Transitions[1];
+                    }
+                }));
 
             adjustment.AddTransition(autoTransitionRedressReview);
 
