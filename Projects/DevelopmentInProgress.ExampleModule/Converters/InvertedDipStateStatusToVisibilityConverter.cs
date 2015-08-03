@@ -4,20 +4,20 @@ using System.Windows;
 using System.Windows.Data;
 using DevelopmentInProgress.DipState;
 
-namespace DevelopmentInProgress.RemediationProgramme.Converters
+namespace DevelopmentInProgress.ExampleModule.Converters
 {
-    public class DipStateStatusToVisibilityConverter : IValueConverter
+    public class InvertedDipStateStatusToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType,
             object parameter, CultureInfo culture)
         {
             if (value != null
-                && ((DipStateStatus) value).Equals(DipStateStatus.Completed))
+                && ((StateStatus)value).Equals(StateStatus.Complete))
             {
-                return Visibility.Collapsed;
+                return Visibility.Visible;
             }
 
-            return Visibility.Visible;
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType,

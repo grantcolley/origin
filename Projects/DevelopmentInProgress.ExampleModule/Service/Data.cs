@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DevelopmentInProgress.RemediationProgramme.Model;
+using DevelopmentInProgress.ExampleModule.Model;
 
-namespace DevelopmentInProgress.RemediationProgramme.Service
+namespace DevelopmentInProgress.ExampleModule.Service
 {
     public static class Data
     {

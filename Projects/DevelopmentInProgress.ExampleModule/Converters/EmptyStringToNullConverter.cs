@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace DevelopmentInProgress.RemediationProgramme.Converters
+namespace DevelopmentInProgress.ExampleModule.Converters
 {
     public class EmptyStringToNullConverter : IValueConverter
     {

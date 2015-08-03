@@ -13,11 +13,6 @@
                       ModuleType="DevelopmentInProgress.ModuleTemplate.Module,DevelopmentInProgress.ModuleTemplate"
                       InitializationMode="WhenAvailable"/>
 
-    <prism:ModuleInfo Ref="Remediation Programme" 
-                      ModuleName="DevelopmentInProgress.RemediationProgramme" 
-                      ModuleType="DevelopmentInProgress.RemediationProgramme.Module,DevelopmentInProgress.RemediationProgramme"
-                      InitializationMode="WhenAvailable"/>
-
     <prism:ModuleInfo Ref="DipDocs"
                       ModuleName="DevelopmentInProgress.DipDocs"
                       ModuleType="DevelopmentInProgress.DipDocs.Module,DevelopmentInProgress.DipDocs"

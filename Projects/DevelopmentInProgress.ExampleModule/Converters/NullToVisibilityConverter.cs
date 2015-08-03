@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using DevelopmentInProgress.RemediationProgramme.Model;
+using DevelopmentInProgress.ExampleModule.Model;
 
-namespace DevelopmentInProgress.RemediationProgramme.Converters
+namespace DevelopmentInProgress.ExampleModule.Converters
 {
     public class NullToVisibilityConverter : IValueConverter
     {

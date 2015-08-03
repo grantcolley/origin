@@ -1,15 +1,14 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using DevelopmentInProgress.DipState;
 
-namespace DevelopmentInProgress.RemediationProgramme.Model
+namespace DevelopmentInProgress.ExampleModule.Model
 {
-    public abstract class EntityBase : DipState.DipState, INotifyPropertyChanged
+    public abstract class EntityBase : State, INotifyPropertyChanged
     {
         protected EntityBase(int id = 0, string name = "", bool initialiseWithParent = false,
-            bool canCompleteParent = false, DipStateType type = DipStateType.Standard,
-            DipStateStatus status = DipStateStatus.Uninitialised, Predicate<DipState.DipState> canComplete = null)
-            : base(id, name, initialiseWithParent, canCompleteParent, type, status, canComplete)
+            bool canCompleteParent = false, StateType type = StateType.Standard,
+            StateStatus status = StateStatus.Uninitialise)
+            : base(id, name, initialiseWithParent, canCompleteParent, type, status)
         {            
         }
 
@@ -22,7 +21,7 @@ namespace DevelopmentInProgress.RemediationProgramme.Model
 
         public bool IsReadOnly
         {
-            get { return Status.Equals(DipStateStatus.Completed); }
+            get { return Status.Equals(StateStatus.Complete); }
         }
 
         public void OnPropertyChanged(string propertyName)

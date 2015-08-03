@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DevelopmentInProgress.DipState;
+using DevelopmentInProgress.ExampleModule.Service;
 
-namespace DevelopmentInProgress.RemediationProgramme.Model
+namespace DevelopmentInProgress.ExampleModule.Model
 {
     public class Adjustment : EntityBase
     {
         public Adjustment()
-            : base(canComplete: HasAdjustmentAmount)
-        {            
+        {
+            this.AddCanCompletePredicateAsync(HasAdjustmentAmountAsync);
         }
 
         public decimal? AdjustmentAmount { get; set; }
 
-        private static bool HasAdjustmentAmount(DipState.DipState state)
+        private async Task<bool> HasAdjustmentAmountAsync(State state)
         {
             if (((Adjustment)state).AdjustmentAmount.HasValue)
             {
@@ -33,6 +35,8 @@ namespace DevelopmentInProgress.RemediationProgramme.Model
                 state.Log.Add(
                     new LogEntry(String.Format("{0} requires an adjustment amount before it can be completed.", state.Name)));                
             }
+
+            await TaskRunner.DoAsyncStuff();
 
             return false;
         }

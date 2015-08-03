@@ -68,6 +68,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\DipStateStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\EmptyStringToNullConverter.cs" />
+    <Compile Include="Converters\InvertedDipStateStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Model\Adjustment.cs" />
+    <Compile Include="Model\AdjustmentDecision.cs" />
+    <Compile Include="Model\AutoTransitionToRedressReview.cs" />
+    <Compile Include="Model\CollateData.cs" />
+    <Compile Include="Model\Communication.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\EntityBase.cs" />
+    <Compile Include="Model\LetterSent.cs" />
+    <Compile Include="Model\Payment.cs" />
+    <Compile Include="Model\RedressReview.cs" />
+    <Compile Include="Model\ResponseReceived.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -82,10 +97,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Rules\NumericValueRule.cs" />
+    <Compile Include="Service\Data.cs" />
+    <Compile Include="Service\RemediationService.cs" />
+    <Compile Include="Service\TaskRunner.cs" />
+    <Compile Include="ViewModel\CustomerRemediationViewModel.cs" />
     <Compile Include="ViewModel\ExampleDocumentMessagesViewModel.cs" />
     <Compile Include="ViewModel\ExampleDocumentNavigationViewModel.cs" />
     <Compile Include="ViewModel\ExampleModalViewModel.cs" />
     <Compile Include="ViewModel\ExampleDocumentViewModel.cs" />
+    <Compile Include="View\CustomerRemediationView.xaml.cs">
+      <DependentUpon>CustomerRemediationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ExampleDocumentMessagesView.xaml.cs">
       <DependentUpon>ExampleDocumentMessagesView.xaml</DependentUpon>
     </Compile>
@@ -109,6 +132,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\dipstate\DevelopmentInProgress.DipState\DevelopmentInProgress.DipState.csproj">
+      <Project>{daf9a425-1c72-4410-8d1e-be8e1125e787}</Project>
+      <Name>DevelopmentInProgress.DipState</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\DevelopmentInProgress.Origin\DevelopmentInProgress.Origin.csproj">
       <Project>{7bce5d35-0443-4031-843a-3563356290e1}</Project>
       <Name>DevelopmentInProgress.Origin</Name>
@@ -118,6 +145,10 @@
     <Resource Include="Images\ExampleModule.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\CustomerRemediationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ExampleDocumentMessagesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -139,6 +170,15 @@
     <Resource Include="Images\DocumentEdit.png" />
     <Resource Include="Images\DocumentMessages.png" />
     <Resource Include="Images\DocumentNavigation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrowRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CustomerRemediation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RemediationProgramme.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

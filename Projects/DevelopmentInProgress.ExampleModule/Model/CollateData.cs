@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DevelopmentInProgress.DipState;
+using DevelopmentInProgress.ExampleModule.Service;
 
-namespace DevelopmentInProgress.RemediationProgramme.Model
+namespace DevelopmentInProgress.ExampleModule.Model
 {
     public class CollateData : EntityBase
     {
@@ -11,8 +13,8 @@ namespace DevelopmentInProgress.RemediationProgramme.Model
         private decimal? redressRate;
 
         public CollateData()
-            : base(canComplete: HasRedressRate)
-        {            
+        {
+            this.AddCanCompletePredicateAsync(HasRedressRateAsync);
         }
 
         public string HedgingProduct { get; set; }
@@ -72,7 +74,7 @@ namespace DevelopmentInProgress.RemediationProgramme.Model
             }
         }
 
-        private static bool HasRedressRate(DipState.DipState state)
+        private async Task<bool> HasRedressRateAsync(State state)
         {
             if (((CollateData) state).RedressAmount.HasValue)
             {
@@ -81,6 +83,8 @@ namespace DevelopmentInProgress.RemediationProgramme.Model
 
             state.Log.Add(
                 new LogEntry(String.Format("{0} requires a redress amount before it can be completed.", state.Name)));
+
+            await TaskRunner.DoAsyncStuff();
 
             return false;
         }

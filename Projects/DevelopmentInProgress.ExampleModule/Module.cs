@@ -25,6 +25,8 @@ namespace DevelopmentInProgress.ExampleModule
             Container.RegisterType<ExampleDocumentMessagesViewModel>(typeof(ExampleDocumentMessagesViewModel).Name);
             Container.RegisterType<Object, ExampleDocumentNavigationView>(typeof(ExampleDocumentNavigationView).Name);
             Container.RegisterType<ExampleDocumentNavigationViewModel>(typeof(ExampleDocumentNavigationViewModel).Name);
+            Container.RegisterType<Object, CustomerRemediationView>(typeof(CustomerRemediationView).Name);
+            Container.RegisterType<CustomerRemediationViewModel>(typeof(CustomerRemediationViewModel).Name);
 
             var moduleSettings = new ModuleSettings();
             moduleSettings.ModuleName = ModuleName;
@@ -55,7 +57,19 @@ namespace DevelopmentInProgress.ExampleModule
             moduleGroup.ModuleGroupItems.Add(documentMessages);
             moduleGroup.ModuleGroupItems.Add(documentNavigation);
 
+            var remediationWorkflowGroup = new ModuleGroup();
+            remediationWorkflowGroup.ModuleGroupName = "Customer Remediation";
+
+            var remediationWorkflow = new ModuleGroupItem();
+            remediationWorkflow.ModuleGroupItemName = "Customer Remediation";
+            remediationWorkflow.TargetView = typeof(CustomerRemediationView).Name;
+            remediationWorkflow.TargetViewTitle = "Customer Remediation";
+            remediationWorkflow.ModuleGroupItemImagePath = @"/DevelopmentInProgress.ExampleModule;component/Images/CustomerRemediation.png";
+
+            remediationWorkflowGroup.ModuleGroupItems.Add(remediationWorkflow);
+
             moduleSettings.ModuleGroups.Add(moduleGroup);
+            moduleSettings.ModuleGroups.Add(remediationWorkflowGroup);
 
             ModuleNavigator.AddModuleNavigation(moduleSettings);
 

@@ -3,11 +3,11 @@ using System.ComponentModel;
 using System.Linq;
 using DevelopmentInProgress.DipState;
 
-namespace DevelopmentInProgress.RemediationProgramme.Model
+namespace DevelopmentInProgress.ExampleModule.Model
 {
     public class Customer : INotifyPropertyChanged
     {
-        private List<DipState.DipState> remediationWorkflow;
+        private List<State> remediationWorkflow;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -16,12 +16,12 @@ namespace DevelopmentInProgress.RemediationProgramme.Model
         public string AccountNumber { get; set; }
         public string Address { get; set; }
 
-        public List<DipState.DipState> RemediationWorkflow
+        public List<State> RemediationWorkflow
         {
             get
             {
-                return remediationWorkflow.Where(s => !s.Status.Equals(DipStateStatus.Uninitialised)
-                                                      && s.Type.Equals(DipStateType.Standard)).ToList();
+                return remediationWorkflow.Where(s => !s.Status.Equals(StateStatus.Uninitialise)
+                                                      && s.Type.Equals(StateType.Standard)).ToList();
             }
             set { remediationWorkflow = value; }
         }

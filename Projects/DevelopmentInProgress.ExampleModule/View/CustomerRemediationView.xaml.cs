@@ -1,14 +1,11 @@
-﻿using System.Text.RegularExpressions;
-using System.Windows.Controls;
-using System.Windows.Input;
-using DevelopmentInProgress.RemediationProgramme.ViewModel;
+﻿using DevelopmentInProgress.ExampleModule.ViewModel;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.View;
 
-namespace DevelopmentInProgress.RemediationProgramme.View
+namespace DevelopmentInProgress.ExampleModule.View
 {
     /// <summary>
-    /// Interaction logic for RemediationWorkflowView.xaml
+    /// Interaction logic for CustomerRemediationView.xaml
     /// </summary>
     public partial class CustomerRemediationView : DocumentViewBase
     {

@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevelopmentInProgress.Origin", "Projects\DevelopmentInProgress.Origin\DevelopmentInProgress.Origin.csproj", "{7BCE5D35-0443-4031-843A-3563356290E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevelopmentInProgress.ExampleModule", "Projects\DevelopmentInProgress.ExampleModule\DevelopmentInProgress.ExampleModule.csproj", "{36965062-D575-4F56-BA1D-BAEEFA80A8F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevelopmentInProgress.ModuleTemplate", "Projects\DevelopmentInProgress.ModuleTemplate\DevelopmentInProgress.ModuleTemplate.csproj", "{D8B3EE0B-9896-499E-9865-1CB553F0EA4E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevelopmentInProgress.RemediationProgramme", "Projects\DevelopmentInProgress.RemediationProgramme\DevelopmentInProgress.RemediationProgramme.csproj", "{2DB08974-5434-4C06-9B93-A15CDD8AB97D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevelopmentInProgress.DipState", "..\dipstate\DevelopmentInProgress.DipState\DevelopmentInProgress.DipState.csproj", "{DAF9A425-1C72-4410-8D1E-BE8E1125E787}"
 EndProject
@@ -31,10 +29,6 @@ Global
 		{D8B3EE0B-9896-499E-9865-1CB553F0EA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8B3EE0B-9896-499E-9865-1CB553F0EA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8B3EE0B-9896-499E-9865-1CB553F0EA4E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DB08974-5434-4C06-9B93-A15CDD8AB97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DB08974-5434-4C06-9B93-A15CDD8AB97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DB08974-5434-4C06-9B93-A15CDD8AB97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DB08974-5434-4C06-9B93-A15CDD8AB97D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DAF9A425-1C72-4410-8D1E-BE8E1125E787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAF9A425-1C72-4410-8D1E-BE8E1125E787}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAF9A425-1C72-4410-8D1E-BE8E1125E787}.Release|Any CPU.ActiveCfg = Release|Any CPU

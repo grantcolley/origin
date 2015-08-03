@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
-namespace DevelopmentInProgress.RemediationProgramme.Rules
+namespace DevelopmentInProgress.ExampleModule.Rules
 {
     public class NumericValueRule : ValidationRule
     {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using DevelopmentInProgress.DipState;
 using DevelopmentInProgress.Origin.Messages;
-using DevelopmentInProgress.RemediationProgramme.Model;
-using DevelopmentInProgress.RemediationProgramme.Service;
+using DevelopmentInProgress.ExampleModule.Model;
+using DevelopmentInProgress.ExampleModule.Service;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.ViewModel;
 
-namespace DevelopmentInProgress.RemediationProgramme.ViewModel
+namespace DevelopmentInProgress.ExampleModule.ViewModel
 {
     public class CustomerRemediationViewModel : DocumentViewModel
     {
@@ -32,18 +32,23 @@ namespace DevelopmentInProgress.RemediationProgramme.ViewModel
 
         protected override ProcessAsyncResult OnPublishedAsync()
         {
-            Customers = remediationService.GetCustomers();
+            GetCustomersAsync();
             return base.OnPublishedAsync();
+        }
+
+        private async void GetCustomersAsync()
+        {
+            Customers = await remediationService.GetCustomersAsync();
         }
 
         private void Complete(object param)
         {
-            var state = param as DipState.DipState;
+            var state = param as State;
             try
             {
-                remediationService.Run(state, DipStateStatus.Completed);
+                remediationService.Run(state, StateStatus.Complete);
             }
-            catch (DipStateException e)
+            catch (StateException e)
             {
                 ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = e.Message});
             }
@@ -56,8 +61,8 @@ namespace DevelopmentInProgress.RemediationProgramme.ViewModel
 
         private void Fail(object param)
         {
-            var state = param as DipState.DipState;
-            remediationService.Run(state, DipStateStatus.Failed);
+            var state = param as State;
+            remediationService.Run(state, StateStatus.Fail);
 
             CurrentCustomer.OnPropertyChanged("RemediationWorkflow");
         }

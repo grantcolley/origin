@@ -1,4 +1,4 @@
-﻿namespace DevelopmentInProgress.RemediationProgramme.Model
+﻿namespace DevelopmentInProgress.ExampleModule.Model
 {
     public class RedressReview : EntityBase
     {

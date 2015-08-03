@@ -1,12 +1,12 @@
-﻿<view:DocumentViewBase x:Class="DevelopmentInProgress.RemediationProgramme.View.CustomerRemediationView"
+﻿<view:DocumentViewBase x:Class="DevelopmentInProgress.ExampleModule.View.CustomerRemediationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:DevelopmentInProgress.Origin.View;assembly=DevelopmentInProgress.Origin"
-             xmlns:model="clr-namespace:DevelopmentInProgress.RemediationProgramme.Model"
-             xmlns:converters="clr-namespace:DevelopmentInProgress.RemediationProgramme.Converters"
-             xmlns:rules="clr-namespace:DevelopmentInProgress.RemediationProgramme.Rules"
+             xmlns:model="clr-namespace:DevelopmentInProgress.ExampleModule.Model"
+             xmlns:rules="clr-namespace:DevelopmentInProgress.ExampleModule.Rules"
+             xmlns:converters="clr-namespace:DevelopmentInProgress.ExampleModule.Converters"
              mc:Ignorable="d">
     <view:DocumentViewBase.Resources>
         <ResourceDictionary>
@@ -204,7 +204,7 @@
                     <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
-                                <Label Content="Offset Applicable" FontWeight="Bold"/>
+                                <Label Content="Adjustment Applicable" FontWeight="Bold"/>
                             </DataTemplate>
                         </GroupBox.HeaderTemplate>
                         <Grid>
