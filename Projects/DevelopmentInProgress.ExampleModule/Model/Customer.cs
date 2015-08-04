@@ -7,8 +7,6 @@ namespace DevelopmentInProgress.ExampleModule.Model
 {
     public class Customer : INotifyPropertyChanged
     {
-        private List<State> remediationWorkflow;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name { get; set; }
@@ -16,14 +14,27 @@ namespace DevelopmentInProgress.ExampleModule.Model
         public string AccountNumber { get; set; }
         public string Address { get; set; }
 
-        public List<State> RemediationWorkflow
+        public List<State> RemediationWorkflow { get; set; }
+
+        public List<State> RedressWorkflow
         {
             get
             {
-                return remediationWorkflow.Where(s => !s.Status.Equals(StateStatus.Uninitialise)
-                                                      && s.Type.Equals(StateType.Standard)).ToList();
+                return RemediationWorkflow.Where(s => !s.Status.Equals(StateStatus.Uninitialise)
+                                                      && s.Type.Equals(StateType.Standard)
+                                                      && !s.Name.Equals("Communication")
+                                                      && !s.Parent.Name.Equals("Communication")).ToList();
             }
-            set { remediationWorkflow = value; }
+        }
+
+        public List<State> CommunicationWorkflow
+        {
+            get
+            {
+                return RemediationWorkflow.Where(s => !s.Status.Equals(StateStatus.Uninitialise)
+                                                      && s.Type.Equals(StateType.Standard)
+                                                      && s.Parent.Name.Equals("Communication")).ToList();
+            }
         }
 
         public void OnPropertyChanged(string propertyName)
@@ -32,7 +43,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
             if (propertyChangedHandler != null)
             {
                 propertyChangedHandler(this, new PropertyChangedEventArgs(propertyName));
-                RemediationWorkflow.ForEach(s => ((EntityBase) s).OnPropertyChanged("Status"));
+                RemediationWorkflow.OfType<EntityBase>().ToList().ForEach(s => ((EntityBase) s).OnPropertyChanged("Status"));
             }
         }
     }
