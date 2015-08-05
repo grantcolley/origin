@@ -79,71 +79,77 @@
             </Style>
 
             <DataTemplate DataType="{x:Type model:LetterSent}">
-                <GroupBox Margin="5,0,0,5">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <Label Content="Communication" FontWeight="Bold"/>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Letter Sent Date:" Margin="2"/>
-                        <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding LetterSentDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
-                        <Button Grid.Row="4" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
-                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
-                                CommandParameter="{Binding}"
-                                Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
-                    </Grid>
-                </GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <GroupBox Margin="5,0,0,5">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <Label Content="Letter Sent" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Letter Sent Date:" Margin="2"/>
+                            <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding LetterSentDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
+                            <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                        </Grid>
+                    </GroupBox>
+                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                </StackPanel>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type model:ResponseReceived}">
-                <GroupBox Margin="5,0,0,5">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <Label Content="Communication" FontWeight="Bold"/>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Response Recieved:" Margin="2"/>
-                        <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding ResponseReceived}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
-                        <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Consequential Loss Claim:" Margin="2"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Width="150" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
-                            <TextBox.Text>
-                                <Binding Path="ConsequentialLossClaim"
-                                         Converter="{StaticResource EmptyStringToNullConverter}"
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <rules:NumericValueRule/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                        <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
-                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
-                                CommandParameter="{Binding}"
-                                Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
-                    </Grid>
-                </GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <GroupBox Margin="5,0,0,5">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <Label Content="Response Received" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Response Recieved:" Margin="2"/>
+                            <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding ResponseReceivedDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
+                            <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Consequential Loss Claim:" Margin="2"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="150" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsequentialLossClaim"
+                                             Converter="{StaticResource EmptyStringToNullConverter}"
+                                             UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <rules:NumericValueRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                        </Grid>
+                    </GroupBox>
+                    <Image Source="../Images/arrowTurnRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                </StackPanel>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type model:CollateData}">
@@ -218,7 +224,7 @@
                                     Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
                         </Grid>
                     </GroupBox>
-                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                    <Image Source="../Images/arrowDivide.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
                 </StackPanel>
             </DataTemplate>
             
@@ -262,7 +268,7 @@
                                     Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
                         </Grid>
                     </GroupBox>
-                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                    <Image Source="../Images/arrowJoin.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
                 </StackPanel>
             </DataTemplate>
             

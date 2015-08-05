@@ -38,25 +38,39 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
 
         private async void GetCustomersAsync()
         {
-            Customers = await remediationService.GetCustomersAsync();
+            try
+            {
+                Customers = await remediationService.GetCustomersAsync();
+            }
+            catch (StateException ex)
+            {
+                ex.Messages.ForEach(
+                    m => ShowMessage(new Message() {MessageType = MessageTypeEnum.Error, Text = m}, true));
+            }
         }
 
-        private void Complete(object param)
+        private async void Complete(object param)
         {
+            ClearMessages();
+
             var state = param as State;
             try
             {
-                remediationService.Run(state, StateStatus.Complete);
+                IsBusy = true;
+                await state.ExecuteAsync(StateStatus.Complete);
             }
-            catch (StateException e)
+            catch (StateException ex)
             {
-                ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = e.Message});
+                ex.Messages.ForEach(
+                    m => ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = m}, true));
             }
-
-            var entityBase = param as EntityBase;
-            entityBase.OnPropertyChanged(String.Empty);
-
-            CurrentCustomer.OnPropertyChanged("RemediationWorkflow");
+            finally
+            {
+                var entityBase = param as EntityBase;
+                entityBase.OnPropertyChanged(String.Empty);
+                CurrentCustomer.OnPropertyChanged(String.Empty);
+                IsBusy = false;
+            }
         }
 
         private void Fail(object param)

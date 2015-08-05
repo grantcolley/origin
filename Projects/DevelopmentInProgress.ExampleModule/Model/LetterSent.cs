@@ -21,8 +21,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
                 return true;
             }
 
-            state.Log.Add(
-                new LogEntry(String.Format("{0} requires a letter sent date before it can be completed.", state.Name)));
+            state.WriteLogEntry(String.Format("{0} requires a letter sent date before it can be completed.", state.Name));
 
             await TaskRunner.DoAsyncStuff();
 
