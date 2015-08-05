@@ -9,7 +9,7 @@ namespace DevelopmentInProgress.ExampleModule.Rules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-           var regex = new Regex("[^0-9.]+");
+            var regex = new Regex("[^0-9.]+");
             if (value == null
                 || value.ToString().Equals(String.Empty)
                 || !regex.IsMatch(value.ToString()))

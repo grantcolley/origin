@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using DevelopmentInProgress.DipState;
@@ -35,6 +36,11 @@ namespace DevelopmentInProgress.ExampleModule.Model
                                                       && s.Type.Equals(StateType.Standard)
                                                       && s.Parent.Name.Equals("Communication")).ToList();
             }
+        }
+
+        public void Refresh()
+        {
+            OnPropertyChanged(String.Empty);
         }
 
         public void OnPropertyChanged(string propertyName)

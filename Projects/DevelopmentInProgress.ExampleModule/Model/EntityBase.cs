@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using DevelopmentInProgress.DipState;
 
 namespace DevelopmentInProgress.ExampleModule.Model
@@ -22,6 +23,11 @@ namespace DevelopmentInProgress.ExampleModule.Model
         public bool IsReadOnly
         {
             get { return Status.Equals(StateStatus.Complete); }
+        }
+
+        public void Refresh()
+        {
+            OnPropertyChanged(String.Empty);
         }
 
         public void OnPropertyChanged(string propertyName)

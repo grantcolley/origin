@@ -40,6 +40,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
         {
             try
             {
+                ClearMessages();
                 Customers = await remediationService.GetCustomersAsync();
             }
             catch (StateException ex)
@@ -52,12 +53,16 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
         private async void Complete(object param)
         {
             ClearMessages();
+            IsBusy = true;
 
             var state = param as State;
+
             try
             {
-                IsBusy = true;
-                await state.ExecuteAsync(StateStatus.Complete);
+                var currentState = await remediationService.ExecuteAsync(state, StateStatus.Complete);
+
+                currentState.Log.ForEach(
+                    l => ShowMessage(new Message() {MessageType = MessageTypeEnum.Info, Text = l.Message}));
             }
             catch (StateException ex)
             {
@@ -66,19 +71,37 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
             finally
             {
-                var entityBase = param as EntityBase;
-                entityBase.OnPropertyChanged(String.Empty);
-                CurrentCustomer.OnPropertyChanged(String.Empty);
                 IsBusy = false;
+                ((EntityBase) state).Refresh();
+                CurrentCustomer.Refresh();
             }
         }
 
-        private void Fail(object param)
+        private async void Fail(object param)
         {
-            var state = param as State;
-            remediationService.Run(state, StateStatus.Fail);
+            ClearMessages();
+            IsBusy = true;
 
-            CurrentCustomer.OnPropertyChanged("RemediationWorkflow");
+            var state = param as State;
+
+            try
+            {
+                var currentState = await remediationService.ExecuteAsync(state, StateStatus.Fail);
+
+                currentState.Log.ForEach(
+                    l => ShowMessage(new Message() {MessageType = MessageTypeEnum.Info, Text = l.Message}));
+            }
+            catch (StateException ex)
+            {
+                ex.Messages.ForEach(
+                    m => ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = m}, true));
+            }
+            finally
+            {
+                IsBusy = false;
+                ((EntityBase) state).Refresh();
+                CurrentCustomer.Refresh();
+            }
         }
     }
 }

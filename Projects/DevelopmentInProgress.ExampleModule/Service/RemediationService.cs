@@ -9,25 +9,24 @@ namespace DevelopmentInProgress.ExampleModule.Service
 {
     public class RemediationService
     {
-        public void Run(State state, StateStatus newStatus)
+        public async Task<State> ExecuteAsync(State state, StateStatus newStatus)
         {
             if (state.Name.Equals("Redress Review"))
             {
                 if (newStatus.Equals(StateStatus.Fail))
                 {
-                    state.Execute(newStatus,
+                    return await state.ExecuteAsync(newStatus,
                         state.Transitions.FirstOrDefault(t => t.Name.Equals("Collate Date")));
                 }
-                else if (newStatus.Equals(StateStatus.Complete))
+
+                if (newStatus.Equals(StateStatus.Complete))
                 {
-                    state.Execute(newStatus,
+                    return await state.ExecuteAsync(newStatus,
                         state.Transitions.FirstOrDefault(t => t.Name.Equals("Payment")));
                 }
             }
-            else
-            {
-                state.Execute(newStatus);
-            }
+
+            return await state.ExecuteAsync(newStatus);
         }
 
         public async Task<List<Customer>> GetCustomersAsync()
