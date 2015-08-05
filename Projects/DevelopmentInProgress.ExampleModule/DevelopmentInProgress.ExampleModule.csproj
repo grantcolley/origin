@@ -180,6 +180,11 @@
   <ItemGroup>
     <Resource Include="Images\RemediationProgramme.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrowDivide.png" />
+    <Resource Include="Images\arrowJoin.png" />
+    <Resource Include="Images\arrowTurnRight.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
