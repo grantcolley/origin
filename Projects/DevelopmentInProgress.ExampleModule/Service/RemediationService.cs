@@ -16,7 +16,7 @@ namespace DevelopmentInProgress.ExampleModule.Service
                 if (newStatus.Equals(StateStatus.Fail))
                 {
                     return await state.ExecuteAsync(newStatus,
-                        state.Transitions.FirstOrDefault(t => t.Name.Equals("Collate Date")));
+                        state.Transitions.FirstOrDefault(t => t.Name.Equals("Collate Data")));
                 }
 
                 if (newStatus.Equals(StateStatus.Complete))

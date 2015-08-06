@@ -69,6 +69,10 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
                 ex.Messages.ForEach(
                     m => ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = m}, true));
             }
+            catch (Exception ex)
+            {
+                ShowMessage(new Message() { MessageType = MessageTypeEnum.Error, Text = ex.Message });
+            }
             finally
             {
                 IsBusy = false;
@@ -95,6 +99,10 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             {
                 ex.Messages.ForEach(
                     m => ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = m}, true));
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(new Message() {MessageType = MessageTypeEnum.Error, Text = ex.Message});
             }
             finally
             {
