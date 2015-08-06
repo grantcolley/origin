@@ -11,8 +11,9 @@
     <view:DocumentViewBase.Resources>
         <ResourceDictionary>
 
-            <converters:DipStateStatusToVisibilityConverter x:Key="DipStateStatusToVisibilityConverter"/>
-            <converters:InvertedDipStateStatusToVisibilityConverter x:Key="InvertedDipStateStatusToVisibilityConverter"/>
+            <converters:StatusToVisibilityCollapsedConverter x:Key="StatusToVisibilityCollapsedConverter"/>
+            <converters:StatusToVisibilityHiddenConverter x:Key="statusToVisibilityHiddenConverter"/>
+            <converters:InvertedStatusToVisibilityCollapsedConverter x:Key="invertedStatusToVisibilityCollapsedConverter"/>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
             <converters:EmptyStringToNullConverter x:Key="EmptyStringToNullConverter"/>
             
@@ -79,7 +80,7 @@
             </Style>
 
             <DataTemplate DataType="{x:Type model:LetterSent}">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Visibility="{Binding Status, Converter={StaticResource statusToVisibilityHiddenConverter}}">
                     <GroupBox Margin="5,0,0,5">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
@@ -102,15 +103,15 @@
                             <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
                         </Grid>
                     </GroupBox>
-                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
                 </StackPanel>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type model:ResponseReceived}">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Visibility="{Binding Status, Converter={StaticResource statusToVisibilityHiddenConverter}}">
                     <GroupBox Margin="5,0,0,5">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
@@ -145,15 +146,15 @@
                             <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
                         </Grid>
                     </GroupBox>
-                    <Image Source="../Images/arrowTurnRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                    <Image Source="../Images/arrowTurnRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
                 </StackPanel>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type model:CollateData}">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Visibility="{Binding Status, Converter={StaticResource statusToVisibilityHiddenConverter}}">
                     <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
@@ -221,15 +222,15 @@
                             <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
                         </Grid>
                     </GroupBox>
-                    <Image Source="../Images/arrowDivide.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                    <Image Source="../Images/arrowDivide.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
                 </StackPanel>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type model:Adjustment}">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Visibility="{Binding Status, Converter={StaticResource statusToVisibilityHiddenConverter}}">
                     <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
@@ -254,8 +255,8 @@
                             <TextBox Grid.Row="0" Grid.Column="1" Width="150" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
                                 <TextBox.Text>
                                     <Binding Path="AdjustmentAmount"
-                                         Converter="{StaticResource EmptyStringToNullConverter}"
-                                         UpdateSourceTrigger="PropertyChanged">
+                                            Converter="{StaticResource EmptyStringToNullConverter}"
+                                            UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
                                             <rules:NumericValueRule/>
                                         </Binding.ValidationRules>
@@ -265,15 +266,15 @@
                             <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
                         </Grid>
                     </GroupBox>
-                    <Image Source="../Images/arrowJoin.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                    <Image Source="../Images/arrowJoin.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
                 </StackPanel>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type model:RedressReview}">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Visibility="{Binding Status, Converter={StaticResource statusToVisibilityHiddenConverter}}">
                     <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
                         <GroupBox.HeaderTemplate>
                             <DataTemplate>
@@ -299,19 +300,19 @@
                             <Button Grid.Row="6" Grid.Column="0" Width="80" Margin="2" Content="Fail"
                                     Command="{Binding DataContext.FailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
                             <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Pass"
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
                         </Grid>
                     </GroupBox>
-                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource InvertedDipStateStatusToVisibilityConverter}}"/>
+                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
                 </StackPanel>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type model:Payment}">
-                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5" Visibility="{Binding Status, Converter={StaticResource statusToVisibilityHiddenConverter}}">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <Label Content="Payment" FontWeight="Bold"/>
@@ -336,7 +337,7 @@
                         <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Execute"
                                 Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 CommandParameter="{Binding}"
-                                Visibility="{Binding Status, Converter={StaticResource DipStateStatusToVisibilityConverter}}"/>
+                                Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
                     </Grid>
                 </GroupBox>                
             </DataTemplate>

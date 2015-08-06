@@ -6,18 +6,18 @@ using DevelopmentInProgress.DipState;
 
 namespace DevelopmentInProgress.ExampleModule.Converters
 {
-    public class InvertedDipStateStatusToVisibilityConverter : IValueConverter
+    public class StatusToVisibilityHiddenConverter : IValueConverter
     {
         public object Convert(object value, Type targetType,
             object parameter, CultureInfo culture)
         {
             if (value != null
-                && ((StateStatus)value).Equals(StateStatus.Complete))
+                && ((StateStatus) value).Equals(StateStatus.Uninitialise))
             {
-                return Visibility.Visible;
+                return Visibility.Hidden;
             }
 
-            return Visibility.Collapsed;
+            return Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType,

@@ -6,7 +6,7 @@ using DevelopmentInProgress.DipState;
 
 namespace DevelopmentInProgress.ExampleModule.Converters
 {
-    public class DipStateStatusToVisibilityConverter : IValueConverter
+    public class StatusToVisibilityCollapsedConverter : IValueConverter
     {
         public object Convert(object value, Type targetType,
             object parameter, CultureInfo culture)

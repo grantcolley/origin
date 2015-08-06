@@ -68,9 +68,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\DipStateStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\StatusToVisibilityHiddenConverter.cs" />
+    <Compile Include="Converters\StatusToVisibilityCollapsedConverter.cs" />
     <Compile Include="Converters\EmptyStringToNullConverter.cs" />
-    <Compile Include="Converters\InvertedDipStateStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\InvertedStatusToVisibilityCollapsedConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Model\Adjustment.cs" />
     <Compile Include="Model\AdjustmentDecision.cs" />
