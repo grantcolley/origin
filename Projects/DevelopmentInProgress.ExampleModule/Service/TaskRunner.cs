@@ -10,7 +10,7 @@ namespace DevelopmentInProgress.ExampleModule.Service
             await Task.Run(async delegate
             {
                 var random = new Random();
-                int milliseconds = random.Next(4)*1000;
+                int milliseconds = random.Next(3)*1000;
                 await Task.Delay(milliseconds);
             });
         }

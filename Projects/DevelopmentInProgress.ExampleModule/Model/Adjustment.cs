@@ -7,12 +7,45 @@ namespace DevelopmentInProgress.ExampleModule.Model
 {
     public class Adjustment : EntityBase
     {
+        private bool? isAdjustmentApplicable;
+
         public Adjustment()
         {
             this.AddCanCompletePredicateAsync(HasAdjustmentAmountAsync);
         }
 
         public decimal? AdjustmentAmount { get; set; }
+
+        public bool? IsAdjustmentApplicable
+        {
+            get
+            {
+                if (isAdjustmentApplicable == null
+                    && Status.Equals(StateStatus.Uninitialise))
+                {
+                    return null;
+                }
+
+                return isAdjustmentApplicable;
+            }
+            set
+            {
+                isAdjustmentApplicable = value;
+            }
+        }
+
+        public bool IsArrowVisible
+        {
+            get
+            {
+                if (IsAdjustmentApplicable == null)
+                {
+                    return false;
+                }
+
+                return !IsAdjustmentApplicable.Value;
+            }
+        }
 
         private async Task<bool> HasAdjustmentAmountAsync(State state)
         {

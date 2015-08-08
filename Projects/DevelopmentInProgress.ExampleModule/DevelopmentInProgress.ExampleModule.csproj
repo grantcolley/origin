@@ -68,6 +68,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\AdjustmentApplicableVisibilityConverter.cs" />
     <Compile Include="Converters\StatusToVisibilityHiddenConverter.cs" />
     <Compile Include="Converters\StatusToVisibilityCollapsedConverter.cs" />
     <Compile Include="Converters\EmptyStringToNullConverter.cs" />

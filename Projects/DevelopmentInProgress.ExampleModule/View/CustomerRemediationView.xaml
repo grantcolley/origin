@@ -16,6 +16,7 @@
             <converters:InvertedStatusToVisibilityCollapsedConverter x:Key="invertedStatusToVisibilityCollapsedConverter"/>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
             <converters:EmptyStringToNullConverter x:Key="EmptyStringToNullConverter"/>
+            <converters:AdjustmentApplicableVisibilityConverter x:Key="adjustmentApplicableVisibilityConverter"/>
             
             <Style TargetType="TextBox">               
                 <Style.Triggers>
@@ -225,51 +226,73 @@
                                     Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
                         </Grid>
                     </GroupBox>
-                    <Image Source="../Images/arrowDivide.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
+                    <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
                 </StackPanel>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type model:Adjustment}">
-                <StackPanel Orientation="Horizontal" Visibility="{Binding Status, Converter={StaticResource statusToVisibilityHiddenConverter}}">
-                    <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
-                        <GroupBox.HeaderTemplate>
-                            <DataTemplate>
-                                <Label Content="Adjustment Applicable" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </GroupBox.HeaderTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Adjustment Amount:" Margin="2"/>
-                            <TextBox Grid.Row="0" Grid.Column="1" Width="150" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
-                                <TextBox.Text>
-                                    <Binding Path="AdjustmentAmount"
-                                            Converter="{StaticResource EmptyStringToNullConverter}"
-                                            UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <rules:NumericValueRule/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                            <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
-                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                    CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
-                        </Grid>
-                    </GroupBox>
-                    <Image Source="../Images/arrowJoin.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsArrowVisible, Converter={StaticResource adjustmentApplicableVisibilityConverter}}">
+                        <GroupBox Style="{StaticResource GroupBoxNoHeaderStyle}" BorderBrush="Transparent" BorderThickness="0" Margin="5,20,0,5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="3" Grid.Column="0" Width="300" Text="No Adjustment Required" FontWeight="Bold" TextAlignment="Center" Margin="2"/>
+                            </Grid>
+                        </GroupBox>
+                        <Image Source="../Images/arrowRight.png"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsAdjustmentApplicable, Converter={StaticResource adjustmentApplicableVisibilityConverter}}">
+                        <GroupBox Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="5,0,0,5">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Label Content="Adjustment Applicable" FontWeight="Bold"/>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Adjustment Amount:" Margin="2"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="150" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
+                                    <TextBox.Text>
+                                        <Binding Path="AdjustmentAmount"
+                                                Converter="{StaticResource EmptyStringToNullConverter}"
+                                                UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <rules:NumericValueRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
+                                        Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"
+                                        Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
+                            </Grid>
+                        </GroupBox>
+                        <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
+                    </StackPanel>
                 </StackPanel>
             </DataTemplate>
             
