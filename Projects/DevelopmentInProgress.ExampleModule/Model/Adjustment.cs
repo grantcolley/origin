@@ -57,6 +57,8 @@ namespace DevelopmentInProgress.ExampleModule.Model
                 if ((((Adjustment) state).AdjustmentAmount.Value
                     + collateData.RedressAmount.Value) > 100)
                 {
+                    await TaskRunner.DoAsyncStuff();
+
                     return true;
                 }
 
@@ -68,8 +70,6 @@ namespace DevelopmentInProgress.ExampleModule.Model
                 state.Log.Add(
                     new LogEntry(String.Format("{0} requires an adjustment amount before it can be completed.", state.Name)));                
             }
-
-            await TaskRunner.DoAsyncStuff();
 
             return false;
         }

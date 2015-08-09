@@ -4,13 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:DevelopmentInProgress.Origin.View;assembly=DevelopmentInProgress.Origin"
+             xmlns:dipConverters="clr-namespace:DevelopmentInProgress.Origin.Converters;assembly=DevelopmentInProgress.Origin"
              xmlns:model="clr-namespace:DevelopmentInProgress.ExampleModule.Model"
              xmlns:rules="clr-namespace:DevelopmentInProgress.ExampleModule.Rules"
              xmlns:converters="clr-namespace:DevelopmentInProgress.ExampleModule.Converters"
+             xmlns:progress="clr-namespace:DevelopmentInProgress.Origin.Controls.Progress;assembly=DevelopmentInProgress.Origin"
              mc:Ignorable="d">
     <view:DocumentViewBase.Resources>
         <ResourceDictionary>
 
+            <dipConverters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
             <converters:StatusToVisibilityCollapsedConverter x:Key="StatusToVisibilityCollapsedConverter"/>
             <converters:StatusToVisibilityHiddenConverter x:Key="statusToVisibilityHiddenConverter"/>
             <converters:InvertedStatusToVisibilityCollapsedConverter x:Key="invertedStatusToVisibilityCollapsedConverter"/>
@@ -101,10 +104,16 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Letter Sent Date:" Margin="2"/>
                             <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding LetterSentDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
-                            <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
+                            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                                <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
+                                    Visibility="{Binding CanComplete, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Viewbox Height="30" Width="30" 
+                                         Visibility="{Binding InProgress, Converter={StaticResource boolToVisibilityConverter}}">
+                                    <progress:CircularProgress/>
+                                </Viewbox>
+                            </StackPanel>
                         </Grid>
                     </GroupBox>
                     <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
@@ -144,10 +153,16 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <Button Grid.Row="3" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
-                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
-                                    CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
+                            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                                <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
+                                        Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                          
+                                        CommandParameter="{Binding}"
+                                        Visibility="{Binding CanComplete, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Viewbox Height="30" Width="30" 
+                                         Visibility="{Binding InProgress, Converter={StaticResource boolToVisibilityConverter}}">
+                                    <progress:CircularProgress/>
+                                </Viewbox>
+                            </StackPanel>
                         </Grid>
                     </GroupBox>
                     <Image Source="../Images/arrowTurnRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
@@ -220,10 +235,16 @@
                             </TextBox>
                             <Label Grid.Row="5" Grid.Column="0" Width="150" Content="Redress Amount:" Margin="2"/>
                             <Label Grid.Row="5" Grid.Column="1" Width="150" Content="{Binding RedressAmount}" Margin="2"/>
-                            <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
-                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                                <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
+                                    Visibility="{Binding CanComplete, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Viewbox Height="30" Width="30" 
+                                         Visibility="{Binding InProgress, Converter={StaticResource boolToVisibilityConverter}}">
+                                    <progress:CircularProgress/>
+                                </Viewbox>
+                            </StackPanel>
                         </Grid>
                     </GroupBox>
                     <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
@@ -285,10 +306,16 @@
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
-                                <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete"
-                                        Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        CommandParameter="{Binding}"
-                                        Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
+                                <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                                    <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding CanComplete, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                    <Viewbox Height="30" Width="30" 
+                                         Visibility="{Binding InProgress, Converter={StaticResource boolToVisibilityConverter}}">
+                                        <progress:CircularProgress/>
+                                    </Viewbox>
+                                </StackPanel>
                             </Grid>
                         </GroupBox>
                         <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
@@ -324,10 +351,16 @@
                                     Command="{Binding DataContext.FailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                     CommandParameter="{Binding}"
                                     Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
-                            <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Pass"
-                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                                <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
                                     CommandParameter="{Binding}"
-                                    Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
+                                    Visibility="{Binding CanComplete, Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Viewbox Height="30" Width="30" 
+                                         Visibility="{Binding InProgress, Converter={StaticResource boolToVisibilityConverter}}">
+                                    <progress:CircularProgress/>
+                                </Viewbox>
+                            </StackPanel>
                         </Grid>
                     </GroupBox>
                     <Image Source="../Images/arrowRight.png" Visibility="{Binding Status, Converter={StaticResource invertedStatusToVisibilityCollapsedConverter}}"/>
@@ -357,10 +390,16 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Payment Date:" Margin="2"/>
                         <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding PaymentDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
-                        <Button Grid.Row="6" Grid.Column="1" Width="80" HorizontalAlignment="Left" Margin="2" Content="Execute"
-                                Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                CommandParameter="{Binding}"
-                                Visibility="{Binding Status, Converter={StaticResource StatusToVisibilityCollapsedConverter}}"/>
+                        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                            <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Execute" 
+                                    Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding CanComplete, Converter={StaticResource boolToVisibilityConverter}}"/>
+                            <Viewbox Height="30" Width="30" 
+                                         Visibility="{Binding InProgress, Converter={StaticResource boolToVisibilityConverter}}">
+                                <progress:CircularProgress/>
+                            </Viewbox>
+                        </StackPanel>
                     </Grid>
                 </GroupBox>                
             </DataTemplate>

@@ -19,13 +19,13 @@ namespace DevelopmentInProgress.ExampleModule.Model
         {
             if (((ResponseReceived)state).ResponseReceivedDate.HasValue)
             {
+                await TaskRunner.DoAsyncStuff();
+
                 return true;
             }
 
             state.Log.Add(
                 new LogEntry(String.Format("{0} requires a response recieved date before it can be completed.", state.Name)));
-
-            await TaskRunner.DoAsyncStuff();
 
             return false;
         }

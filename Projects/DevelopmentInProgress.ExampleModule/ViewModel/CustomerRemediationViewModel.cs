@@ -56,13 +56,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             IsBusy = true;
 
             var state = param as State;
+            ((EntityBase) state).InProgress = true;
 
             try
             {
                 var currentState = await remediationService.ExecuteAsync(state, StateStatus.Complete);
-
-                currentState.Log.ForEach(
-                    l => ShowMessage(new Message() {MessageType = MessageTypeEnum.Info, Text = l.Message}));
             }
             catch (StateException ex)
             {
@@ -76,6 +74,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             finally
             {
                 IsBusy = false;
+                ((EntityBase)state).InProgress = false;
                 ((EntityBase) state).Refresh();
                 CurrentCustomer.Refresh();
             }
@@ -87,13 +86,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             IsBusy = true;
 
             var state = param as State;
+            ((EntityBase)state).InProgress = true;
 
             try
             {
                 var currentState = await remediationService.ExecuteAsync(state, StateStatus.Fail);
-
-                currentState.Log.ForEach(
-                    l => ShowMessage(new Message() {MessageType = MessageTypeEnum.Info, Text = l.Message}));
             }
             catch (StateException ex)
             {
@@ -107,6 +104,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             finally
             {
                 IsBusy = false;
+                ((EntityBase)state).InProgress = false;
                 ((EntityBase) state).Refresh();
                 CurrentCustomer.Refresh();
             }

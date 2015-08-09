@@ -18,12 +18,12 @@ namespace DevelopmentInProgress.ExampleModule.Model
         {
             if (((LetterSent)state).LetterSentDate.HasValue)
             {
+                await TaskRunner.DoAsyncStuff();
+
                 return true;
             }
 
             state.WriteLogEntry(String.Format("{0} requires a letter sent date before it can be completed.", state.Name));
-
-            await TaskRunner.DoAsyncStuff();
 
             return false;
         }

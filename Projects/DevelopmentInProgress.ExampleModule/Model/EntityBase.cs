@@ -6,6 +6,8 @@ namespace DevelopmentInProgress.ExampleModule.Model
 {
     public abstract class EntityBase : State, INotifyPropertyChanged
     {
+        private bool inProgress;
+
         protected EntityBase(int id = 0, string name = "", bool initialiseWithParent = false,
             bool canCompleteParent = false, StateType type = StateType.Standard,
             StateStatus status = StateStatus.Uninitialise)
@@ -14,6 +16,31 @@ namespace DevelopmentInProgress.ExampleModule.Model
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool InProgress
+        {
+            get { return inProgress; }
+            set
+            {
+                inProgress = value;
+                OnPropertyChanged("InProgress");
+                OnPropertyChanged("CanComplete");
+            }
+        }
+
+        public bool CanComplete
+        {
+            get
+            {
+                if (InProgress
+                    || Status.Equals(StateStatus.Complete))
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
 
         public bool CanModify
         {

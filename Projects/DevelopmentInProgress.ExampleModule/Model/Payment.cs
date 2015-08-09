@@ -18,13 +18,13 @@ namespace DevelopmentInProgress.ExampleModule.Model
         {
             if (((Payment)state).PaymentDate.HasValue)
             {
+                await TaskRunner.DoAsyncStuff();
+
                 return true;
             }
 
             state.Log.Add(
                 new LogEntry(String.Format("{0} requires a payment date before it can be completed.", state.Name)));
-
-            await TaskRunner.DoAsyncStuff();
 
             return false;
         }
