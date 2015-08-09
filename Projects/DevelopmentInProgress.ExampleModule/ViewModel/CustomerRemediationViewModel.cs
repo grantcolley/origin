@@ -55,8 +55,8 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             ClearMessages();
             IsBusy = true;
 
-            var state = param as State;
-            ((EntityBase) state).InProgress = true;
+            var state = param as EntityBase;
+            state.InProgress = true;
 
             try
             {
@@ -74,19 +74,19 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             finally
             {
                 IsBusy = false;
-                ((EntityBase)state).InProgress = false;
-                ((EntityBase) state).Refresh();
+                state.InProgress = false;
+                state.Refresh();
                 CurrentCustomer.Refresh();
             }
         }
-
+        
         private async void Fail(object param)
         {
             ClearMessages();
             IsBusy = true;
 
-            var state = param as State;
-            ((EntityBase)state).InProgress = true;
+            var state = param as EntityBase;
+            state.InProgress = true;
 
             try
             {
@@ -104,8 +104,8 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             finally
             {
                 IsBusy = false;
-                ((EntityBase)state).InProgress = false;
-                ((EntityBase) state).Refresh();
+                state.InProgress = false;
+                state.Refresh();
                 CurrentCustomer.Refresh();
             }
         }
