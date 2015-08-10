@@ -3,6 +3,7 @@ The Origin framework is a WPF shell application for hosting line-of-business mod
 
 ![Alt text](/README-images/origin-screenshot.png?raw=true "Origin screenshot")
 
+![Alt text](/README-images/WPF-Example.PNG?raw=true "WPF implementation of the Dipstate example workflow in DevelopmentInProgress.Origin")
 
 
 # Motivation
@@ -19,8 +20,6 @@ I first started developing Origin in 2012 as an exercise in WPF shell developmen
 3. You will see three projects in the solution and each will be discussed below. For the time being note the start-up project is **DevelopmentInProgress.Origin** and the build output will go to a folder called **Binaries**.
 
    ![Alt text](/README-images/solution.PNG?raw=true "Solution")
-
-   ![Alt text](/README-images/WPF-Example.png?raw=true "WPF implementation of the Dipstate example workflow in DevelopmentInProgress.Origin")
 
 4. Build the solution.
 
