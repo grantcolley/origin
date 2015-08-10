@@ -103,7 +103,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Letter Sent Date:" Margin="2"/>
-                            <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding LetterSentDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
+                            <DatePicker Grid.Row="0" Grid.Column="1" Width="140" SelectedDate="{Binding LetterSentDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
                             <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
                                 <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
@@ -140,9 +140,9 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Response Recieved:" Margin="2"/>
-                            <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding ResponseReceivedDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
+                            <DatePicker Grid.Row="0" Grid.Column="1" Width="140" SelectedDate="{Binding ResponseReceivedDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
                             <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Consequential Loss Claim:" Margin="2"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" Width="150" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="140" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
                                 <TextBox.Text>
                                     <Binding Path="ConsequentialLossClaim"
                                              Converter="{StaticResource EmptyStringToNullConverter}"
@@ -192,11 +192,11 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Hedging Product:" Margin="2"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" Width="150" 
+                            <ComboBox Grid.Row="0" Grid.Column="1" Width="140" HorizontalAlignment="Left"
                                       ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                       SelectedItem="{Binding HedgingProduct}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
                             <Label Grid.Row="1" Grid.Column="0" Width="150" Content="Nominal Amount:" Margin="2"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" Width="150" Margin="2" IsReadOnly="{Binding IsReadOnly}">
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="140" Margin="2" IsReadOnly="{Binding IsReadOnly}" HorizontalAlignment="Left">
                                 <TextBox.Text>
                                     <Binding Path="NominalAmount"
                                          Converter="{StaticResource EmptyStringToNullConverter}"
@@ -220,7 +220,8 @@
                                 </TextBox.Text>
                             </TextBox>
                             <Label Grid.Row="3" Grid.Column="0" Width="150" Content="Start Date:" Margin="2"/>
-                            <DatePicker Grid.Row="3" Grid.Column="1" Width="150" SelectedDate="{Binding StartDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
+                            <DatePicker Grid.Row="3" Grid.Column="1" Width="140" SelectedDate="{Binding StartDate}" Margin="2" 
+                                        HorizontalAlignment="Left" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
                             <Label Grid.Row="4" Grid.Column="0" Width="150" Content="Redress Rate:" Margin="2"/>
                             <TextBox Grid.Row="4" Grid.Column="1" Width="100" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
                                 <TextBox.Text>
@@ -234,7 +235,7 @@
                                 </TextBox.Text>
                             </TextBox>
                             <Label Grid.Row="5" Grid.Column="0" Width="150" Content="Redress Amount:" Margin="2"/>
-                            <Label Grid.Row="5" Grid.Column="1" Width="150" Content="{Binding RedressAmount}" Margin="2"/>
+                            <Label Grid.Row="5" Grid.Column="1" Width="140" Content="{Binding RedressAmount}" Margin="2"/>
                             <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
                                 <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Complete" 
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            
@@ -268,7 +269,7 @@
                                     <RowDefinition Height="30"/>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="3" Grid.Column="0" Width="300" Text="No Adjustment Required" FontWeight="Bold" TextAlignment="Center" Margin="2"/>
+                                <TextBlock Grid.Row="3" Grid.Column="0" Width="290" Text="No Adjustment Required" FontWeight="Bold" TextAlignment="Center" Margin="2"/>
                             </Grid>
                         </GroupBox>
                         <Image Source="../Images/arrowRight.png"/>
@@ -295,7 +296,7 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Adjustment Amount:" Margin="2"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Width="150" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="140" Margin="2" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}">
                                     <TextBox.Text>
                                         <Binding Path="AdjustmentAmount"
                                                 Converter="{StaticResource EmptyStringToNullConverter}"
@@ -346,7 +347,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Final Redress Amount:" Margin="2"/>
-                            <Label Grid.Row="0" Grid.Column="1" Width="150" Content="{Binding FinalRedressAmount}" Margin="2"/>
+                            <Label Grid.Row="0" Grid.Column="1" Width="140" Content="{Binding FinalRedressAmount}" Margin="2"/>
                             <Button Grid.Row="6" Grid.Column="0" Width="80" Margin="2" Content="Fail"
                                     Command="{Binding DataContext.FailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                     CommandParameter="{Binding}"
@@ -389,7 +390,8 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Width="150" Content="Payment Date:" Margin="2"/>
-                        <DatePicker Grid.Row="0" Grid.Column="1" Width="150" SelectedDate="{Binding PaymentDate}" Margin="2" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
+                        <DatePicker Grid.Row="0" Grid.Column="1" Width="140" SelectedDate="{Binding PaymentDate}" Margin="2"
+                                    HorizontalAlignment="Left" IsHitTestVisible="{Binding CanModify}" IsTabStop="{Binding CanModify}"/>
                         <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
                             <Button Width="80" HorizontalAlignment="Left" Margin="2" Content="Execute" 
                                     Command="{Binding DataContext.CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"                            

@@ -12,7 +12,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
         {
             var collateData = context.Antecedent as CollateData;
             if (collateData.RedressAmount == null
-                || collateData.RedressAmount.Value < 100)
+                || collateData.RedressAmount.Value < 1000)
             {
                 // If the calculated redress amount is less
                 // than 100 transition to adjustment.

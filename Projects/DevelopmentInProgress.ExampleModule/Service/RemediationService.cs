@@ -110,7 +110,8 @@ namespace DevelopmentInProgress.ExampleModule.Service
                 .AddTransition(payment)
                 .AddTransition(collateData)
                 .AddDependency(communication)
-                .AddDependency(autoTransitionToRedressReview);
+                .AddDependency(autoTransitionToRedressReview)
+                .AddActionAsync(StateActionType.Entry, redressReview.CalculateFinalRedressAmountAsync);
 
             autoTransitionToRedressReview
                 .AddDependant(redressReview, true)
