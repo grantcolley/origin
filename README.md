@@ -1,8 +1,10 @@
 ﻿# origin
 The Origin framework is a WPF shell application for hosting line-of-business modules in a document style layout. Origin implements Prism, Unity, the AvalonDock docking system, a custom navigation bar and supports MVVM.
 
+Screenshot 1. Example Dipsecure module
 ![Alt text](/README-images/origin-screenshot.png?raw=true "Origin screenshot")
 
+Screenshot 2. Example workflow module implementing Dipstate.
 ![Alt text](/README-images/WPF-Example.PNG?raw=true "WPF implementation of the Dipstate example workflow in DevelopmentInProgress.Origin")
 
 
