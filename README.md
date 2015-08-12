@@ -4,7 +4,7 @@ The Origin framework is a WPF shell application for hosting line-of-business mod
 Screenshot 1. Example Dipsecure module
 ![Alt text](/README-images/origin-screenshot.png?raw=true "Origin screenshot")
 
-Screenshot 2. Example workflow module implementing [Dipstate](https://github.com/grantcolley/dipstate).
+Screenshot 2. Example workflow module implementing [Dipstate](https://github.com/grantcolley/dipstate) for an activity based workflow.
 ![Alt text](/README-images/WPF-Example.PNG?raw=true "WPF implementation of the Dipstate example workflow in DevelopmentInProgress.Origin")
 
 
