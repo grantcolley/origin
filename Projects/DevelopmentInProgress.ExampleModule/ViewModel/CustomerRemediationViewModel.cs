@@ -45,8 +45,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
             catch (StateException ex)
             {
-                ex.Messages.ForEach(
-                    m => ShowMessage(new Message() {MessageType = MessageTypeEnum.Error, Text = m}, true));
+                ShowMessage(new Message() {MessageType = MessageTypeEnum.Error, Text = ex.Message}, true);
             }
         }
 
@@ -60,12 +59,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
 
             try
             {
-                var currentState = await remediationService.ExecuteAsync(state, StateStatus.Complete);
+                var currentState = await remediationService.CompleteStateAsync(state);
             }
             catch (StateException ex)
             {
-                ex.Messages.ForEach(
-                    m => ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = m}, true));
+                ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = ex.Message}, true);
             }
             catch (Exception ex)
             {
@@ -75,7 +73,6 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             {
                 IsBusy = false;
                 state.InProgress = false;
-                state.Refresh();
                 CurrentCustomer.Refresh();
             }
         }
@@ -90,12 +87,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
 
             try
             {
-                var currentState = await remediationService.ExecuteAsync(state, StateStatus.Fail);
+                var currentState = await remediationService.FailToCollateData(state);
             }
             catch (StateException ex)
             {
-                ex.Messages.ForEach(
-                    m => ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = m}, true));
+                ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = ex.Message}, true);
             }
             catch (Exception ex)
             {
@@ -105,7 +101,6 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             {
                 IsBusy = false;
                 state.InProgress = false;
-                state.Refresh();
                 CurrentCustomer.Refresh();
             }
         }

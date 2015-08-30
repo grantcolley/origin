@@ -253,7 +253,7 @@
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type model:Adjustment}">
-                <StackPanel>
+                <StackPanel Visibility="{Binding Status, Converter={StaticResource statusToVisibilityHiddenConverter}}">
                     <StackPanel Orientation="Horizontal" Visibility="{Binding IsArrowVisible, Converter={StaticResource adjustmentApplicableVisibilityConverter}}">
                         <GroupBox Style="{StaticResource GroupBoxNoHeaderStyle}" BorderBrush="Transparent" BorderThickness="0" Margin="5,20,0,5">
                             <Grid>

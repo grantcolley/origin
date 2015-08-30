@@ -7,6 +7,12 @@ namespace DevelopmentInProgress.ExampleModule.Model
 {
     public class RedressReview : EntityBase
     {
+        public RedressReview()
+        {
+            this.AddActionAsync(StateActionType.OnEntry, CalculateFinalRedressAmountAsync);
+            this.AddActionAsync(StateActionType.OnStatusChanged, RefreshAsync);
+        }
+
         public decimal? FinalRedressAmount { get; set; }
 
         internal async Task CalculateFinalRedressAmountAsync(State context)
@@ -37,6 +43,11 @@ namespace DevelopmentInProgress.ExampleModule.Model
             }
 
             FinalRedressAmount = finalRedressAmount;
+
+            if (Transition == null)
+            {
+                Transition = Transitions.FirstOrDefault(s => s.Name.Equals("Payment"));
+            }
 
             await TaskRunner.DoAsyncStuff();
         }

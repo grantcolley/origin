@@ -10,6 +10,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
         public LetterSent()
         {
             this.AddCanCompletePredicateAsync(HasLetterSentDateAsync);
+            this.AddActionAsync(StateActionType.OnStatusChanged, RefreshAsync);
         }
 
         public DateTime? LetterSentDate { get; set; }
@@ -23,9 +24,9 @@ namespace DevelopmentInProgress.ExampleModule.Model
                 return true;
             }
 
-            state.WriteLogEntry(String.Format("{0} requires a letter sent date before it can be completed.", state.Name));
-
-            return false;
+            var error = String.Format("{0} requires a letter sent date before it can be completed.", state.Name);
+            state.WriteLogEntry(error);
+            throw new StateException(state, error);
         }
     }
 }

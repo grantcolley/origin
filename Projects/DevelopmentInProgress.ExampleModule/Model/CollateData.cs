@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DevelopmentInProgress.DipState;
 using DevelopmentInProgress.ExampleModule.Service;
@@ -15,6 +16,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
         public CollateData()
         {
             this.AddCanCompletePredicateAsync(HasRedressRateAsync);
+            this.AddActionAsync(StateActionType.OnStatusChanged, RefreshAsync);
         }
 
         public string HedgingProduct { get; set; }
@@ -78,15 +80,19 @@ namespace DevelopmentInProgress.ExampleModule.Model
         {
             if (((CollateData) state).RedressAmount.HasValue)
             {
+                if (Transition == null)
+                {
+                    Transition = Transitions.FirstOrDefault();
+                }
+
                 await TaskRunner.DoAsyncStuff();
 
                 return true;
             }
 
-            state.Log.Add(
-                new LogEntry(String.Format("{0} requires a redress amount before it can be completed.", state.Name)));
-
-            return false;
+            var error = String.Format("{0} requires a redress amount before it can be completed.", state.Name);
+            state.WriteLogEntry(error);
+            throw new StateException(state, error);
         }
     }
 }

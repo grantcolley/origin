@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DevelopmentInProgress.DipState;
 using DevelopmentInProgress.ExampleModule.Service;
@@ -12,6 +13,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
         public Adjustment()
         {
             this.AddCanCompletePredicateAsync(HasAdjustmentAmountAsync);
+            this.AddActionAsync(StateActionType.OnStatusChanged, RefreshAsync);
         }
 
         public decimal? AdjustmentAmount { get; set; }
@@ -21,7 +23,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
             get
             {
                 if (isAdjustmentApplicable == null
-                    && Status.Equals(StateStatus.Uninitialise))
+                    && Status.Equals(StateStatus.Uninitialised))
                 {
                     return null;
                 }
@@ -47,6 +49,11 @@ namespace DevelopmentInProgress.ExampleModule.Model
             }
         }
 
+        public override async Task RefreshAsync(State state)
+        {
+            OnPropertyChanged(String.Empty);
+        }
+
         private async Task<bool> HasAdjustmentAmountAsync(State state)
         {
             if (((Adjustment)state).AdjustmentAmount.HasValue)
@@ -55,23 +62,28 @@ namespace DevelopmentInProgress.ExampleModule.Model
                 var collateData = adjustmentDecision.Antecedent as CollateData;
 
                 if ((((Adjustment) state).AdjustmentAmount.Value
-                    + collateData.RedressAmount.Value) > 100)
+                    + collateData.RedressAmount.Value) > 100)                
                 {
+                    if (Transition == null)
+                    {
+                        Transition = Transitions.FirstOrDefault();
+                    }
+
                     await TaskRunner.DoAsyncStuff();
 
                     return true;
                 }
 
-                state.Log.Add(
-                    new LogEntry("The sum of the redress amount and the adjustment amount must be greater than 100."));
+                var error = "The sum of the redress amount and the adjustment amount must be greater than 100.";
+                state.Log.Add(new LogEntry(error));
+                throw new StateException(state, error);
             }
             else
             {
-                state.Log.Add(
-                    new LogEntry(String.Format("{0} requires an adjustment amount before it can be completed.", state.Name)));                
+                var error = String.Format("{0} requires an adjustment amount before it can be completed.", state.Name);
+                state.WriteLogEntry(error);      
+                throw new StateException(state, error);
             }
-
-            return false;
         }
     }
 }

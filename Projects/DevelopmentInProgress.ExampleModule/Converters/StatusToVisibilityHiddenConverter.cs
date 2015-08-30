@@ -12,7 +12,7 @@ namespace DevelopmentInProgress.ExampleModule.Converters
             object parameter, CultureInfo culture)
         {
             if (value != null
-                && ((StateStatus) value).Equals(StateStatus.Uninitialise))
+                && ((StateStatus) value).Equals(StateStatus.Uninitialised))
             {
                 return Visibility.Hidden;
             }

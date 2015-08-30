@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevelopmentInProgress.DipState;
@@ -9,24 +8,15 @@ namespace DevelopmentInProgress.ExampleModule.Service
 {
     public class RemediationService
     {
-        public async Task<State> ExecuteAsync(State state, StateStatus newStatus)
+        public async Task<State> CompleteStateAsync(State state)
         {
-            if (state.Name.Equals("Redress Review"))
-            {
-                if (newStatus.Equals(StateStatus.Fail))
-                {
-                    return await state.ExecuteAsync(newStatus,
-                        state.Transitions.FirstOrDefault(t => t.Name.Equals("Collate Data")));
-                }
+            return await state.ExecuteAsync(StateExecutionType.Complete);
+        }
 
-                if (newStatus.Equals(StateStatus.Complete))
-                {
-                    return await state.ExecuteAsync(newStatus,
-                        state.Transitions.FirstOrDefault(t => t.Name.Equals("Payment")));
-                }
-            }
-
-            return await state.ExecuteAsync(newStatus);
+        public async Task<State> FailToCollateData(State redressReview)
+        {
+            var collateData = redressReview.Transitions.FirstOrDefault(t => t.Name.Equals("Collate Data"));
+            return await redressReview.ExecuteAsync(collateData, true);
         }
 
         public async Task<List<Customer>> GetCustomersAsync()
@@ -42,35 +32,30 @@ namespace DevelopmentInProgress.ExampleModule.Service
 
         private async Task<List<State>> GetRemediationWorkflow()
         {
-            var remediationWorkflow = new State(100, "Remediation Workflow",
-                type: StateType.Root);
+            var remediationWorkflow = new State(100, "Remediation Workflow", StateType.Root);
 
             var communication = new Communication()
             {
                 Id = 200,
-                Name = "Communication",
-                InitialiseWithParent = true
+                Name = "Communication"
             };
 
             var letterSent = new LetterSent()
             {
                 Id = 210,
-                Name = "Letter Sent",
-                InitialiseWithParent = true
+                Name = "Letter Sent"
             };
 
             var responseReceived = new ResponseReceived()
             {
                 Id = 220,
-                Name = "Response Received",
-                CanCompleteParent = true
+                Name = "Response Received"
             };
 
             var collateData = new CollateData()
             {
                 Id = 300,
-                Name = "Collate Data",
-                InitialiseWithParent = true
+                Name = "Collate Data"
             };
 
             var adjustmentDecision = new AdjustmentDecision()
@@ -102,49 +87,48 @@ namespace DevelopmentInProgress.ExampleModule.Service
             var payment = new Payment()
             {
                 Id = 800,
-                Name = "Payment",
-                CanCompleteParent = true
+                Name = "Payment"
             };
 
             redressReview
-                .AddTransition(payment)
+                .AddTransition(payment, true)
                 .AddTransition(collateData)
-                .AddDependency(communication)
-                .AddDependency(autoTransitionToRedressReview)
-                .AddActionAsync(StateActionType.Entry, redressReview.CalculateFinalRedressAmountAsync);
+                .AddDependency(communication, true)
+                .AddDependency(autoTransitionToRedressReview, true);
 
             autoTransitionToRedressReview
                 .AddDependant(redressReview, true)
-                .AddTransition(redressReview);
+                .AddTransition(redressReview, true);
 
-            adjustment.AddTransition(autoTransitionToRedressReview);
+            adjustment
+                .AddTransition(autoTransitionToRedressReview, true);
 
             adjustmentDecision
                 .AddTransition(adjustment)
-                .AddTransition(autoTransitionToRedressReview)
-                .AddActionAsync(StateActionType.Entry, adjustmentDecision.ConditionalTransitionDecisionAsync);
+                .AddTransition(autoTransitionToRedressReview);
 
             collateData
-                .AddTransition(adjustmentDecision);
+                .AddTransition(adjustmentDecision, true);
 
-            letterSent.AddTransition(responseReceived);
+            letterSent
+                .AddTransition(responseReceived, true);
 
             communication
-                .AddDependant(redressReview, true)
-                .AddSubState(letterSent)
+                .AddSubState(letterSent, true)
                 .AddSubState(responseReceived)
-                .AddTransition(redressReview);
-            
+                .AddDependant(redressReview, true)
+                .AddTransition(redressReview, true);
+
             remediationWorkflow
-                .AddSubState(communication)
-                .AddSubState(collateData)
+                .AddSubState(communication, true)
+                .AddSubState(collateData, true)
                 .AddSubState(adjustmentDecision)
-                .AddSubState(adjustment)
+                .AddSubState(adjustment, completionRequired: false)
                 .AddSubState(autoTransitionToRedressReview)
                 .AddSubState(redressReview)
                 .AddSubState(payment);
 
-            await remediationWorkflow.ExecuteAsync(StateStatus.Initialise);
+            await remediationWorkflow.ExecuteAsync(StateExecutionType.Initialise);
 
             return remediationWorkflow.Flatten();
         }

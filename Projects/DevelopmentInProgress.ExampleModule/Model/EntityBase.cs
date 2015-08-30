@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using DevelopmentInProgress.DipState;
 
 namespace DevelopmentInProgress.ExampleModule.Model
@@ -8,10 +9,9 @@ namespace DevelopmentInProgress.ExampleModule.Model
     {
         private bool inProgress;
 
-        protected EntityBase(int id = 0, string name = "", bool initialiseWithParent = false,
-            bool canCompleteParent = false, StateType type = StateType.Standard,
-            StateStatus status = StateStatus.Uninitialise)
-            : base(id, name, initialiseWithParent, canCompleteParent, type, status)
+        protected EntityBase(int id = 0, string name = "", StateType type = StateType.Standard,
+            StateStatus status = StateStatus.Uninitialised)
+            : base(id, name, type, status)
         {            
         }
 
@@ -33,7 +33,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
             get
             {
                 if (InProgress
-                    || Status.Equals(StateStatus.Complete))
+                    || Status.Equals(StateStatus.Completed))
                 {
                     return false;
                 }
@@ -49,10 +49,10 @@ namespace DevelopmentInProgress.ExampleModule.Model
 
         public bool IsReadOnly
         {
-            get { return Status.Equals(StateStatus.Complete); }
+            get { return Status.Equals(StateStatus.Completed); }
         }
 
-        public void Refresh()
+        public virtual async Task RefreshAsync(State state)
         {
             OnPropertyChanged(String.Empty);
         }

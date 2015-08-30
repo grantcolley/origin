@@ -6,6 +6,11 @@ namespace DevelopmentInProgress.ExampleModule.Model
 {
     public class AdjustmentDecision : State
     {
+        public AdjustmentDecision()
+        {
+            this.AddActionAsync(StateActionType.OnEntry, ConditionalTransitionDecisionAsync);
+        }
+
         public bool? AdjustmentApplicable { get; set; }
 
         internal async Task ConditionalTransitionDecisionAsync(State context)
