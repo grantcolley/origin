@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
 using DevelopmentInProgress.DipState;
 using DevelopmentInProgress.ExampleModule.Service;
 
@@ -9,6 +11,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
         public AdjustmentDecision()
         {
             this.AddActionAsync(StateActionType.OnEntry, ConditionalTransitionDecisionAsync);
+            this.AddActionAsync(StateActionType.Reset, ResetAsync);
         }
 
         public bool? AdjustmentApplicable { get; set; }
@@ -33,6 +36,13 @@ namespace DevelopmentInProgress.ExampleModule.Model
             }
 
             await TaskRunner.DoAsyncStuff();
+        }
+
+        public async Task ResetAsync(State state)
+        {
+            ((Adjustment) state.Transitions[0]).IsAdjustmentApplicable = null;
+            ((Adjustment)state.Transitions[0]).AdjustmentAmount = null;
+            ((Adjustment)state.Transitions[0]).OnPropertyChanged(String.Empty);
         }
     }
 }
