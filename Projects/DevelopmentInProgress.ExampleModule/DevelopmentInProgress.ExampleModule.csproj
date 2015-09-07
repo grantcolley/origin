@@ -188,9 +188,6 @@
     <Resource Include="Images\arrowJoin.png" />
     <Resource Include="Images\arrowTurnRight.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
