@@ -97,7 +97,7 @@ namespace DevelopmentInProgress.ExampleModule.Service
                 .AddDependency(autoTransitionToRedressReview, true);
 
             autoTransitionToRedressReview
-                .AddDependant(redressReview, true)
+                .AddDependant(redressReview)
                 .AddTransition(redressReview, true);
 
             adjustment
@@ -116,7 +116,7 @@ namespace DevelopmentInProgress.ExampleModule.Service
             communication
                 .AddSubState(letterSent, true)
                 .AddSubState(responseReceived)
-                .AddDependant(redressReview, true)
+                .AddDependant(redressReview)
                 .AddTransition(redressReview, true);
 
             remediationWorkflow
