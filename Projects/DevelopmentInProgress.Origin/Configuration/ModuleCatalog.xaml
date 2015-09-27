@@ -13,9 +13,9 @@
                       ModuleType="DevelopmentInProgress.ModuleTemplate.Module,DevelopmentInProgress.ModuleTemplate"
                       InitializationMode="WhenAvailable"/>
 
-    <prism:ModuleInfo Ref="DipDocs"
-                      ModuleName="DevelopmentInProgress.DipDocs"
-                      ModuleType="DevelopmentInProgress.DipDocs.Module,DevelopmentInProgress.DipDocs"
+    <prism:ModuleInfo Ref="Authorisation Manager"
+                      ModuleName="DevelopmentInProgress.AuthorisationManager"
+                      ModuleType="DevelopmentInProgress.AuthorisationManager.Module,DevelopmentInProgress.AuthorisationManager"
                       InitializationMode="WhenAvailable"/>
     
 </prism:ModuleCatalog>
