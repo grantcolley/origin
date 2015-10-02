@@ -77,7 +77,6 @@
     <Resource Include="Images\Activities.png" />
     <Resource Include="Images\Activity.png" />
     <Resource Include="Images\AuthorisationManager.png" />
-    <Resource Include="Images\Filter.png" />
     <Resource Include="Images\ItemDelete.png" />
     <Resource Include="Images\ItemNew.png" />
     <Resource Include="Images\ItemSave.png" />
