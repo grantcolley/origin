@@ -95,10 +95,6 @@
     <Compile Include="Context\IViewContext.cs" />
     <Compile Include="Context\IViewModelContext.cs" />
     <Compile Include="Context\ViewContext.cs" />
-    <Compile Include="Controls\NavigationPane\GroupList.cs" />
-    <Compile Include="Controls\NavigationPane\GroupListItem.cs" />
-    <Compile Include="Controls\NavigationPane\ModuleList.cs" />
-    <Compile Include="Controls\NavigationPane\ModuleListItem.cs" />
     <Compile Include="Controls\Progress\CircularProgress.xaml.cs">
       <DependentUpon>CircularProgress.xaml</DependentUpon>
     </Compile>
@@ -173,10 +169,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LoggerFacade\LoggerFacade.cs" />
-    <Page Include="Controls\NavigationPane\NavigationPaneResourceDictionary.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\Progress\CircularProgress.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -280,6 +272,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\GroupListItem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\wpfcontrols\DevelopmentInProgress.WPFControls\DevelopmentInProgress.WPFControls.csproj">
+      <Project>{5acdc574-0f6f-48bc-ad2a-2f29bd7009fe}</Project>
+      <Name>DevelopmentInProgress.WPFControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
