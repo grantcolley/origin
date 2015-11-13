@@ -5,13 +5,13 @@
 // <author>Grant Colley</author>
 //-----------------------------------------------------------------------
 
-using DevelopmentInProgress.Origin.Controls.NavigationPane;
 using DevelopmentInProgress.Origin.Navigation;
 using DevelopmentInProgress.Origin.RegionAdapters;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using DevelopmentInProgress.WPFControls.NavigationPanel;
 
 namespace DevelopmentInProgress.Origin.View
 {
@@ -34,7 +34,7 @@ namespace DevelopmentInProgress.Origin.View
 
             InitializeComponent();
 
-            moduleList.ItemSelected += SelectedModuleListItem;
+            navigationPanel.ItemSelected += SelectedModuleListItem;
         }
 
         /// <summary>
@@ -49,24 +49,24 @@ namespace DevelopmentInProgress.Origin.View
         /// <param name="moduleSettings">Module settings.</param>
         public void AddModule(ModuleSettings moduleSettings)
         {
-            var moduleListItem = new ModuleListItem();
-            moduleListItem.ModuleName = moduleSettings.ModuleName;
-            moduleListItem.ImageLocation = moduleSettings.ModuleImagePath;
+            var navigationPanelItem = new NavigationPanelItem();
+            navigationPanelItem.NavigationPanelItemName = moduleSettings.ModuleName;
+            navigationPanelItem.ImageLocation = moduleSettings.ModuleImagePath;
 
             foreach (ModuleGroup moduleGroup in moduleSettings.ModuleGroups)
             {
-                var groupList = new GroupList {GroupListName = moduleGroup.ModuleGroupName};
+                var navigationList = new NavigationList {NavigationListName = moduleGroup.ModuleGroupName};
 
                 foreach (ModuleGroupItem moduleGroupItem in moduleGroup.ModuleGroupItems)
                 {
-                    var groupListItem = new GroupListItem
+                    var navigationListItems = new NavigationListItem
                     {
                         ItemName = moduleGroupItem.ModuleGroupItemName,
                         ImageLocation = moduleGroupItem.ModuleGroupItemImagePath
                     };
 
-                    groupListItem.ItemClicked += GroupListItemItemClicked;
-                    groupList.GroupListItems.Add(groupListItem);
+                    navigationListItems.ItemClicked += GroupListItemItemClicked;
+                    navigationList.NavigationListItems.Add(navigationListItems);
 
                     var navigationSettings = new NavigationSettings
                     {
@@ -75,18 +75,18 @@ namespace DevelopmentInProgress.Origin.View
                     };
 
                     string navigationKey = String.Format("{0}.{1}.{2}",
-                        moduleListItem.ModuleName,
-                        groupList.GroupListName,
-                        groupListItem.ItemName);
+                        navigationPanelItem.NavigationPanelItemName,
+                        navigationList.NavigationListName,
+                        navigationListItems.ItemName);
 
-                    groupListItem.Tag = navigationKey;
+                    navigationListItems.Tag = navigationKey;
                     navigationSettingsList.Add(navigationKey, navigationSettings);
                 }
 
-                moduleListItem.Groups.Add(groupList);
+                navigationPanelItem.NavigationList.Add(navigationList);
             }
 
-            moduleList.Modules.Add(moduleListItem);
+            navigationPanel.NavigationPanelItems.Add(navigationPanelItem);
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace DevelopmentInProgress.Origin.View
         /// <param name="e">Event arguments.</param>
         private void GroupListItemItemClicked(object sender, RoutedEventArgs e)
         {
-            var groupListItem = (GroupListItem)e.Source;
-            string navigationKey = groupListItem.Tag.ToString();
+            var navigationListItem = (NavigationListItem)e.Source;
+            string navigationKey = navigationListItem.Tag.ToString();
             NavigationSettings navigationSettings;
             if (navigationSettingsList.TryGetValue(navigationKey, out navigationSettings))
             {
@@ -112,11 +112,11 @@ namespace DevelopmentInProgress.Origin.View
         /// <param name="e">Event arguments.</param>
         private void SelectedModuleListItem(object sender, RoutedEventArgs e)
         {
-            var moduleListItem = (ModuleListItem)e.OriginalSource;
+            var navigationPanelItem = (NavigationPanelItem)e.OriginalSource;
             var moduleSelected = ModuleSelected;
             if (moduleSelected != null)
             {
-                var modulePaneEventArgs = new ModuleEventArgs(moduleListItem.ModuleName);
+                var modulePaneEventArgs = new ModuleEventArgs(navigationPanelItem.NavigationPanelItemName);
                 moduleSelected(this, modulePaneEventArgs);
             }
 
