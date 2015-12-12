@@ -33,7 +33,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
             get
             {
                 if (InProgress
-                    || Status.Equals(StateStatus.Completed))
+                    || Status == StateStatus.Completed)
                 {
                     return false;
                 }
@@ -49,7 +49,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
 
         public bool IsReadOnly
         {
-            get { return Status.Equals(StateStatus.Completed); }
+            get { return Status == StateStatus.Completed; }
         }
 
         public virtual async Task RefreshAsync(State state)

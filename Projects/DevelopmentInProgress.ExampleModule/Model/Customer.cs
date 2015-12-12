@@ -21,7 +21,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
         {
             get
             {
-                return RemediationWorkflow.Where(s => s.Type.Equals(StateType.Standard)
+                return RemediationWorkflow.Where(s => s.Type == StateType.Standard
                                                       && !s.Name.Equals("Communication")
                                                       && !s.Parent.Name.Equals("Communication")).ToList();
             }
@@ -31,7 +31,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
         {
             get
             {
-                return RemediationWorkflow.Where(s => s.Type.Equals(StateType.Standard)
+                return RemediationWorkflow.Where(s => s.Type == StateType.Standard
                                                       && s.Parent.Name.Equals("Communication")).ToList();
             }
         }

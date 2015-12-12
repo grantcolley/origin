@@ -23,7 +23,7 @@ namespace DevelopmentInProgress.ExampleModule.Model
             get
             {
                 if (isAdjustmentApplicable == null
-                    && Status.Equals(StateStatus.Uninitialised))
+                    && Status == StateStatus.Uninitialised)
                 {
                     return null;
                 }

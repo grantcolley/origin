@@ -12,7 +12,7 @@ namespace DevelopmentInProgress.ExampleModule.Converters
             object parameter, CultureInfo culture)
         {
             if (value != null
-                && ((StateStatus) value).Equals(StateStatus.Completed))
+                && (StateStatus) value == StateStatus.Completed)
             {
                 return Visibility.Collapsed;
             }

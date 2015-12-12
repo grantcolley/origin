@@ -23,7 +23,7 @@ namespace DevelopmentInProgress.Origin.Navigation
         public NavigationTarget(string target)
         {
             string[] targetSplit = target.Split('^');
-            if (targetSplit.Length.Equals(2))
+            if (targetSplit.Length == 2)
             {
                 NavigationId = targetSplit[0];
                 Title = targetSplit[1];
