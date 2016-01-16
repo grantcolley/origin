@@ -19,8 +19,8 @@ namespace DevelopmentInProgress.AuthorisationManager
 
         public override void Initialize()
         {
-            Container.RegisterType<object, ActivityView>(typeof (ActivityView).Name);
-            Container.RegisterType<ActivityViewModel>(typeof (ActivityViewModel).Name);
+            Container.RegisterType<object, ConfigureAuthorisationView>(typeof (ConfigureAuthorisationView).Name);
+            Container.RegisterType<ConfigurationAuthorisationViewModel>(typeof (ConfigurationAuthorisationViewModel).Name);
 
             var authorisationManager = new ModuleSettings()
             {
@@ -33,16 +33,16 @@ namespace DevelopmentInProgress.AuthorisationManager
                 ModuleGroupName = "Authorisation"
             };
 
-            var activities = new ModuleGroupItem()
+            var configureAuthorisation = new ModuleGroupItem()
             {
-                ModuleGroupItemName = "Activities",
-                TargetView = typeof (ActivityView).Name,
-                TargetViewTitle = "Activities",
+                ModuleGroupItemName = "Configure Authorisation",
+                TargetView = typeof (ConfigureAuthorisationView).Name,
+                TargetViewTitle = "Configure Authorisation",
                 ModuleGroupItemImagePath =
-                    @"\DevelopmentInProgress.AuthorisationManager;component/Images/Activities.png"
+                    @"\DevelopmentInProgress.AuthorisationManager;component/Images/Authorisation.png"
             };
 
-            authorisationGroup.ModuleGroupItems.Add(activities);
+            authorisationGroup.ModuleGroupItems.Add(configureAuthorisation);
             authorisationManager.ModuleGroups.Add(authorisationGroup);
             ModuleNavigator.AddModuleNavigation(authorisationManager);
 

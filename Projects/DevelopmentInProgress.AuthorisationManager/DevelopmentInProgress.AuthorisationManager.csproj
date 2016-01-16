@@ -55,9 +55,9 @@
   <ItemGroup>
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\ActivityViewModel.cs" />
-    <Compile Include="View\ActivityView.xaml.cs">
-      <DependentUpon>ActivityView.xaml</DependentUpon>
+    <Compile Include="ViewModel\ConfigurationAuthorisationViewModel.cs" />
+    <Compile Include="View\ConfigureAuthorisationView.xaml.cs">
+      <DependentUpon>ConfigureAuthorisationView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -68,13 +68,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="View\ActivityView.xaml">
+    <Page Include="View\ConfigureAuthorisationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Activities.png" />
+    <Resource Include="Images\Authorisation.png" />
     <Resource Include="Images\Activity.png" />
     <Resource Include="Images\AuthorisationManager.png" />
     <Resource Include="Images\ItemDelete.png" />

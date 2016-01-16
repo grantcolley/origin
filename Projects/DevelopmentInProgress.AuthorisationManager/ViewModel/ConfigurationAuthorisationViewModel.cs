@@ -3,9 +3,9 @@ using DevelopmentInProgress.Origin.ViewModel;
 
 namespace DevelopmentInProgress.AuthorisationManager.ViewModel
 {
-    public class ActivityViewModel : DocumentViewModel
+    public class ConfigurationAuthorisationViewModel : DocumentViewModel
     {
-        public ActivityViewModel(ViewModelContext viewModelContext)
+        public ConfigurationAuthorisationViewModel(ViewModelContext viewModelContext)
             : base(viewModelContext)
         {
             
