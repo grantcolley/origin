@@ -26,17 +26,15 @@
         </DockPanel>
         <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>
         <DockPanel Grid.Column="2" LastChildFill="True" Margin="2">
-            <DockPanel LastChildFill="True">
+            <DockPanel Dock="Top" LastChildFill="True">
                 <Button Content="New Activity"/>
                 <Button Content="New Role"/>
                 <Button Content="Clear"/>
-                <Label/>
                 <Button  DockPanel.Dock="Right" Content="Delete"/>
                 <Button DockPanel.Dock="Right" Content="Save"/>
+                <Label/>
             </DockPanel>
-            <Grid>
-
-            </Grid>
+            <ContentControl />
         </DockPanel>
     </Grid>
 </view:DocumentViewBase>
