@@ -66,8 +66,16 @@
       <Name>DevelopmentInProgress.Origin</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Resource Include="Images\Delete.png" />
+    <Resource Include="Images\New.png" />
+    <Resource Include="Images\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\Dictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ConfigureAuthorisationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

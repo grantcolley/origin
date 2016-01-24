@@ -5,6 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:DevelopmentInProgress.Origin.View;assembly=DevelopmentInProgress.Origin"
              mc:Ignorable="d">
+    <view:DocumentViewBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </view:DocumentViewBase.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -13,13 +20,13 @@
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Column="0" LastChildFill="True" Margin="2">
             <TabControl Margin="2" Background="#FFEEF5FD">
-                <TabItem Background="#FFEEF5FD" Foreground="#FF686464" Header="Authorisation">
+                <TabItem Background="#FFEEF5FD" Foreground="{StaticResource LabelForeground}" Header="Authorisation">
                     <Grid Background="#FFEEF5FD"/>
                 </TabItem>
-                <TabItem Background="#FFEEF5FD" Foreground="#FF686464" Header="Roles">
+                <TabItem Background="#FFEEF5FD" Foreground="{StaticResource LabelForeground}" Header="Roles">
                     <Grid Background="#FFEEF5FD"/>
                 </TabItem>
-                <TabItem Background="#FFEEF5FD" Foreground="#FF686464" Header="Activities">
+                <TabItem Background="#FFEEF5FD" Foreground="{StaticResource LabelForeground}" Header="Activities">
                     <Grid Background="#FFEEF5FD"/>
                 </TabItem>
             </TabControl>
@@ -27,11 +34,24 @@
         <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>
         <DockPanel Grid.Column="2" LastChildFill="True" Margin="2">
             <DockPanel Dock="Top" LastChildFill="True">
-                <Button Content="New Activity"/>
-                <Button Content="New Role"/>
-                <Button Content="Clear"/>
-                <Button  DockPanel.Dock="Right" Content="Delete"/>
-                <Button DockPanel.Dock="Right" Content="Save"/>
+                <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/Activity.png" Height="24" Width="24"/>
+                        <Label Content="New Activity" Foreground="{StaticResource LabelForeground}"/>
+                    </StackPanel>
+                </Button>
+                <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/Role.png" Height="24" Width="24"/>
+                        <Label Content="New Role" Foreground="{StaticResource LabelForeground}"/>
+                    </StackPanel>
+                </Button>
+                <Button DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <Image Source="../Images/Delete.png" Height="24" Width="24"/>
+                </Button>
+                <Button DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <Image Source="../Images/Save.png" Height="24" Width="24"/>
+                </Button>
                 <Label/>
             </DockPanel>
             <ContentControl />
