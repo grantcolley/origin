@@ -30,14 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevelopmentInProgress.DipSecure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DipSecure.1.0.0.0\lib\net45\DevelopmentInProgress.DipSecure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DipWpfControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DipWpfControls.1.0.0.0\lib\net45\DipWpfControls.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Practices.Prism">
       <HintPath>..\..\Third Party\Prism\Microsoft.Practices.Prism.dll</HintPath>
     </Reference>
@@ -102,9 +94,7 @@
     <Resource Include="Images\User.png" />
     <Resource Include="Images\Users.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
