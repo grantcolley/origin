@@ -1,4 +1,6 @@
-﻿using DevelopmentInProgress.Origin.Context;
+﻿using System.Collections.ObjectModel;
+using DevelopmentInProgress.DipSecure;
+using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.ViewModel;
 
 namespace DevelopmentInProgress.AuthorisationManager.ViewModel
@@ -8,8 +10,13 @@ namespace DevelopmentInProgress.AuthorisationManager.ViewModel
         public ConfigurationAuthorisationViewModel(ViewModelContext viewModelContext)
             : base(viewModelContext)
         {
-            
         }
+
+        public ObservableCollection<Role> Roles { get; set; }
+
+        public ObservableCollection<Activity> Activities { get; set; }
+
+        public ObservableCollection<UserAuthorisation> Users { get; set; }
 
         protected override ProcessAsyncResult OnPublishedAsync(object data)
         {
