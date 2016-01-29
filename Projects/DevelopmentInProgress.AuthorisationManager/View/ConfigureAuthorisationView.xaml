@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:DevelopmentInProgress.Origin.View;assembly=DevelopmentInProgress.Origin"
+             xmlns:filterTree="clr-namespace:DevelopmentInProgress.WPFControls.FilterTree;assembly=DipWpfControls"
              mc:Ignorable="d">
     <view:DocumentViewBase.Resources>
         <ResourceDictionary>
@@ -22,21 +23,21 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" Header="Authorisation" Foreground="{StaticResource LabelForeground}" Margin="5,5,5,5"> 
+        <GroupBox Grid.Column="0" Header="Users" Foreground="{StaticResource LabelForeground}" Margin="5,5,5,5"> 
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                
+                <filterTree:XamlFilterTree></filterTree:XamlFilterTree>
             </ScrollViewer>
         </GroupBox>
         <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>
         <GroupBox Grid.Column="2" Header="Roles" Foreground="{StaticResource LabelForeground}" Margin="5,5,5,5">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-
+                <filterTree:XamlFilterTree></filterTree:XamlFilterTree>
             </ScrollViewer>
         </GroupBox>
         <GridSplitter Grid.Column="3" Width="2" HorizontalAlignment="Stretch"/>
         <GroupBox Grid.Column="4" Header="Activities" Foreground="{StaticResource LabelForeground}" Margin="5,5,5,5">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-
+                <filterTree:XamlFilterTree></filterTree:XamlFilterTree>
             </ScrollViewer>
         </GroupBox>
         <GridSplitter Grid.Column="5" Width="2" HorizontalAlignment="Stretch"/>
