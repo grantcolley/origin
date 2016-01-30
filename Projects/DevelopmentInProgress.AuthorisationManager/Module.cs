@@ -39,7 +39,7 @@ namespace DevelopmentInProgress.AuthorisationManager
                 TargetView = typeof (ConfigureAuthorisationView).Name,
                 TargetViewTitle = "Configure Authorisation",
                 ModuleGroupItemImagePath =
-                    @"\DevelopmentInProgress.AuthorisationManager;component/Images/Authorisation.png"
+                    @"\DevelopmentInProgress.AuthorisationManager;component/Images/Users.png"
             };
 
             authorisationGroup.ModuleGroupItems.Add(configureAuthorisation);

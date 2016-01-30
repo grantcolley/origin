@@ -42,27 +42,36 @@
         </GroupBox>
         <GridSplitter Grid.Column="5" Width="2" HorizontalAlignment="Stretch"/>
         <DockPanel Grid.Column="6" LastChildFill="True" Margin="2">
-            <DockPanel Dock="Top" LastChildFill="True">
-                <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="../Images/Activity.png" Height="24" Width="24"/>
-                        <Label Content="New Activity" Foreground="{StaticResource LabelForeground}"/>
-                    </StackPanel>
-                </Button>
-                <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="../Images/Role.png" Height="24" Width="24"/>
-                        <Label Content="New Role" Foreground="{StaticResource LabelForeground}"/>
-                    </StackPanel>
-                </Button>
-                <Button DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <Image Source="../Images/Delete.png" Height="24" Width="24"/>
-                </Button>
-                <Button DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <Image Source="../Images/Save.png" Height="24" Width="24"/>
-                </Button>
-                <Label/>
-            </DockPanel>
+            <GroupBox Background="#FFEEF5FD" Style="{StaticResource GroupBoxNoHeaderStyle}" DockPanel.Dock="Top">
+                <DockPanel Dock="Top" LastChildFill="True">
+                                   
+                    <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/User.png" Height="24" Width="24"/>
+                            <Label Content="New User" Foreground="{StaticResource LabelForeground}"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/Role.png" Height="24" Width="24"/>
+                            <Label Content="New Role" Foreground="{StaticResource LabelForeground}"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/Activity.png" Height="24" Width="24"/>
+                            <Label Content="New Activity" Foreground="{StaticResource LabelForeground}"/>
+                        </StackPanel>
+                    </Button>
+                    <Button DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                        <Image Source="../Images/Delete.png" Height="24" Width="24"/>
+                    </Button>
+                    <Button DockPanel.Dock="Right" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                        <Image Source="../Images/Save.png" Height="24" Width="24"/>
+                    </Button>
+                    <Label/>
+               </DockPanel>
+            </GroupBox>
             <ContentControl />
         </DockPanel>
     </Grid>
