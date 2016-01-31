@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using DevelopmentInProgress.DipSecure;
+using DevelopmentInProgress.AuthorisationManager.Model;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.ViewModel;
 
@@ -23,11 +23,19 @@ namespace DevelopmentInProgress.AuthorisationManager.ViewModel
 
         public ICommand DeleteCommand { get; set; }
 
-        public ObservableCollection<Role> Roles { get; set; }
+        public ICommand RemoveItemCommand { get; set; }
 
-        public ObservableCollection<Activity> Activities { get; set; }
+        public ICommand AddItemCommand { get; set; }
 
-        public ObservableCollection<UserAuthorisation> Users { get; set; }
+        public ICommand SelectItemCommand { get; set; }
+
+        public ICommand DragDropCommand { get; set; }
+
+        public ObservableCollection<RoleNode> Roles { get; set; }
+
+        public ObservableCollection<ActivityNode> Activities { get; set; }
+
+        public ObservableCollection<UserNode> Users { get; set; }
 
         protected override ProcessAsyncResult OnPublishedAsync(object data)
         {
