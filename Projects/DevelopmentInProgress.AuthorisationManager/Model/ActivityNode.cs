@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace DevelopmentInProgress.AuthorisationManager.Model
 {
     public class ActivityNode : EntityBase
     {
-        public List<ActivityNode> Activities { get; set; }
+        public ActivityNode()
+        {
+            Activities = new ObservableCollection<ActivityNode>();
+        }
+
+        public ObservableCollection<ActivityNode> Activities { get; set; }
     }
 }

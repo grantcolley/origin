@@ -4,11 +4,21 @@ namespace DevelopmentInProgress.AuthorisationManager.Model
 {
     public abstract class EntityBase : INotifyPropertyChanged
     {
+        private string text;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int Id { get; set; }
 
-        public string Text { get; set; }
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                text = value;
+                OnPropertyChanged("Text");
+            }
+        }
 
         public string Code { get; set; }
 

@@ -1,12 +1,17 @@
-﻿using System.Collections.Generic;
-using DevelopmentInProgress.DipSecure;
+﻿using System.Collections.ObjectModel;
 
 namespace DevelopmentInProgress.AuthorisationManager.Model
 {
     public class RoleNode : EntityBase
     {
-        public List<RoleNode> Roles { get; set; }
+        public RoleNode()
+        {
+            Roles = new ObservableCollection<RoleNode>();
+            Activities= new ObservableCollection<ActivityNode>();
+        }
 
-        public List<ActivityNode> Activities { get; set; }
+        public ObservableCollection<RoleNode> Roles { get; set; }
+
+        public ObservableCollection<ActivityNode> Activities { get; set; }
     }
 }

@@ -58,7 +58,7 @@
                                        RemoveItemCommand="{Binding ItemDeletedCommand}"
                                        AddItemCommand="{Binding ItemAddCommand}"
                                        SelectItemCommand="{Binding ItemSelectCommand}"
-                                       DragDropCommand="{Binding DragDropCommand}"/>
+                                       DragDropCommand="{Binding DragDropCommand}"/>            
         </ScrollViewer>
 
         <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>

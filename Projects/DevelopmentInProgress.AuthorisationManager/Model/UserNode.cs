@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace DevelopmentInProgress.AuthorisationManager.Model
 {
     public class UserNode : EntityBase
     {
-        public List<RoleNode> Roles { get; set; }
+        public UserNode()
+        {
+            Roles = new ObservableCollection<RoleNode>();
+        }
+
+        public ObservableCollection<RoleNode> Roles { get; set; }
     }
 }
