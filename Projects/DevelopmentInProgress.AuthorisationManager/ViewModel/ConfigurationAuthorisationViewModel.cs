@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DevelopmentInProgress.AuthorisationManager.Model;
 using DevelopmentInProgress.Origin.Context;
@@ -15,6 +14,8 @@ namespace DevelopmentInProgress.AuthorisationManager.ViewModel
             : base(viewModelContext)
         {            
             AddItemCommand = new WpfCommand(AddItem);
+            RemoveItemCommand = new WpfCommand(RemoveItem);
+            SelectItemCommand = new WpfCommand(SelectItem);
         }
 
         public ICommand NewUserCommand { get; set; }
@@ -35,11 +36,11 @@ namespace DevelopmentInProgress.AuthorisationManager.ViewModel
 
         public ICommand DragDropCommand { get; set; }
 
-        public ObservableCollection<RoleNode> Roles { get; set; }
+        public List<RoleNode> Roles { get; set; }
 
-        public ObservableCollection<ActivityNode> Activities { get; set; }
+        public List<ActivityNode> Activities { get; set; }
 
-        public ObservableCollection<UserNode> Users { get; set; }
+        public List<UserNode> Users { get; set; }
 
         protected override ProcessAsyncResult OnPublishedAsync(object data)
         {
@@ -58,11 +59,10 @@ namespace DevelopmentInProgress.AuthorisationManager.ViewModel
             var user2 = new UserNode() { Text = "Melanie" };
             user2.Roles.Add(role2);
 
-            Users = new ObservableCollection<UserNode>(new[] { user1, user2 });
-            Roles = new ObservableCollection<RoleNode>(new[] { role1, role2 });
-            Activities = new ObservableCollection<ActivityNode>(new[] { activity1, activity2 });
-
-            OnPropertyChanged(String.Empty);
+            Users = new List<UserNode>();
+            Users.AddRange(new[] { user1, user2 });
+            Roles = new List<RoleNode>(new[] { role1, role2 });
+            Activities = new List<ActivityNode>(new[] { activity1, activity2 });
 
             return base.OnPublishedAsync(data);
         }
@@ -79,7 +79,17 @@ namespace DevelopmentInProgress.AuthorisationManager.ViewModel
 
         private void AddItem(object param)
         {
-            
+
+        }
+
+        private void RemoveItem(object param)
+        {
+
+        }
+
+        private void SelectItem(object param)
+        {
+
         }
     }
 }

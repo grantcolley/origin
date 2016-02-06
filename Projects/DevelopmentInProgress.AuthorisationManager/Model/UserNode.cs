@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Documents;
 
 namespace DevelopmentInProgress.AuthorisationManager.Model
 {
@@ -6,9 +8,9 @@ namespace DevelopmentInProgress.AuthorisationManager.Model
     {
         public UserNode()
         {
-            Roles = new ObservableCollection<RoleNode>();
+            Roles = new List<RoleNode>();
         }
 
-        public ObservableCollection<RoleNode> Roles { get; set; }
+        public List<RoleNode> Roles { get; set; }
     }
 }

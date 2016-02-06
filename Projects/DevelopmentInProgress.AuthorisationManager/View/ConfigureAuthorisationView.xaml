@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:DevelopmentInProgress.Origin.View;assembly=DevelopmentInProgress.Origin"
-             xmlns:filterTree="clr-namespace:DevelopmentInProgress.WPFControls.FilterTree;assembly=DipWpfControls"
+             xmlns:ft="clr-namespace:DevelopmentInProgress.WPFControls.FilterTree;assembly=DipWpfControls"
              xmlns:model="clr-namespace:DevelopmentInProgress.AuthorisationManager.Model"
              mc:Ignorable="d">
     <view:DocumentViewBase.Resources>
@@ -14,14 +14,15 @@
                 <ResourceDictionary Source="Dictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <HierarchicalDataTemplate DataType="{x:Type model:UserNode}" ItemsSource="{Binding Roles}">
+            <HierarchicalDataTemplate DataType="{x:Type model:UserNode}" 
+                                              ItemsSource="{Binding Roles}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../Images/User.png" 
                        ToolTip="{Binding Text}" Margin="2" MaxHeight="20" MaxWidth="20" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding Text}" Margin="2" VerticalAlignment="Center"/>
                 </StackPanel>
             </HierarchicalDataTemplate>
-            
+
             <HierarchicalDataTemplate DataType="{x:Type model:RoleNode}" ItemsSource="{Binding Activities}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../Images/Role.png"
@@ -52,37 +53,37 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Column="0" Margin="5,5,5,5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <filterTree:XamlFilterTree Header="Users" 
-                                       Foreground="{StaticResource LabelForeground}"
-                                       ItemsSource="{Binding Users}" 
-                                       RemoveItemCommand="{Binding ItemDeletedCommand}"
-                                       AddItemCommand="{Binding ItemAddCommand}"
-                                       SelectItemCommand="{Binding ItemSelectCommand}"
-                                       DragDropCommand="{Binding DragDropCommand}"/>            
+            <ft:XamlFilterTree Header="Users" 
+                               Foreground="{StaticResource LabelForeground}"
+                               ItemsSource="{Binding Users}" 
+                               RemoveItemCommand="{Binding RemoveItemCommand}"
+                               AddItemCommand="{Binding AddItemCommand}"
+                               SelectItemCommand="{Binding SelectItemCommand}"
+                               DragDropCommand="{Binding DragDropCommand}"/>          
         </ScrollViewer>
 
         <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>
 
         <ScrollViewer Grid.Column="2" Margin="5,5,5,5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <filterTree:XamlFilterTree Header="Roles" 
-                                       Foreground="{StaticResource LabelForeground}"
-                                       ItemsSource="{Binding Roles}" 
-                                       RemoveItemCommand="{Binding ItemDeletedCommand}"
-                                       AddItemCommand="{Binding ItemAddCommand}"
-                                       SelectItemCommand="{Binding ItemSelectCommand}"
-                                       DragDropCommand="{Binding DragDropCommand}"/>
+            <ft:XamlFilterTree Header="Roles" 
+                               Foreground="{StaticResource LabelForeground}"
+                               ItemsSource="{Binding Roles}" 
+                               RemoveItemCommand="{Binding RemoveItemCommand}"
+                               AddItemCommand="{Binding AddItemCommand}"
+                               SelectItemCommand="{Binding SelectItemCommand}"
+                               DragDropCommand="{Binding DragDropCommand}"/>
         </ScrollViewer>
         
         <GridSplitter Grid.Column="3" Width="2" HorizontalAlignment="Stretch"/>
 
         <ScrollViewer Grid.Column="4" Margin="5,5,5,5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <filterTree:XamlFilterTree Header="Activities" 
-                                       Foreground="{StaticResource LabelForeground}"
-                                       ItemsSource="{Binding Activities}" 
-                                       RemoveItemCommand="{Binding ItemDeletedCommand}"
-                                       AddItemCommand="{Binding ItemAddCommand}"
-                                       SelectItemCommand="{Binding ItemSelectCommand}"
-                                       DragDropCommand="{Binding DragDropCommand}"/>
+            <ft:XamlFilterTree Header="Activities" 
+                               Foreground="{StaticResource LabelForeground}"
+                               ItemsSource="{Binding Activities}" 
+                               RemoveItemCommand="{Binding RemoveItemCommand}"
+                               AddItemCommand="{Binding AddItemCommand}"
+                               SelectItemCommand="{Binding SelectItemCommand}"
+                               DragDropCommand="{Binding DragDropCommand}"/>
         </ScrollViewer>
         
         <GridSplitter Grid.Column="5" Width="2" HorizontalAlignment="Stretch"/>

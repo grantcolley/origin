@@ -6,6 +6,11 @@ namespace DevelopmentInProgress.AuthorisationManager.Model
     {
         private string text;
 
+        protected EntityBase()
+        {
+            IsVisible = true;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int Id { get; set; }
