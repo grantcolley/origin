@@ -42,19 +42,8 @@ namespace DevelopmentInProgress.Origin.ViewModel
         /// Abstract method to be implemented by the sub class.
         /// </summary>
         /// <param name="data">The parameter passed into the method.</param>
-        /// <returns>The results of processing the method asynchronously</returns>
-        protected virtual ProcessAsyncResult OnPublishedAsync(object data)
+        protected virtual void OnPublished(object data)
         {
-            return new ProcessAsyncResult();
-        }
-
-        /// <summary>
-        /// Executed on the UI thread on completion of <see cref="OnPublishedAsync(object)"/>.
-        /// </summary>
-        /// <param name="processAsyncResult">The results of processing the method asynchronously.</param>
-        protected virtual void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            return;
         }
 
         /// <summary>
@@ -115,23 +104,13 @@ namespace DevelopmentInProgress.Origin.ViewModel
         }
 
         /// <summary>
-        /// Called by the <see cref="ViewModelBase"/> DataPublished method
-        /// and in turn calls the abstract OnPublished method implemented 
-        /// by the ViewModel, passing the data, when the document gets loaded.
+        /// Called by the <see cref="ViewModelBase"/> DataPublished method and
+        /// in turn calls the abstract OnPublished method implemented by the 
+        /// specialized ViewModel, passing the data, when the document gets loaded.
         /// </summary>
-        /// <returns>The results of processing the method asynchronously</returns>
-        protected override ProcessAsyncResult OnPublishedAsync()
+        protected override void OnPublished()
         {
-            return OnPublishedAsync(Data);
-        }
-
-        /// <summary>
-        /// Executed on the UI thread on completion of <see cref="OnPublishedAsync()"/>.
-        /// </summary>
-        /// <param name="processAsyncResult">The results of processing the method asynchronously.</param>
-        protected override void OnPublishedAsyncCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            OnPublishedCompleted(processAsyncResult);
+            OnPublished(Data);
         }
 
         /// <summary>

@@ -5,12 +5,10 @@
 // <author>Grant Colley</author>
 //-----------------------------------------------------------------------
 
-using System.Threading.Tasks;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.Origin.Navigation;
 using DevelopmentInProgress.Origin.View;
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Logging;
 using System;
@@ -96,36 +94,18 @@ namespace DevelopmentInProgress.Origin.ViewModel
         #endregion
 
         /// <summary>
-        /// Notification to the sub class that data has been published. This is called on a task separate from the UI thread when 
-        /// the document is opened for the first time and when it is refreshed.
+        /// Notification to the sub class that data has been published. This is called  
+        /// when the document is opened for the first time and when it is refreshed.
         /// This abstract method is implemented by <see cref="DocumentViewModel"/> and <see cref="ModalViewModel"/>
-        /// which in turn implement a specialized virtual OnPublishAsync method of their own which can be overriden by a 
+        /// which in turn implement a specialized virtual OnPublish method of their own which can be overriden by a 
         /// document or modal view model. 
         /// </summary>
-        /// <returns>The results of processing the method asynchronously.</returns>
-        protected abstract ProcessAsyncResult OnPublishedAsync();
+        protected abstract void OnPublished();
 
         /// <summary>
-        /// Executed on the UI thread on completion of <see cref="OnPublishedAsync"/>.
+        /// Optionally overriden by the view model to handle saving the document when clicking the save icon.
         /// </summary>
-        /// <param name="processAsyncResult">The results of the async method.</param>
-        protected abstract void OnPublishedAsyncCompleted(ProcessAsyncResult processAsyncResult);
-
-        /// <summary>
-        /// Perform an asynchronous save. This is called on a task separate from the UI thread. 
-        /// This virtual method that is optionally overriden by the view model.
-        /// </summary>
-        /// <returns>The results of an asynchronous save.</returns>
-        protected virtual ProcessAsyncResult SaveDocumentAsync()
-        {
-            return new ProcessAsyncResult();
-        }
-
-        /// <summary>
-        /// Executed on the UI thread on completion of <see cref="SaveDocumentAsync"/>.
-        /// </summary>
-        /// <param name="processAsyncResult">The results of the async method.</param>
-        protected virtual void SaveDocumentCompleted(ProcessAsyncResult processAsyncResult)
+        protected virtual void SaveDocument()
         {
         }
 
@@ -378,12 +358,12 @@ namespace DevelopmentInProgress.Origin.ViewModel
         }
 
         /// <summary>
-        /// Calls the <see cref="OnPublishedAsync"/> method implemented by the
+        /// Calls the <see cref="OnPublished"/> method implemented by the
         /// sub class which in turn calls the view model passing the args.
         /// </summary>
         protected void DataPublished()
         {
-            ProcessAsync(OnPublishedAsync, OnPublishedAsyncCompleted);
+            ProcessAction(OnPublished);
         }
 
         /// <summary>
@@ -396,139 +376,24 @@ namespace DevelopmentInProgress.Origin.ViewModel
         }
 
         /// <summary>
-        /// Calls the <see cref="SaveDocumentAsync"/> on a new thread.
+        /// Calls the <see cref="SaveDocument"/>.
         /// </summary>
         /// <param name="param">This argument is ignored.</param>
         private void OnSave(object param)
         {
-            ProcessAsync(SaveDocumentAsync, SaveDocumentCompleted);
+            ProcessAction(SaveDocument);
         }
-        
+
         /// <summary>
-        /// Process a background task asynchronously and then run a completion task under the 
-        /// view models current synchronisation context when the background task is complete.
+        /// Process an action implemented in the specialised classes the derive from <see cref="ViewModelBase"/>.
         /// </summary>
-        /// <param name="asyncFunction">The function to run in the background.</param>
-        /// <param name="completionAction">The action to run on completion. This will be run under the view models current synchronisation context.</param>
-        /// <param name="state">The state object to pass to the backrgound function.</param>
-        protected void ProcessAsync(Func<object, ProcessAsyncResult> asyncFunction,
-            Action<ProcessAsyncResult> completionAction, object state)
+        /// <param name="action">The action to run.</param>
+        protected void ProcessAction(Action action)
         {
             IsBusy = true;
-            Task<ProcessAsyncResult>.Factory
-                .StartNew(asyncFunction, state)
-                .ContinueWith(antecendent =>
-                {
-                    var asyncResult = GetProcessAsyncResult(antecendent);
-                    if (asyncResult.IsFaulted)
-                    {
-                        ShowFlattenedAggregateException(asyncResult.FlattenedAggregateException);
-                    }
-                    else
-                    {
-                        asyncResult.State = antecendent.AsyncState;
-                        completionAction(asyncResult);                        
-                    }
-
-                    ResetStatus();
-                }, TaskScheduler.FromCurrentSynchronizationContext())
-                .ContinueWith(antecendent =>
-                {
-                    if (antecendent.Exception != null)
-                    {
-                        ShowFlattenedAggregateException(antecendent.Exception.Flatten());
-                    }
-
-                    IsBusy = false;
-                    OnPropertyChanged(String.Empty);
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-
+            action.Invoke();
+            ResetStatus();            
             OnPropertyChanged(String.Empty);
-        }
-
-        /// <summary>
-        /// Process a background task asynchronously and then run a completion task under the 
-        /// view models current synchronisation context when the background task is complete.
-        /// </summary>
-        /// <param name="asyncFunction">The function to run in the background.</param>
-        /// <param name="completionAction">The action to run on completion. This will be run under the view models current synchronisation context.</param>
-        protected void ProcessAsync(Func<ProcessAsyncResult> asyncFunction,
-            Action<ProcessAsyncResult> completionAction)
-        {
-            IsBusy = true;
-            Task<ProcessAsyncResult>.Factory
-                .StartNew(asyncFunction)
-                .ContinueWith(antecendent =>
-                {
-                    var asyncResult = GetProcessAsyncResult(antecendent);
-                    if (asyncResult.IsFaulted)
-                    {
-                        ShowFlattenedAggregateException(asyncResult.FlattenedAggregateException);
-                    }
-                    else
-                    {
-                        completionAction(asyncResult);
-                    }
-
-                    ResetStatus();
-                }, TaskScheduler.FromCurrentSynchronizationContext())
-                .ContinueWith(antecendent =>
-                {
-                    if (antecendent.Exception != null)
-                    {
-                        ShowFlattenedAggregateException(antecendent.Exception.Flatten());
-                    }
-
-                    IsBusy = false;
-                    OnPropertyChanged(String.Empty);
-                }, TaskScheduler.FromCurrentSynchronizationContext());
-
-            OnPropertyChanged(String.Empty);
-        }
-        
-        /// <summary>
-        /// Write the flattened aggregated exception's inner exceptions list into a list of error messages to be displayed.
-        /// </summary>
-        /// <param name="flattenedAggregateException">A flattened aggregate exception.</param>
-        private void ShowFlattenedAggregateException(AggregateException flattenedAggregateException)
-        {
-            if (flattenedAggregateException != null)
-            {
-                var errorMessages = new List<Message>();
-                flattenedAggregateException.InnerExceptions.ForEach(
-                    ex => errorMessages.Add(new Message()
-                    {
-                        MessageType = MessageTypeEnum.Error,
-                        Text = ex.Message
-                    }));
-
-                ShowMessages(errorMessages);
-            }            
-        }
-
-        /// <summary>
-        /// Extracts the <see cref="ProcessAsyncResult"/> from the antecendent. If the
-        /// antecendent has exceptions then creates a new instance of <see cref="ProcessAsyncResult"/>.
-        /// </summary>
-        /// <param name="antecendent">The antecendent task.</param>
-        /// <returns>An instance of <see cref="ProcessAsyncResult"/>.</returns>
-        private ProcessAsyncResult GetProcessAsyncResult(Task<ProcessAsyncResult> antecendent)
-        {
-            ProcessAsyncResult asyncResult;
-            if (antecendent.Exception != null)
-            {
-                asyncResult = new ProcessAsyncResult()
-                {
-                    FlattenedAggregateException = antecendent.Exception.Flatten(),
-                    IsFaulted = true
-                };
-            }
-            else
-            {
-                asyncResult = antecendent.Result;
-            }
-
-            return asyncResult;
         }
 
         /// <summary>

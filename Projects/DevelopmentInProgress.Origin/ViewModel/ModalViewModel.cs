@@ -49,38 +49,17 @@ namespace DevelopmentInProgress.Origin.ViewModel
         /// To be overriden by the the sub class.
         /// </summary>
         /// <param name="param">A dictionary of parameters.</param>
-        /// <returns>The results of processing the method asynchronously</returns>
-        protected virtual ProcessAsyncResult OnPublishedAsync(Dictionary<string, object> param)
+        protected virtual void OnPublished(Dictionary<string, object> param)
         {
-            return new ProcessAsyncResult();
-        }
-
-        /// <summary>
-        /// Executed on the UI thread on completion of <see cref="OnPublishedAsync(object)"/>.
-        /// </summary>
-        /// <param name="processAsyncResult">The results of processing the method asynchronously.</param>
-        protected virtual void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            return;
-        }
-
-        /// <summary>
-        /// Executed on the UI thread on completion of <see cref="OnPublishedAsync"/>.
-        /// </summary>
-        /// <param name="processAsyncResult">The results of processing the method asynchronously.</param>
-        protected override void OnPublishedAsyncCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            OnPublishedCompleted(processAsyncResult);
         }
 
         /// <summary>
         /// Implemnents the abstract OnPublished method of the <see cref="ViewModelBase"/>.
         /// Calls OnPublished to be implemented by the subclass.
         /// </summary>
-        /// <returns>The results of processing the method asynchronously</returns>
-        protected override ProcessAsyncResult OnPublishedAsync()
+        protected override void OnPublished()
         {
-            return OnPublishedAsync(parameters);
+            OnPublished(parameters);
         }
     }
 }
