@@ -11,7 +11,7 @@ Screenshot 2. Example workflow module implementing [Dipstate](https://github.com
 
 
 # Motivation
-I first started developing Origin in 2012 as an exercise in WPF shell development using Prism and Unity. Origin is a simple WPF shell that implements the AvalonDock docking system along with a custom navigation bar for hosting modules in a document style layout that supports MVVM. It is an ideal platform for developers who need to start writing line-of-business functionality without having to worry about writing a shell from scratch. I finally decided to dust of the cover and publish it in 2015.
+I first started developing Origin as an exercise in WPF shell development using Prism and Unity. Origin is a simple WPF shell that implements the AvalonDock docking system along with a custom navigation bar for hosting modules in a document style layout that supports MVVM. It is an ideal platform for developers who need to start writing line-of-business functionality without having to worry about writing a shell from scratch.
 
 
 
