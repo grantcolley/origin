@@ -259,7 +259,7 @@ Document view models and modal view models ultimately inherit the `ViewModelBase
 
 ### Processing arguments passed to a view model
 
-Arguments passed to the view model can handled in the view model by overriding the `OnPublished` method. The `OnPublished` method can be optionally marked ***async*** to enable ***await**'ing* long running processing of the arguments.
+Arguments passed to the view model can handled in the view model by overriding the `OnPublished` method. The `OnPublished` method can be optionally marked ***async*** to enable ***await******'ing* long running processing of the arguments.
 
 To asynchronously process parameters passed to a view model inheriting from `DocumentViewModel` as an object:
 ```C#
