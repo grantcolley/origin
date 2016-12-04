@@ -249,6 +249,8 @@ namespace DevelopmentInProgress.Origin.ViewModel
         {
             IsBusy = false;
             IsDirty = false;
+            OnPropertyChanged("IsBusy");
+            OnPropertyChanged("IsDirty");
         }
 
         /// <summary>
@@ -390,10 +392,7 @@ namespace DevelopmentInProgress.Origin.ViewModel
         /// <param name="action">The action to run.</param>
         protected void ProcessAction(Action action)
         {
-            IsBusy = true;
             action.Invoke();
-            ResetStatus();            
-            OnPropertyChanged(String.Empty);
         }
 
         /// <summary>
