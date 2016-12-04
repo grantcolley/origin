@@ -1,4 +1,4 @@
-﻿# origin
+# origin
 [![Build status](https://ci.appveyor.com/api/projects/status/lilwq7ancs9jdecj/branch/master?svg=true)](https://ci.appveyor.com/project/grantcolley/origin/branch/master)
 
 The Origin framework is a WPF shell application for hosting line-of-business modules in a document style layout. Origin implements Prism, Unity, the AvalonDock docking system and a custom navigation bar.
@@ -79,7 +79,7 @@ The following three steps describe how to create your own module using the **Dev
     
     2. Modify the constructor to accept `ViewModelContext`, passing it into the base constructor.
     
-    3. Override the `OnPublishedAsync(object data)`, `OnPublishedCompleted(ProcessAsyncResult processAsyncResult)` and `SaveDocumentAsync()` methods.
+    3. Override the `OnPublished(object data)` and `SaveDocument()` methods. You can optionally mark these async.
 
 
         ```C#
@@ -90,19 +90,14 @@ The following three steps describe how to create your own module using the **Dev
                 {
                 }
         
-                protected override ProcessAsyncResult OnPublishedAsync(object data)
+                protected async override void OnPublished(object data)
                 {
-                    return base.OnPublishedAsync(data);
+                    // Do stuff here...
                 }
-                
-                protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
+
+                protected async override void SaveDocument()
                 {
-                    base.OnPublishedCompleted(processAsyncResult);
-                }
-                
-                protected override ProcessAsyncResult SaveDocumentAsync()
-                {
-                    return base.SaveDocumentAsync();
+                    // Save stuff here...
                 }
             }
         ```
