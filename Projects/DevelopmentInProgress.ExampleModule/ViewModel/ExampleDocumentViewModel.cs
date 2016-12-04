@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.ViewModel;
 using System.Windows.Input;
@@ -31,23 +30,14 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
         }
 
-        protected override ProcessAsyncResult OnPublishedAsync(object data)
+        protected override void OnPublished(object data)
         {
             Thread.Sleep(1000);
-
-            return new ProcessAsyncResult();
         }
 
-        protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            base.OnPublishedCompleted(processAsyncResult);
-        }
-
-        protected override ProcessAsyncResult SaveDocumentAsync()
+        protected override void SaveDocument()
         {
             Thread.Sleep(1000);
-
-            return new ProcessAsyncResult();
         }
 
         private void ResetDocumentStatus(object parameter)

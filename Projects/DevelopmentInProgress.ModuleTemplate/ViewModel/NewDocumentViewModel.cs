@@ -10,24 +10,14 @@ namespace DevelopmentInProgress.ModuleTemplate.ViewModel
         {
         }
 
-        protected override ProcessAsyncResult OnPublishedAsync(object data)
+        protected async override void OnPublished(object data)
         {
-            return base.OnPublishedAsync(data);
+            // Do stuff here...
         }
 
-        protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
+        protected async override void SaveDocument()
         {
-            base.OnPublishedCompleted(processAsyncResult);
-        }
-
-        protected override ProcessAsyncResult SaveDocumentAsync()
-        {
-            return base.SaveDocumentAsync();
-        }
-
-        protected override void SaveDocumentCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            base.SaveDocumentCompleted(processAsyncResult);
+            // Save stuff here...
         }
     }
 }

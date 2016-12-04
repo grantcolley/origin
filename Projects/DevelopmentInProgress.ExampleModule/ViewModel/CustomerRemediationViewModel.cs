@@ -30,13 +30,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
         public Customer CurrentCustomer { get; set; }
         public List<string> Products { get; set; }
 
-        protected override ProcessAsyncResult OnPublishedAsync()
-        {
-            GetCustomersAsync();
-            return base.OnPublishedAsync();
-        }
-
-        private async void GetCustomersAsync()
+        protected async override void OnPublished(object data)
         {
             try
             {
@@ -45,7 +39,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
             catch (StateException ex)
             {
-                ShowMessage(new Message() {MessageType = MessageTypeEnum.Error, Text = ex.Message}, true);
+                ShowMessage(new Message() { MessageType = MessageTypeEnum.Error, Text = ex.Message }, true);
             }
         }
 

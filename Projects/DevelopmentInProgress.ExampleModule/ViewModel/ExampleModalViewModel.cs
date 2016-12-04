@@ -65,7 +65,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
         }
 
-        protected override ProcessAsyncResult OnPublishedAsync(Dictionary<string, object> parameters)
+        protected override void OnPublished(Dictionary<string, object> parameters)
         {
             if (parameters != null
                 && parameters["ModalParameter"] != null)
@@ -75,25 +75,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
 
             Thread.Sleep(1000);
-
-            return new ProcessAsyncResult();
         }
 
-        protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            base.OnPublishedCompleted(processAsyncResult);
-        }
-
-        protected override ProcessAsyncResult SaveDocumentAsync()
+        protected override void SaveDocument()
         {
             Thread.Sleep(1000);
-
-            return new ProcessAsyncResult();
-        }
-
-        protected override void SaveDocumentCompleted(ProcessAsyncResult processAsyncResult)
-        {
-            base.SaveDocumentCompleted(processAsyncResult);
         }
 
         private void ShowMessage(object parameter)

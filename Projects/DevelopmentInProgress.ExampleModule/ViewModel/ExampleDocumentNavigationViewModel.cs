@@ -32,21 +32,17 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
 
         public ObservableCollection<ViewModelBase> OpenDocuments { get; private set; }
 
-        protected override ProcessAsyncResult OnPublishedAsync(object data)
+        protected override void OnPublished(object data)
         {
             Parameter = data;
             HasParameter = !data.ToString().Equals(typeof (object).FullName);
 
             Thread.Sleep(1000);
-
-            return new ProcessAsyncResult();
         }
 
-        protected override ProcessAsyncResult SaveDocumentAsync()
+        protected override void SaveDocument()
         {
             Thread.Sleep(1000);
-
-            return new ProcessAsyncResult();
         }
         
         private void OpenDocument(object param)
