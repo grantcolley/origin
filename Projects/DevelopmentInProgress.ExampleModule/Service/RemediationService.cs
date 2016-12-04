@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using DevelopmentInProgress.DipState;
 using DevelopmentInProgress.ExampleModule.Model;
@@ -27,7 +28,11 @@ namespace DevelopmentInProgress.ExampleModule.Service
                 customer.RemediationWorkflow = await GetRemediationWorkflow();
             }
 
-            return customers;
+            return await Task.Run(() =>
+            {
+                Thread.Sleep(750);
+                return customers;
+            });
         }
 
         private async Task<List<State>> GetRemediationWorkflow()
