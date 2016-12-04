@@ -5,6 +5,7 @@ using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.Origin.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DevelopmentInProgress.ExampleModule.ViewModel
 {
@@ -65,21 +66,32 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
         }
 
-        protected override void OnPublished(Dictionary<string, object> parameters)
+        protected async override void OnPublished(Dictionary<string, object> parameters)
         {
-            if (parameters != null
-                && parameters["ModalParameter"] != null)
-            {
-                ModalParameter = parameters["ModalParameter"].ToString();
-                OnPropertyChanged(String.Empty);
-            }
+            IsBusy = true;
 
-            Thread.Sleep(1000);
+            await Task.Run(() =>
+            {
+                Thread.Sleep(750);
+                if (parameters != null
+                    && parameters["ModalParameter"] != null)
+                {
+                    ModalParameter = parameters["ModalParameter"].ToString();
+                }
+            });
+
+            ResetStatus();
+            OnPropertyChanged("");
         }
 
-        protected override void SaveDocument()
+        protected async override void SaveDocument()
         {
-            Thread.Sleep(1000);
+            IsBusy = true;
+
+            await Task.Run(() => Thread.Sleep(1000));
+
+            ResetStatus();
+            OnPropertyChanged("");
         }
 
         private void ShowMessage(object parameter)

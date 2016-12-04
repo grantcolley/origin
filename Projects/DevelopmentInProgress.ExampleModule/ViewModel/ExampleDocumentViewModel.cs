@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.ViewModel;
 using System.Windows.Input;
@@ -30,14 +31,24 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
         }
 
-        protected override void OnPublished(object data)
+        protected async override void OnPublished(object data)
         {
-            Thread.Sleep(1000);
+            IsBusy = true;
+
+            await Task.Run(() => Thread.Sleep(1000));
+
+            ResetStatus();
+            OnPropertyChanged("");
         }
 
-        protected override void SaveDocument()
+        protected async override void SaveDocument()
         {
-            Thread.Sleep(1000);
+            IsBusy = true;
+
+            await Task.Run(() => Thread.Sleep(1000));
+
+            ResetStatus();
+            OnPropertyChanged("");
         }
 
         private void ResetDocumentStatus(object parameter)

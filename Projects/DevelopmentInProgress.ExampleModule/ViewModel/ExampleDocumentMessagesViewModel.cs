@@ -3,6 +3,7 @@ using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.Origin.ViewModel;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DevelopmentInProgress.ExampleModule.ViewModel
@@ -45,14 +46,24 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
         }
 
-        protected override void OnPublished(object data)
+        protected async override void OnPublished(object data)
         {
-            Thread.Sleep(1000);
+            IsBusy = true;
+
+            await Task.Run(() => Thread.Sleep(1000));
+
+            ResetStatus();
+            OnPropertyChanged("");
         }
 
-        protected override void SaveDocument()
+        protected async override void SaveDocument()
         {
-            Thread.Sleep(1000);
+            IsBusy = true;
+
+            await Task.Run(() => Thread.Sleep(1000));
+
+            ResetStatus();
+            OnPropertyChanged("");
         }
         
         private void ShowMessage(object parameter)

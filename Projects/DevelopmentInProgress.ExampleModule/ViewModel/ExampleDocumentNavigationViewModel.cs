@@ -3,6 +3,7 @@ using DevelopmentInProgress.Origin.Navigation;
 using DevelopmentInProgress.Origin.ViewModel;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DevelopmentInProgress.ExampleModule.ViewModel
@@ -32,17 +33,29 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
 
         public ObservableCollection<ViewModelBase> OpenDocuments { get; private set; }
 
-        protected override void OnPublished(object data)
+        protected async override void OnPublished(object data)
         {
-            Parameter = data;
-            HasParameter = !data.ToString().Equals(typeof (object).FullName);
+            IsBusy = true;
 
-            Thread.Sleep(1000);
+            await Task.Run(() =>
+            {
+                Thread.Sleep(750);
+                Parameter = data;
+                HasParameter = !data.ToString().Equals(typeof (object).FullName);
+            });
+
+            ResetStatus();
+            OnPropertyChanged("");
         }
 
-        protected override void SaveDocument()
+        protected async override void SaveDocument()
         {
-            Thread.Sleep(1000);
+            IsBusy = true;
+
+            await Task.Run(() => Thread.Sleep(1000));
+
+            ResetStatus();
+            OnPropertyChanged("");
         }
         
         private void OpenDocument(object param)

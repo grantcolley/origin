@@ -34,10 +34,13 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
         {
             try
             {
+                IsBusy = true;
                 ClearMessages();
                 Customers = await remediationService.GetCustomersAsync();
+                ResetStatus();
+                OnPropertyChanged("");
             }
-            catch (StateException ex)
+            catch (Exception ex)
             {
                 ShowMessage(new Message() { MessageType = MessageTypeEnum.Error, Text = ex.Message }, true);
             }
