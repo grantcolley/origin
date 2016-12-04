@@ -38,10 +38,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DipWpfControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DipWpfControls.1.0.0.0\lib\net45\DipWpfControls.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\Third Party\log4net\log4net.dll</HintPath>
     </Reference>
@@ -146,7 +142,6 @@
     </Compile>
     <Compile Include="Context\ViewModelContext.cs" />
     <Compile Include="Navigation\ViewSettings.cs" />
-    <Compile Include="ViewModel\ProcessAsyncResult.cs" />
     <Compile Include="View\DocumentViewHost.xaml.cs">
       <DependentUpon>DocumentViewHost.xaml</DependentUpon>
     </Compile>
@@ -225,7 +220,6 @@
     <None Include="Diagrams\ContextDiagram.cd" />
     <None Include="Diagrams\ViewDiagram.cd" />
     <None Include="Diagrams\ViewModelDiagram.cd" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -277,6 +271,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\GroupListItem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\wpfcontrols\DevelopmentInProgress.WPFControls\DevelopmentInProgress.WPFControls.csproj">
+      <Project>{5acdc574-0f6f-48bc-ad2a-2f29bd7009fe}</Project>
+      <Name>DevelopmentInProgress.WPFControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
