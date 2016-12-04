@@ -79,7 +79,7 @@ The following three steps describe how to create your own module using the **Dev
     
     2. Modify the constructor to accept `ViewModelContext`, passing it into the base constructor.
     
-    3. Override the `OnPublished(object data)` and `SaveDocument()` methods. You can optionally mark these async.
+    3. Override the `OnPublished(object data)` and `SaveDocument()` methods. To do so asynchronously just mark the methods with the ***async*** keyword and then ***await*** a long running task.
 
 
         ```C#
@@ -233,13 +233,12 @@ Document view models inherit the `DocumentViewModel` class. You can open a new d
 
 ### Document navigation history
 Documents show a breadcrumb style navigation history. Click a link in the navigation history and jump back to the document you came from.
-
 ![](https://github.com/grantcolley/origin/raw/master/README-images/navigation-history.png)
 
 
 
 ### Open a modal window and pass parameters to it
-Document view models and modal view models ultimately inherit the `ViewModelBase` class. To open a modal window call `ShowModal(ModalSettings modalSettings)` on the `ViewModelBase` class, passing a `ModalSettings` object containing information about the target view and view model, the window title, height and width, and the parameter.
+ocument view models and modal view models ultimately inherit the `ViewModelBase` class. To open a modal window call `ShowModal(ModalSettings modalSettings)` on the `ViewModelBase` class, passing a `ModalSettings` object containing information about the target view and view model, the window title, height and width, and the parameter.
 
 ```C#
             var modalSettings = new ModalSettings()
@@ -259,7 +258,7 @@ Document view models and modal view models ultimately inherit the `ViewModelBase
 
 ### Processing arguments passed to a view model
 
-Arguments passed to the view model can handled in the view model by overriding the `OnPublished` method. The `OnPublished` method can be optionally marked ***async*** to enable ***await******'ing* long running processing of the arguments.
+Arguments passed to the view model can handled in the view model by overriding the `OnPublished` method. To do so asynchronously just mark the method with the ***async*** keyword to ***await*** long running tasks.
 
 To asynchronously process parameters passed to a view model inheriting from `DocumentViewModel` as an object:
 ```C#
@@ -279,15 +278,13 @@ To asynchronously process parameters passed to a view model inheriting from `Mod
 
 
 
-### Save a document asynchronously
-When saving a document by clicking the Save button in the toolbar, the shell executes the `Save` command of the documents `ViewModelBase` class. You can handle the save asynchronously by overriding the `ViewModelBase` class's `SaveDocumentAsync()` method.
+### Save a document
+When saving a document by clicking the Save button in the toolbar, the shell executes the `Save` command of the documents `ViewModelBase` class. You can handle the save by overriding the `ViewModelBase` class's `SaveDocument()` method. To do so asynchronously just mark the method with the ***async*** keyword to ***await*** long running tasks.
 
 ```C#
-        protected override ProcessAsyncResult SaveDocumentAsync()
+        protected async override void SaveDocument()
         {
-            // do save stuff here...
-
-            return new ProcessAsyncResult();
+            // Save stuff here...
         }
 ```
 
