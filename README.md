@@ -1,4 +1,4 @@
-﻿# origin
+# origin
 [![Build status](https://ci.appveyor.com/api/projects/status/lilwq7ancs9jdecj/branch/master?svg=true)](https://ci.appveyor.com/project/grantcolley/origin/branch/master)
 
 The Origin framework is a WPF shell application for hosting line-of-business modules in a document style layout. Origin implements Prism, Unity, the AvalonDock docking system and a custom navigation bar.
@@ -11,7 +11,7 @@ Screenshot 2. Example workflow module implementing [Dipstate](https://github.com
 
 
 # Motivation
-I first started developing Origin in 2012 as an exercise in WPF shell development using Prism and Unity. Origin is a simple WPF shell that implements the AvalonDock docking system along with a custom navigation bar for hosting modules in a document style layout that supports MVVM. It is an ideal platform for developers who need to start writing line-of-business functionality without having to worry about writing a shell from scratch. I finally decided to dust of the cover and publish it in 2015.
+I first started developing Origin as an exercise in WPF shell development using Prism and Unity. Origin is a simple WPF shell that implements the AvalonDock docking system along with a custom navigation bar for hosting modules in a document style layout that supports MVVM. It is an ideal platform for developers who need to start writing line-of-business functionality without having to worry about writing a shell from scratch.
 
 
 
@@ -79,7 +79,7 @@ The following three steps describe how to create your own module using the **Dev
     
     2. Modify the constructor to accept `ViewModelContext`, passing it into the base constructor.
     
-    3. Override the `OnPublishedAsync(object data)`, `OnPublishedCompleted(ProcessAsyncResult processAsyncResult)` and `SaveDocumentAsync()` methods.
+    3. Override the `OnPublished(object data)` and `SaveDocument()` methods. To do so asynchronously just mark the methods with the ***async*** keyword and then ***await*** a long running task.
 
 
         ```C#
@@ -90,19 +90,14 @@ The following three steps describe how to create your own module using the **Dev
                 {
                 }
         
-                protected override ProcessAsyncResult OnPublishedAsync(object data)
+                protected async override void OnPublished(object data)
                 {
-                    return base.OnPublishedAsync(data);
+                    // Do stuff here...
                 }
-                
-                protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
+
+                protected async override void SaveDocument()
                 {
-                    base.OnPublishedCompleted(processAsyncResult);
-                }
-                
-                protected override ProcessAsyncResult SaveDocumentAsync()
-                {
-                    return base.SaveDocumentAsync();
+                    // Save stuff here...
                 }
             }
         ```
@@ -238,13 +233,12 @@ Document view models inherit the `DocumentViewModel` class. You can open a new d
 
 ### Document navigation history
 Documents show a breadcrumb style navigation history. Click a link in the navigation history and jump back to the document you came from.
-
 ![](https://github.com/grantcolley/origin/raw/master/README-images/navigation-history.png)
 
 
 
 ### Open a modal window and pass parameters to it
-Document view models and modal view models ultimately inherit the `ViewModelBase` class. To open a modal window call `ShowModal(ModalSettings modalSettings)` on the `ViewModelBase` class, passing a `ModalSettings` object containing information about the target view and view model, the window title, height and width, and the parameter.
+ocument view models and modal view models ultimately inherit the `ViewModelBase` class. To open a modal window call `ShowModal(ModalSettings modalSettings)` on the `ViewModelBase` class, passing a `ModalSettings` object containing information about the target view and view model, the window title, height and width, and the parameter.
 
 ```C#
             var modalSettings = new ModalSettings()
@@ -262,52 +256,35 @@ Document view models and modal view models ultimately inherit the `ViewModelBase
 
 
 
-### Asynchronously process the arguments passed to a view model
+### Processing arguments passed to a view model
 
-The arguments passed to the view model are handled in the view model by overriding the methods `OnPublishedAsync` and `OnPublishedCompleted`.
-
-`OnPublishedAsync` runs on a different thread from the UI, giving the view model an opportunity to peform functions such as query query a database etc. in an asynchronous manner.
-
-`OnPublishedCompleted` returns the results of `OnPublishedAsync` back to the view model on the UI thread, allowing the view model to update properties such as collections etc, which need to be done on a UI thread.
+Arguments passed to the view model can handled in the view model by overriding the `OnPublished` method. To do so asynchronously just mark the method with the ***async*** keyword to ***await*** long running tasks.
 
 To asynchronously process parameters passed to a view model inheriting from `DocumentViewModel` as an object:
 ```C#
-        protected override ProcessAsyncResult OnPublishedAsync(object data)
+        protected async override void OnPublished(object data)
         {
-            // process the data passed into the view model here...
-
-            return new ProcessAsyncResult();
+            // Do stuff with the data passed to the document view model here...
         }
 ```
 
 To asynchronously process parameters passed to a view model inheriting from `ModalViewModel` in the form of a dictionary of key value pairs:
 ```C#
-        protected override ProcessAsyncResult OnPublishedAsync(Dictionary<string, object> parameters)
+        protected async override void OnPublished(Dictionary<string, object> parameters)
         {
-            // process the data passed into the view model here...
-
-            return new ProcessAsyncResult();
+            // Do stuff with the parameters passed to the modal view model here...
         }
 ```
 
-To process the results from `OnPublishedAsync` in the view model on the UI thread (applies to view models inheriting from `DocumentViewModel` or `ModalViewModel`).
-```C#
-        protected override void OnPublishedCompleted(ProcessAsyncResult processAsyncResult)
-        {
-        // process the data passed into the view model here...
-            base.OnPublishedCompleted(processAsyncResult);
-        }
-```
 
-### Save a document asynchronously
-When saving a document by clicking the Save button in the toolbar, the shell executes the `Save` command of the documents `ViewModelBase` class. You can handle the save asynchronously by overriding the `ViewModelBase` class's `SaveDocumentAsync()` method.
+
+### Save a document
+When saving a document by clicking the Save button in the toolbar, the shell executes the `Save` command of the documents `ViewModelBase` class. You can handle the save by overriding the `ViewModelBase` class's `SaveDocument()` method. To do so asynchronously just mark the method with the ***async*** keyword to ***await*** long running tasks.
 
 ```C#
-        protected override ProcessAsyncResult SaveDocumentAsync()
+        protected async override void SaveDocument()
         {
-            // do save stuff here...
-
-            return new ProcessAsyncResult();
+            // Save stuff here...
         }
 ```
 
