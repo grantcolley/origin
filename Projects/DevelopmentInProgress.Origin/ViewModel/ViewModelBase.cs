@@ -308,6 +308,9 @@ namespace DevelopmentInProgress.Origin.ViewModel
                 messages = new ObservableCollection<Message>();
             }
 
+            messagesToShow.ForEach(
+                m => Logger.Log(m.Text, ConvertMessageTypeToLogCategory(m.MessageType), Priority.None));
+
             if (appendMessage)
             {
                 messagesToShow.ForEach(m => this.messages.Insert(0, m));
@@ -402,6 +405,22 @@ namespace DevelopmentInProgress.Origin.ViewModel
         private void OnClearMessages(object param)
         {
             ClearMessages();
+        }
+
+        private Category ConvertMessageTypeToLogCategory(MessageTypeEnum type)
+        {
+            switch (type)
+            {
+                case MessageTypeEnum.Error:
+                    return Category.Exception;
+                case MessageTypeEnum.Warn:
+                    return Category.Warn;
+                case MessageTypeEnum.Info:
+                case MessageTypeEnum.Question:
+                    return Category.Info;
+                default:
+                    return Category.Debug;
+            }
         }
     }
 }
