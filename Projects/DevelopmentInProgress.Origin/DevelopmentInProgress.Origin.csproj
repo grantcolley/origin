@@ -38,8 +38,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DipWpfControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DipWpfControls.1.0.0.0\lib\net45\DipWpfControls.dll</HintPath>
+    <Reference Include="DipWpfControls, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\authorisationmanager\packages\DipWpfControls.1.5.0.0\lib\DipWpfControls.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net">
