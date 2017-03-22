@@ -39,7 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DipWpfControls, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\authorisationmanager\packages\DipWpfControls.1.6.0.0\lib\DipWpfControls.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net">
