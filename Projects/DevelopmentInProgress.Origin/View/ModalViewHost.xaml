@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="clr-namespace:DevelopmentInProgress.Origin.Converters"
-        xmlns:progress="clr-namespace:DevelopmentInProgress.Origin.Controls.Progress">
+        xmlns:progress="clr-namespace:DevelopmentInProgress.Origin.Controls.Progress"
+        xmlns:messages="clr-namespace:DevelopmentInProgress.Origin.Messages">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
         <converters:InvertBoolToVisibilityConverter x:Key="invertBoolToVisibilityConverter"/>
@@ -62,7 +63,7 @@
                     </LinearGradientBrush>
                 </ListBox.Background>
                 <ListBox.ItemTemplate>
-                    <DataTemplate DataType="Message">
+                    <DataTemplate DataType="messages:Message">
                         <ContentControl MouseDoubleClick="MessageMouseDoubleClick">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="2" Height="10" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"

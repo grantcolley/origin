@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:nav="clr-namespace:DevelopmentInProgress.Origin.Navigation"
              xmlns:converters="clr-namespace:DevelopmentInProgress.Origin.Converters"
+             xmlns:messages="clr-namespace:DevelopmentInProgress.Origin.Messages"
              mc:Ignorable="d"
              Background="White">
     <UserControl.Resources>
@@ -93,7 +94,7 @@
                     </LinearGradientBrush>
                 </ListBox.Background>
                 <ListBox.ItemTemplate>
-                    <DataTemplate DataType="Message">
+                    <DataTemplate DataType="messages:Message">
                         <ContentControl MouseDoubleClick="MessageMouseDoubleClick">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="2" Height="10" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"
