@@ -45,11 +45,6 @@ namespace DevelopmentInProgress.Origin.View
             get { return MainContent.Content as DocumentViewBase; }
         }
 
-        /// <summary>
-        /// When a user double clicks on a message then open the message in a message box.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">Event arguments.</param>
         private void MessageMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
