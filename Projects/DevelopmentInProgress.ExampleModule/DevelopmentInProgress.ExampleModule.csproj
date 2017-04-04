@@ -45,6 +45,10 @@
       <HintPath>..\..\packages\DipState.2.0.0.0\lib\DevelopmentInProgress.DipState.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DipWpfControls, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DipWpfControls.2.0.0.0\lib\DipWpfControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Third Party\Prism\Microsoft.Practices.Prism.dll</HintPath>
@@ -139,10 +143,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\wpfcontrols\DevelopmentInProgress.WPFControls\DevelopmentInProgress.WPFControls.csproj">
-      <Project>{5acdc574-0f6f-48bc-ad2a-2f29bd7009fe}</Project>
-      <Name>DevelopmentInProgress.WPFControls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Projects\DevelopmentInProgress.Origin\DevelopmentInProgress.Origin.csproj">
       <Project>{7bce5d35-0443-4031-843a-3563356290e1}</Project>
       <Name>DevelopmentInProgress.Origin</Name>
