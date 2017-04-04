@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Windows.Input;
 using DevelopmentInProgress.Origin.Context;
-using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.Origin.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using msg = DevelopmentInProgress.WPFControls.Messaging;
 
 namespace DevelopmentInProgress.ExampleModule.ViewModel
 {
@@ -96,7 +96,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
 
         private void ShowMessage(object parameter)
         {
-            var message = new Message() { Text = MessageText };
+            var message = new msg.Message() { Text = MessageText };
             SetMessageImage(message, MessageType);
             ShowMessage(message, true);
         }
@@ -108,45 +108,43 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
 
         private void OpenMessageBox(object parameter)
         {
-            var message = new Message() { Text = MessageBoxText, Title = String.Format("Show {0}", MessageIcon) };
+            var message = new msg.MessageBoxSettings() { Text = MessageBoxText, Title = String.Format("Show {0}", MessageIcon) };
             SetMessageImage(message, MessageIcon);
-
-            var messageBoxSettings = new MessageBoxSettings() { Message = message };
 
             switch (MessageBoxButton)
             {
                 case "Ok":
-                    messageBoxSettings.MessageBoxButtons = MessageBoxButtonsEnum.Ok;
+                    message.MessageBoxButtons = msg.MessageBoxButtons.Ok;
                     break;
                 case "Ok Cancel":
-                    messageBoxSettings.MessageBoxButtons = MessageBoxButtonsEnum.OkCancel;
+                    message.MessageBoxButtons = msg.MessageBoxButtons.OkCancel;
                     break;
                 case "Yes No":
-                    messageBoxSettings.MessageBoxButtons = MessageBoxButtonsEnum.YesNo;
+                    message.MessageBoxButtons = msg.MessageBoxButtons.YesNo;
                     break;
                 case "Yes No Cancel":
-                    messageBoxSettings.MessageBoxButtons = MessageBoxButtonsEnum.YesNoCancel;
+                    message.MessageBoxButtons = msg.MessageBoxButtons.YesNoCancel;
                     break;
             }
 
-            var result = ShowMessageBox(messageBoxSettings);
+            var result = ShowMessageBox(message);
         }
 
-        private void SetMessageImage(Message message, string image)
+        private void SetMessageImage(msg.Message message, string image)
         {
             switch (image)
             {
                 case "Info":
-                    message.MessageType = MessageTypeEnum.Info;
+                    message.MessageType = msg.MessageType.Info;
                     break;
                 case "Warn":
-                    message.MessageType = MessageTypeEnum.Warn;
+                    message.MessageType = msg.MessageType.Warn;
                     break;
                 case "Error":
-                    message.MessageType = MessageTypeEnum.Error;
+                    message.MessageType = msg.MessageType.Error;
                     break;
                 case "Question":
-                    message.MessageType = MessageTypeEnum.Question;
+                    message.MessageType = msg.MessageType.Question;
                     break;
             }
         }

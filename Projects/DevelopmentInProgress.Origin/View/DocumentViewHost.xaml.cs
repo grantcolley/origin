@@ -5,13 +5,8 @@
 // <author>Grant Colley</author>
 //-----------------------------------------------------------------------
 
-using DevelopmentInProgress.Origin.Messages;
-using DevelopmentInProgress.Origin.Navigation;
 using DevelopmentInProgress.Origin.RegionAdapters;
-using Microsoft.Practices.ServiceLocation;
-using System;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace DevelopmentInProgress.Origin.View
 {
@@ -43,37 +38,6 @@ namespace DevelopmentInProgress.Origin.View
         public DocumentViewBase View
         {
             get { return MainContent.Content as DocumentViewBase; }
-        }
-
-        private void MessageMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-            var contentControl = sender as ContentControl;
-            if (contentControl == null)
-            {
-                return;
-            }
-
-            var mesage = contentControl.DataContext as Message;
-            if (mesage == null)
-            {
-                return;
-            }
-
-            if (String.IsNullOrEmpty(mesage.Title))
-            {
-                mesage.Title = ModuleName;
-            }
-
-            var modalManager = ServiceLocator.Current.GetInstance<ModalNavigator>();
-            var messageBoxSettings = new MessageBoxSettings
-            {
-                MessageBoxButtons = MessageBoxButtonsEnum.Ok,
-                CopyToClipboardEnabled = true,
-                Message = mesage
-            };
-
-            modalManager.ShowMessageBox(messageBoxSettings);
         }
     }
 }

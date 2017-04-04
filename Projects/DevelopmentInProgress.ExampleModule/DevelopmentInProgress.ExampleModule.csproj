@@ -139,6 +139,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\wpfcontrols\DevelopmentInProgress.WPFControls\DevelopmentInProgress.WPFControls.csproj">
+      <Project>{5acdc574-0f6f-48bc-ad2a-2f29bd7009fe}</Project>
+      <Name>DevelopmentInProgress.WPFControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\DevelopmentInProgress.Origin\DevelopmentInProgress.Origin.csproj">
       <Project>{7bce5d35-0443-4031-843a-3563356290e1}</Project>
       <Name>DevelopmentInProgress.Origin</Name>

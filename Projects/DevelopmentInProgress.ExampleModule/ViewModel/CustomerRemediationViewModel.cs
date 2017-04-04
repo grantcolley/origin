@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using DevelopmentInProgress.DipState;
-using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.ExampleModule.Model;
 using DevelopmentInProgress.ExampleModule.Service;
 using DevelopmentInProgress.Origin.Context;
 using DevelopmentInProgress.Origin.ViewModel;
+using DevelopmentInProgress.WPFControls.Messaging;
 
 namespace DevelopmentInProgress.ExampleModule.ViewModel
 {
@@ -42,7 +42,7 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
             catch (Exception ex)
             {
-                ShowMessage(new Message() { MessageType = MessageTypeEnum.Error, Text = ex.Message }, true);
+                ShowMessage(new Message() { MessageType = MessageType.Error, Text = ex.Message }, true);
             }
         }
 
@@ -60,11 +60,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
             catch (StateException ex)
             {
-                ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = ex.Message}, true);
+                ShowMessage(new Message() {MessageType = MessageType.Warn, Text = ex.Message}, true);
             }
             catch (Exception ex)
             {
-                ShowMessage(new Message() { MessageType = MessageTypeEnum.Error, Text = ex.Message });
+                ShowMessage(new Message() { MessageType = MessageType.Error, Text = ex.Message });
             }
             finally
             {
@@ -88,11 +88,11 @@ namespace DevelopmentInProgress.ExampleModule.ViewModel
             }
             catch (StateException ex)
             {
-                ShowMessage(new Message() {MessageType = MessageTypeEnum.Warn, Text = ex.Message}, true);
+                ShowMessage(new Message() {MessageType = MessageType.Warn, Text = ex.Message}, true);
             }
             catch (Exception ex)
             {
-                ShowMessage(new Message() {MessageType = MessageTypeEnum.Error, Text = ex.Message});
+                ShowMessage(new Message() {MessageType = MessageType.Error, Text = ex.Message});
             }
             finally
             {

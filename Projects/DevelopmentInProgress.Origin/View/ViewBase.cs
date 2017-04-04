@@ -6,10 +6,10 @@
 //-----------------------------------------------------------------------
 
 using DevelopmentInProgress.Origin.Context;
-using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.Origin.Navigation;
 using Microsoft.Practices.Prism.Logging;
 using System.Windows.Controls;
+using DevelopmentInProgress.WPFControls.Messaging;
 
 namespace DevelopmentInProgress.Origin.View
 {

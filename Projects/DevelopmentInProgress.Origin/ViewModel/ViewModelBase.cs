@@ -6,7 +6,6 @@
 //-----------------------------------------------------------------------
 
 using DevelopmentInProgress.Origin.Context;
-using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.Origin.Navigation;
 using DevelopmentInProgress.Origin.View;
 using Microsoft.Practices.Prism;
@@ -16,6 +15,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using DevelopmentInProgress.WPFControls.Messaging;
 
 namespace DevelopmentInProgress.Origin.ViewModel
 {
@@ -258,7 +258,7 @@ namespace DevelopmentInProgress.Origin.ViewModel
         /// </summary>
         /// <param name="messageBoxSettings">Details of the message to display.</param>
         /// <returns>The message result.</returns>
-        protected MessageBoxResultEnum ShowMessageBox(MessageBoxSettings messageBoxSettings)
+        protected MessageBoxResult ShowMessageBox(MessageBoxSettings messageBoxSettings)
         {
             var showMessageWindow = ShowMessageWindow;
             if (showMessageWindow != null)
@@ -407,16 +407,16 @@ namespace DevelopmentInProgress.Origin.ViewModel
             ClearMessages();
         }
 
-        private Category ConvertMessageTypeToLogCategory(MessageTypeEnum type)
+        private Category ConvertMessageTypeToLogCategory(MessageType type)
         {
             switch (type)
             {
-                case MessageTypeEnum.Error:
+                case MessageType.Error:
                     return Category.Exception;
-                case MessageTypeEnum.Warn:
+                case MessageType.Warn:
                     return Category.Warn;
-                case MessageTypeEnum.Info:
-                case MessageTypeEnum.Question:
+                case MessageType.Info:
+                case MessageType.Question:
                     return Category.Info;
                 default:
                     return Category.Debug;

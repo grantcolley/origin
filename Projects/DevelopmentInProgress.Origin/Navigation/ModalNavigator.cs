@@ -5,12 +5,12 @@
 // <author>Grant Colley</author>
 //-----------------------------------------------------------------------
 
-using DevelopmentInProgress.Origin.Messages;
 using DevelopmentInProgress.Origin.View;
 using DevelopmentInProgress.Origin.ViewModel;
 using Microsoft.Practices.Unity;
 using System;
 using System.Windows.Media.Imaging;
+using DevelopmentInProgress.WPFControls.Messaging;
 
 namespace DevelopmentInProgress.Origin.Navigation
 {
@@ -37,15 +37,7 @@ namespace DevelopmentInProgress.Origin.Navigation
         /// <param name="messageBoxSettings">The message box settings.</param>
         public void ShowMessageBox(MessageBoxSettings messageBoxSettings)
         {
-            var view = new MessageBoxView();
-            var model = new MessageBoxViewModel(
-                messageBoxSettings.Message, 
-                messageBoxSettings.MessageBoxButtons, 
-                messageBoxSettings.CopyToClipboardEnabled);
-            view.DataContext = model;
-            view.ShowDialog();
-            var result = model.MessageResult;
-            messageBoxSettings.MessageBoxResult = result;
+            Messaging.ShowMessage(messageBoxSettings);
         }
 
         /// <summary>
@@ -89,10 +81,7 @@ namespace DevelopmentInProgress.Origin.Navigation
         /// <param name="stackTrace">The error stack trace.</param>
         public void ShowError(string message, string stackTrace)
         {
-            var errorView = new ErrorView();
-            var errorViewModel = new ErrorViewModel(message, stackTrace);
-            errorView.DataContext = errorViewModel;
-            errorView.ShowDialog();
+            Messaging.ShowException(message, stackTrace);
         }
     }
 }

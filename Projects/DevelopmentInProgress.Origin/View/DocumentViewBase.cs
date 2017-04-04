@@ -24,19 +24,19 @@ namespace DevelopmentInProgress.Origin.View
         /// Initializes a new instance of the <see cref="DocumentViewBase"/> class.
         /// </summary>
         /// <param name="viewContext">The view context.</param>
-        /// <param name="authorisationViewModel">The view model.</param>
+        /// <param name="documentViewModel">The view model.</param>
         /// <param name="moduleName">The mudule name.</param>
-        protected DocumentViewBase(IViewContext viewContext, DocumentViewModel authorisationViewModel, string moduleName)
+        protected DocumentViewBase(IViewContext viewContext, DocumentViewModel documentViewModel, string moduleName)
             : base(viewContext)
         {
             ModuleName = moduleName;
-            authorisationViewModel.ViewModelContext.UiDispatcher = Dispatcher;
-            authorisationViewModel.Activate += ViewModelActivate;
-            authorisationViewModel.ShowMessageWindow += ShowMessageBox;
-            authorisationViewModel.ShowModalWindow += ShowModalWindow;
-            authorisationViewModel.NavigateTarget += NavigateTarget;
-            authorisationViewModel.GetViewModels += GetViewModels;
-            authorisationViewModel.Publish += Publish;
+            documentViewModel.ViewModelContext.UiDispatcher = Dispatcher;
+            documentViewModel.Activate += ViewModelActivate;
+            documentViewModel.ShowMessageWindow += ShowMessageBox;
+            documentViewModel.ShowModalWindow += ShowModalWindow;
+            documentViewModel.NavigateTarget += NavigateTarget;
+            documentViewModel.GetViewModels += GetViewModels;
+            documentViewModel.Publish += Publish;
         }
 
         /// <summary>

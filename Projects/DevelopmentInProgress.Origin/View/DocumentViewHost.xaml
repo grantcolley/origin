@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:nav="clr-namespace:DevelopmentInProgress.Origin.Navigation"
              xmlns:converters="clr-namespace:DevelopmentInProgress.Origin.Converters"
-             xmlns:messages="clr-namespace:DevelopmentInProgress.Origin.Messages"
+             xmlns:messaging="clr-namespace:DevelopmentInProgress.WPFControls.Messaging;assembly=DipWpfControls"
              mc:Ignorable="d"
              Background="White">
     <UserControl.Resources>
@@ -71,40 +71,17 @@
             </StackPanel>
         </Border>
         <ContentControl Grid.Row="1" Name="MainContent"/>
-        <Expander Grid.Row="2" Visibility="{Binding IsMessagesVisible, Converter={StaticResource boolToVisibilityConverter}}"
-                  IsExpanded="{Binding IsMessagesExpanded}" MaxHeight="200" Background="#B7CAE0">
-            <Expander.HeaderTemplate>
-                <DataTemplate>
-                    <DockPanel>
-                        <TextBlock TextAlignment="Left" Text="Messages" DockPanel.Dock="Left"/>
-                        <Button Command="{Binding Path=DataContext.ClearMessageBox, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" 
-                                Background="Transparent" BorderBrush="Transparent" BorderThickness="0" 
-                                ToolTip="Clear Messages" DockPanel.Dock="Right" Margin="10,2,2,2">
-                                <Image Height="10" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                       Source="..\Images\Close.png"/>
-                        </Button>
-                    </DockPanel>
-                </DataTemplate>
-            </Expander.HeaderTemplate>
-            <ListBox ItemsSource="{Binding Messages}" BorderBrush="Transparent" BorderThickness="0">
-                <ListBox.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#B7CAE0" Offset="0" />
-                        <GradientStop Color="#E8F0FF" Offset="1" />
-                    </LinearGradientBrush>
-                </ListBox.Background>
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="messages:Message">
-                        <ContentControl MouseDoubleClick="MessageMouseDoubleClick">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Margin="2" Height="10" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                       Source="{Binding Type, Converter={StaticResource imageConverter}}"/>
-                                <TextBlock Text="{Binding Text}" Foreground="{Binding Type, Converter={StaticResource foregroundConverter}}"/>
-                            </StackPanel>
-                        </ContentControl>
-                    </DataTemplate>                    
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Expander>
+        <messaging:MessagePanel Grid.Row="2" MaxHeight="200" HeaderBackground="#B7CAE0"
+                                Messages="{Binding Messages}" 
+                                ClearMessages="{Binding ClearMessageBox}" 
+                                IsExpanded="{Binding IsMessagesExpanded}" 
+                                Visibility="{Binding IsMessagesVisible, Converter={StaticResource boolToVisibilityConverter}}">
+            <messaging:MessagePanel.PanelBackground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#B7CAE0" Offset="0" />
+                    <GradientStop Color="#E8F0FF" Offset="1" />
+                </LinearGradientBrush>
+            </messaging:MessagePanel.PanelBackground>
+        </messaging:MessagePanel>        
     </Grid>
 </UserControl>
