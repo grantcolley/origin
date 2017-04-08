@@ -207,7 +207,7 @@ Rebuild the solution and run it.
 ![Alt text](/README-images/moduletemplate-screenshot.png?raw=true "DevelopmentInProgress.ModuleTemplate screenshot")
 
 
-#Time To Get Coding
+# Time To Get Coding
 
 As already mentioned the best way to see how the Origin framework works and how you can write code to leverage its functionality is to look at the **DevelopmentInProgress.ExampleModule** project and step through the code using the debugger.
 
