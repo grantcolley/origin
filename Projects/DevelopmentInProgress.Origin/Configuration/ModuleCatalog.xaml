@@ -12,11 +12,6 @@
                       ModuleName="DevelopmentInProgress.ModuleTemplate" 
                       ModuleType="DevelopmentInProgress.ModuleTemplate.Module,DevelopmentInProgress.ModuleTemplate"
                       InitializationMode="WhenAvailable"/>
-
-    <prism:ModuleInfo Ref="Manage Users" 
-                      ModuleName="DevelopmentInProgress.ControlsExample" 
-                      ModuleType="DevelopmentInProgress.ControlsExample.Module,DevelopmentInProgress.ControlsExample"
-                      InitializationMode="WhenAvailable"/>
     
     <!--<prism:ModuleInfo Ref="Authorisation Manager"
                       ModuleName="DevelopmentInProgress.AuthorisationManager.WPF"
