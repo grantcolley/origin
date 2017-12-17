@@ -149,6 +149,7 @@ AppPackages/
 
 # Others
 sql/
+sqlite3/
 *.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
