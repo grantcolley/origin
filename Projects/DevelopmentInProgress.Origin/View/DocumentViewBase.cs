@@ -91,6 +91,7 @@ namespace DevelopmentInProgress.Origin.View
             if (documentViewModel != null)
             {
                 string navigationId = documentViewModel.NavigationId;
+                documentViewModel.Dispose();
                 ViewContext.NavigationManager.CloseDocument(navigationId);
             }
         }

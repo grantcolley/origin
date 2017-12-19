@@ -19,7 +19,7 @@ namespace DevelopmentInProgress.Origin.ViewModel
     /// <summary>
     /// Base view model for documents.
     /// </summary>
-    public abstract class DocumentViewModel : ViewModelBase, INavigationAware /*, IConfirmNavigationRequest, IRegionMemberLifetime */
+    public abstract class DocumentViewModel : ViewModelBase, IDisposable, INavigationAware /*, IConfirmNavigationRequest, IRegionMemberLifetime */
     {
         private readonly List<NavigationTarget> navigationHistory;
         private string uriQueryString;
@@ -39,10 +39,17 @@ namespace DevelopmentInProgress.Origin.ViewModel
         }
 
         /// <summary>
-        /// Abstract method to be implemented by the sub class.
+        /// Virtual method to be implemented by the sub class.
         /// </summary>
         /// <param name="data">The parameter passed into the method.</param>
         protected virtual void OnPublished(object data)
+        {
+        }
+
+        /// <summary>
+        /// Virtual method to be implemented by the sub class.
+        /// </summary>
+        protected virtual void OnDisposing()
         {
         }
 
@@ -147,6 +154,45 @@ namespace DevelopmentInProgress.Origin.ViewModel
                 navigateTarget(this, navigationTarget);
             }
         }
+
+        #region IDisposable Support
+
+        private bool disposedValue = false; // To detect redundant calls
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+                OnDisposing();
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        ~DocumentViewModel()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: only call the following line if the finalizer is overridden above.
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
 
         #region Implement INavigationAware
 
