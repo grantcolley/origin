@@ -21,6 +21,14 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderBrush="AliceBlue" BorderThickness="1">
             <StackPanel Orientation="Horizontal">
+                <StackPanel.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#ECF5FC" Offset="0" />
+                            <GradientStop Color="#98B4D2" Offset="1" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
                 <Button Command="{Binding Refresh}" ToolTip="Refresh">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
