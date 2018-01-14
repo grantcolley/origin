@@ -37,7 +37,7 @@ namespace DevelopmentInProgress.Origin.Navigation
         /// <param name="messageBoxSettings">The message box settings.</param>
         public void ShowMessageBox(MessageBoxSettings messageBoxSettings)
         {
-            Messaging.ShowMessage(messageBoxSettings);
+            Dialog.ShowMessage(messageBoxSettings);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace DevelopmentInProgress.Origin.Navigation
         /// <param name="stackTrace">The error stack trace.</param>
         public void ShowError(string message, string stackTrace)
         {
-            Messaging.ShowException(message, stackTrace);
+            Dialog.ShowException(message, stackTrace);
         }
     }
 }

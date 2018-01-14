@@ -12,10 +12,5 @@
                       ModuleName="DevelopmentInProgress.ModuleTemplate" 
                       ModuleType="DevelopmentInProgress.ModuleTemplate.Module,DevelopmentInProgress.ModuleTemplate"
                       InitializationMode="WhenAvailable"/>
-    
-    <!--<prism:ModuleInfo Ref="Authorisation Manager"
-                      ModuleName="DevelopmentInProgress.AuthorisationManager.WPF"
-                      ModuleType="DevelopmentInProgress.AuthorisationManager.WPF.Module,DevelopmentInProgress.AuthorisationManager.WPF"
-                      InitializationMode="WhenAvailable"/>-->
-    
+
 </prism:ModuleCatalog>
