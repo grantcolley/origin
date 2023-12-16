@@ -1,7 +1,7 @@
 # origin
 [![Build status](https://ci.appveyor.com/api/projects/status/lilwq7ancs9jdecj/branch/master?svg=true)](https://ci.appveyor.com/project/grantcolley/origin/branch/master)
 
-The Origin framework is a WPF shell application for hosting line-of-business modules in a document style layout. Origin implements Prism, Unity, the AvalonDock docking system and a custom navigation bar.
+The Origin .NET Framework 4.6 is a WPF shell application for hosting line-of-business modules in a document style layout. Origin implements Prism, Unity, the AvalonDock docking system and a custom navigation bar.
 
 Screenshot 1. Example Dipsecure module
 ![Alt text](/README-images/origin-screenshot.png?raw=true "Origin screenshot")
